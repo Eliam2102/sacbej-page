@@ -1,30 +1,78 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/base/NavBar.vue'
+import Section from './components/control/Section.vue'
+import Footer from './components/base/Footer.vue'
+import Hero from './components/organisms/Hero.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header>
+    <NavBar />
+  </header>
+
+  <main>
+    <!-- Seccion Hero -->
+    <Hero/>
+
+    <Section class="section section2">
+      <h1>Sección 2</h1>
+      <p>Contenido de la segunda sección</p>
+    </Section>
+
+    <Section class="section section3">
+      <h1>Sección 3</h1>
+      <p>Contenido de la tercera sección</p>
+    </Section>
+    <Section class="section section4">
+      <h1>Sección 4</h1>
+      <p>Contenido de la tercera sección</p>
+    </Section>
+    <Section class="section section5">
+      <h1>Sección 6</h1>
+      <p>Contenido de la tercera sección</p>
+    </Section>
+    <Section class="section section6">
+      <h1>Sección 7</h1>
+      <p>Contenido de la tercera sección</p>
+    </Section>
+  </main>
+  <footer>
+    <Footer/>
+  </footer>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+main {
+  margin-top: 187x; /* deja espacio para el navbar */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+/* Hacemos que cada sección ocupe toda la pantalla */
+.section {
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;   
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+/* Colores de fondo distintos para diferenciar secciones */
+.section1, .section2,  .section3, .section4, .section5, .section6{
+  background-color: #E5E0D3;
+  width: 100%;
+}
+
+
+/* Para que los títulos se vean bien */
+.section h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  font-size: 1.5rem;
+  max-width: 600px;
 }
 </style>
