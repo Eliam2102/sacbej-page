@@ -3,21 +3,19 @@ import NavBar from './components/base/NavBar.vue'
 import Section from './components/control/Section.vue'
 import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
+import About from './components/organisms/About.vue'
 </script>
 
 <template>
   <header>
     <NavBar />
   </header>
-
+  <!-- Contenido principal -->
   <main>
     <!-- Seccion Hero -->
     <Hero/>
-
-    <Section class="section section2">
-      <h1>Sección 2</h1>
-      <p>Contenido de la segunda sección</p>
-    </Section>
+    <!-- Sección acerca de nosotros -->
+    <About/>
 
     <Section class="section section3">
       <h1>Sección 3</h1>
