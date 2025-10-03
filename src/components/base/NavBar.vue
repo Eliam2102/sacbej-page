@@ -84,6 +84,8 @@ onUnmounted(() => {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+
 .nav-header {
   position: fixed;
   top: 0;
@@ -115,6 +117,7 @@ onUnmounted(() => {
 }
 .info-nav-top p {
   margin: 0;
+  font-family: 'Google Sans Code', monospace;
   padding: 0;
 }
 
@@ -137,9 +140,10 @@ onUnmounted(() => {
 }
 
 .menu-nav li {
+  font-family: "Bebas Neue", monospace;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 1.2rem;
+  font-weight: 370;
+  font-size: 1.7rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
