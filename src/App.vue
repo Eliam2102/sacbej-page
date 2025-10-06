@@ -4,6 +4,7 @@ import Section from './components/control/Section.vue'
 import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
 import About from './components/organisms/About.vue'
+import Experiences from './components/organisms/Experiences.vue'
 </script>
 
 <template>
@@ -17,10 +18,7 @@ import About from './components/organisms/About.vue'
     <!-- Sección acerca de nosotros -->
     <About/>
 
-    <Section class="section section3">
-      <h1>Sección 3</h1>
-      <p>Contenido de la tercera sección</p>
-    </Section>
+    <Experiences/>
     <Section class="section section4">
       <h1>Sección 4</h1>
       <p>Contenido de la tercera sección</p>
