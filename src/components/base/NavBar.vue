@@ -117,7 +117,7 @@ onUnmounted(() => {
 }
 .info-nav-top p {
   margin: 0;
-  font-family: 'Google Sans Code', monospace;
+  font-family: 'Google Sans Code', serif;
   padding: 0;
 }
 
