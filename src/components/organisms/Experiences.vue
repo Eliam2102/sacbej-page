@@ -213,7 +213,7 @@ const changeImage = (index: number) => {
                 <h2 class="modal-title">{{ selectedExperience.title }}</h2>
 
                 <div class="info-chip">
-                  <span class="info-label"><Icon icon="mdi:schedule" width="15"/> Duración:</span>
+                  <span class="info-label"><Icon icon="mdi:schedule" width="16"/> Duración:</span>
                   {{ selectedExperience.duration }}
                 </div>
 
@@ -222,7 +222,7 @@ const changeImage = (index: number) => {
                 </p>
 
                 <div class="included-section">
-                  <h4 class="included-title"><Icon icon="mdi:check-circle-outline" width="15"/> Incluye:</h4>
+                  <h4 class="included-title"><Icon icon="mdi:check-circle-outline" width="20"/> Incluye:</h4>
                   <ul class="included-list">
                     <li v-for="item in selectedExperience.included" :key="item">{{ item }}</li>
                   </ul>
@@ -245,14 +245,12 @@ const changeImage = (index: number) => {
 
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 
 .catalog-view {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "Cormorant Garamond", sans-serif;
   background-color: #F5E6D3;
   min-height: 11vh;
-  color: #1A1A1A;
 }
 
 .main-content {
@@ -304,7 +302,7 @@ const changeImage = (index: number) => {
 }
 
 .product-card {
-  background-color: #ffffffc5;
+  background-color: #A68A6D;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
@@ -404,13 +402,13 @@ const changeImage = (index: number) => {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: inherit;
+  font-family: "Bebas Neue", sans-serif;
   backdrop-filter: blur(10px);
 }
 
 .btn-overlay:hover {
-  background-color: #1DA851;
-  border-color: #25D366;
+  background-color: #4CAF50 ;
+  border-color: #1B3B2F;;
   color: #F5E6D3;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(14, 165, 34, 0.4);
@@ -430,17 +428,19 @@ const changeImage = (index: number) => {
 
 .product-description {
   font-size: 0.95rem;
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'Merriweather', sans-serif;
   line-height: 1.6;
-  color: #1B3B2F;
+  color: #F5E6D3;
   font-weight: bold;
 }
+
+/* --- MODAL MINIMALISTA PROFESIONAL --- */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -451,46 +451,48 @@ const changeImage = (index: number) => {
 
 .modal-content {
   background-color: #F5E6D3;
-  border-radius: 20px;
+  border-radius: 16px;
   max-width: 1100px;
   width: 100%;
   max-height: 95vh;
   overflow-y: auto;
   position: relative;
-  padding: 2.5rem;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
   margin: auto;
+  transition: all 0.3s ease;
 }
 
 .modal-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 44px;
-  height: 44px;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
   border: none;
-  background-color: #F5F5F5;
+  background-color: #FFFFFF;
+  color: #4E342E;
   border-radius: 50%;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  transition: all 0.25s ease;
   line-height: 1;
 }
 
 .modal-close:hover {
   background-color: #4E342E;
   color: #FFFFFF;
-  transform: rotate(90deg) scale(1.1);
+  transform: rotate(45deg) scale(1.05);
 }
 
 .modal-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
 }
 
 .modal-gallery {
@@ -505,26 +507,26 @@ const changeImage = (index: number) => {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 12px;
   background-color: #F5F5F5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .image-thumbnails {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .thumbnail {
-  min-width: 80px;
-  width: 80px;
-  height: 80px;
+  min-width: 70px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   opacity: 0.5;
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
 }
 
 .thumbnail:hover {
@@ -540,13 +542,13 @@ const changeImage = (index: number) => {
 .modal-details {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .modal-badge {
   display: inline-block;
-  padding: 0.5rem 1.25rem;
-  border-radius: 20px;
+  padding: 0.4rem 1.1rem;
+  border-radius: 16px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -565,23 +567,23 @@ const changeImage = (index: number) => {
 }
 
 .modal-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   font-family: "Bebas Neue", sans-serif;
   color: #4E342E;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .info-chip {
   display: inline-flex;
   align-items: center;
-  font-family: "Merriweather", serif;;
+  font-family: "Merriweather", serif;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background-color: #F8F9FA;
-  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
   font-size: 0.95rem;
   width: fit-content;
+  background-color: rgba(245, 230, 211, 0.3);
 }
 
 .info-label {
@@ -590,16 +592,17 @@ const changeImage = (index: number) => {
 }
 
 .modal-description {
-  font-size: 1rem;
-  font-family: 'Google Sans Code', serif;
-  line-height: 1.7;
-  color: #555555;
+  font-size: 0.975rem;
+  font-weight: bold;
+  font-family: "Merriweather", serif;
+  line-height: 1.65;
+  color: #2C2C2C;
 }
 
 .included-section {
-  background-color: #F8F9FA;
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(245, 230, 211, 0.2);
 }
 
 .included-title {
@@ -607,7 +610,7 @@ const changeImage = (index: number) => {
   font-weight: 600;
   font-family: "Bebas Neue", sans-serif;
   color: #4E342E;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .included-list {
@@ -620,7 +623,7 @@ const changeImage = (index: number) => {
 .included-list li {
   padding-left: 1.5rem;
   position: relative;
-  color: #555555;
+  color: #2C2C2C;
   font-size: 0.95rem;
 }
 
@@ -633,10 +636,12 @@ const changeImage = (index: number) => {
 }
 
 .price-section {
-  background: linear-gradient(135deg, #1DA851 0%, #25D366 100%);
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #1B3B2F  0%, #1DA851 100%);
+  padding: 1rem;
+  border-radius: 10px;
   text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: white;
 }
 
@@ -648,11 +653,47 @@ const changeImage = (index: number) => {
 }
 
 .modal-price {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   font-family: "Bebas Neue", sans-serif;
   color: #FFFFFF;
 }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .modal-main-image {
+    border-radius: 10px;
+  }
+
+  .thumbnail {
+    min-width: 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-price {
+    font-size: 1.5rem;
+  }
+
+  .info-chip {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .included-title {
+    font-size: 1.25rem;
+  }
+}
+
 
 @media (max-width: 768px) {
   .section-title {
