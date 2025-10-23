@@ -1,7 +1,6 @@
 <template>
   <main>
     <section class="hero">
-<<<<<<< HEAD
       <!-- 🎥 Video de fondo -->
       <video class="hero-video" autoplay muted loop playsinline>
         <source src="https://sacbej.b-cdn.net/DJI_20250903102029_0636_D.MP4" type="video/mp4" />
@@ -12,36 +11,16 @@
       <div class="hero-content">
         <h1 class="hero-title">
           Diseñamos el escape perfecto.<br />
-=======
-      <div class="hero-content">
-        <!-- frase introductoria ligera -->
-        <!-- <p class="hero-intro">Donde el Tiempo se Detiene y la Magia Comienza</p>
-
-        <!-- separador decorativo <hr class="hero-divider" /> -->
-
-        <!-- frase principal / título -->
-        <h1 class="hero-title">
-          Diseñamos el escape perfecto.<br/>
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
           La naturaleza pone la magia
         </h1>
 
         <hr class="hero-divider" />
 
-<<<<<<< HEAD
-=======
-        <!-- subtítulo explicativo -->
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
         <h2 class="hero-subtitle">
           Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.
         </h2>
 
-<<<<<<< HEAD
         <a class="hero-btn" href="#experiencias">Descúbrelo Ahora</a>
-=======
-        <!-- botón de acción -->
-        <button class="hero-btn">Descúbrelo Ahora</button>
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
       </div>
     </section>
   </main>
@@ -52,7 +31,6 @@
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 
-<<<<<<< HEAD
 /* ========== RESET ========== */
 * {
   margin: 0;
@@ -66,18 +44,10 @@
   height: 100vh;
   min-height: 500px;
   position: relative;
-=======
-
-/* HERO SECTION */
-.hero {
-  margin-top: 80px;
-  height: 100vh;
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-<<<<<<< HEAD
   color: white;
   overflow: hidden;
 }
@@ -94,18 +64,10 @@
 }
 
 /* Overlay para contraste */
-=======
-  background: url('https://media.istockphoto.com/id/1477565738/photo/mangrove-forest-ria-celestun-biosphere-reserve-mexico.jpg?s=612x612&w=0&k=20&c=d7OfiwhEGdPX1SMAnIIw2DIotLyVGncwWNg9IKfPWTE=') no-repeat center center/cover;
-  position: relative;
-  color: white;
-}
-
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-<<<<<<< HEAD
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -127,32 +89,12 @@
   font-weight: 300;
   letter-spacing: -0.5px;
   margin: 2rem 0 2.5rem;
-=======
-  background: rgba(0,0,0,0.5); /* overlay para contraste */
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  padding: 40px 20px; /* más aire lateral y vertical */
-}
-
-/* Frase introductoria (ligera) */
-.hero-intro {
-  font-family: "Merriweather", monospace;
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 2rem; /* más separación */
-  letter-spacing: 0.5px;
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
   color: #f5e6d3;
 }
 
 /* Separador decorativo */
 .hero-divider {
   border: none;
-<<<<<<< HEAD
   border-top: 3px solid #4caf50;
   width: clamp(60px, 15vw, 100px);
   margin: 2rem auto;
@@ -170,44 +112,10 @@
   margin: 2rem 0 4rem;
   color: #e0cfa5;
   padding: 0 1rem;
-=======
-  border-top: 3px solid #4caf50; /* verde para estilo natural */
-  width: 100px;
-  margin: 2rem auto; /* más separación */
-  border-radius: 2px;
-}
-
-/* Frase principal / título */
-.hero-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 3.5rem; /* tamaño más impactante */
-  line-height: 1.2;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  margin: 2rem 0 2.5rem; /* más espacio arriba y abajo */
-  -webkit-line-clamp: 2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: clip;
-  color: #f5e6d3;
-}
-
-/* Subtítulo explicativo */
-.hero-subtitle {
-  font-family: "Merriweather", monospace;
-  font-size: 1.8rem;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.3px;
-  margin: 2rem 0 4rem;
-  color: #e0cfa5; /* color más suave que el título */
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
 }
 
 /* Botón */
 .hero-btn {
-<<<<<<< HEAD
   background: #f5e6d3;
   color: #4e342e;
   font-size: clamp(1rem, 2.5vw, 1.3rem);
@@ -657,38 +565,3 @@
   }
 }
 </style>
-=======
-  background: #f5e6D3;
-  color: #4E342E;
-  font-size: 1.3rem;
-  padding: 16px 36px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.hero-btn:hover {
-  background: #A68A6D;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  .hero-subtitle {
-    font-size: 1.3rem;
-  }
-  .hero-intro {
-    font-size: 1.1rem;
-  }
-  .hero-btn {
-    padding: 12px 24px;
-    font-size: 1.1rem;
-  }
-}
-</style>
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
