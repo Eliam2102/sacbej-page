@@ -182,15 +182,15 @@
     <!-- Redes Sociales - Desktop -->
     <div class="redes-fijas-desktop">
       <div class="contenedor-redes">
-        <a href="#" class="icono-red facebook" aria-label="Facebook">
+        <a href="https://www.facebook.com/p/Ecoturismo-sac-bej-Celest%C3%BAn-100063497890923/" class="icono-red facebook" aria-label="Facebook" target="_blank">
           <Icon icon="mdi:facebook" width="22" />
         </a>
-        <a href="#" class="icono-red instagram" aria-label="Instagram">
+        <a href="https://www.instagram.com/sacbejcelestun/" class="icono-red instagram" aria-label="Instagram" target="_blank">
           <Icon icon="mdi:instagram" width="22" />
         </a>
-        <a href="#" class="icono-red twitter" aria-label="Twitter">
-          <Icon icon="mdi:twitter" width="22" />
-        </a>
+        <a href="https://www.tripadvisor.com/" class="icono-red tripadvisor" aria-label="Tripadvisor" target="_blank">
+        <Icon icon="simple-icons:tripadvisor" width="22" />
+      </a>
       </div>
     </div> 
   </main>
