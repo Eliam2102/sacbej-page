@@ -3,7 +3,7 @@
     <section class="hero">
       <!-- 🎥 Video de fondo -->
       <video class="hero-video" autoplay muted loop playsinline>
-        <source src="/src/assets/hero-sacbej.mp4" type="video/mp4" />
+        <source src="https://sacbej.b-cdn.net/DJI_20250903102029_0636_D.MP4" type="video/mp4" />
         Tu navegador no soporta video HTML5.
       </video>
 
