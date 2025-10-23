@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NavBar from './components/base/NavBar.vue'
-import Section from './components/control/Section.vue'
 import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
 import About from './components/organisms/About.vue'
