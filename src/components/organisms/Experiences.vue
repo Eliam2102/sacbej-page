@@ -11,75 +11,185 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFReYtFFkq7B
 const experiences: Experience[] = [
   {
     id: 1,
-    title: "Aventura en Cenotes",
-    pricePerPerson: 1200,
-    img: "https://picsum.photos/400?random=1",
+    title: "Sac Bej – Camino Blanco",
+    pricePerPerson: 1250,
+    img: "https://i.postimg.cc/C1s5JJr8/5.png",
     badge: "popular",
-    shortDescription: "Explora los místicos cenotes de la región con guía experto",
-    fullDescription: "Sumérgete en la magia de los cenotes sagrados mayas. Esta experiencia incluye visita a 3 cenotes diferentes, equipo de snorkel, guía certificado y transporte. Descubre la belleza natural y la historia ancestral de estos lugares únicos.",
-    images: ["https://picsum.photos/400?random=1", "https://picsum.photos/400?random=11", "https://picsum.photos/400?random=21"],
-    duration: "6 horas",
-    included: ["Transporte", "Guía certificado", "Equipo de snorkel", "Comida"]
+    shortDescription: "Recorre la zona sur de la Reserva Ría Celestún en tuc tuc: salinas rosas, bosque petrificado y flamencos.",
+    fullDescription: `¡Bienvenidos a una experiencia única de conexión con la naturaleza! Te invitamos a disfrutar de un recorrido exclusivo por la parte sur de la Reserva de la Biosfera Ría Celestún, conocido como Sac Bej (“Camino Blanco” en lengua maya).
+    Durante una hora y media a dos horas en tuc tuc explorarás el puerto de pescadores, las charcas de sal rosa, el bosque petrificado, la ex hacienda Real de Salinas y, de diciembre a marzo, la zona de flamencos rosados.
+    Ideal para quienes buscan historia, paisajes y contacto directo con la naturaleza.`,
+    images: [
+      "https://i.postimg.cc/Jn50KKYH/6.png",
+      "https://i.postimg.cc/RFLhGGpH/7.png",
+      "https://i.postimg.cc/76nhXXtG/9.png"
+    ],
+    duration: "1.5 a 2 horas",
+    included: [
+      "Transporte en tuc tuc",
+      "Guía certificado bilingüe (NOM 09 TUR 2002)",
+      "Servicio de pick-up en hoteles de Celestún",
+      "Descuentos para adulto mayor y personas con discapacidad"
+    ]
   },
   {
     id: 2,
-    title: "Tour Arqueológico Maya",
-    pricePerPerson: 1800,
-    img: "https://picsum.photos/400?random=2",
-    badge: "oferta",
-    shortDescription: "Descubre las antiguas ciudades mayas con arqueólogos expertos",
-    fullDescription: "Viaja en el tiempo visitando las ruinas más impresionantes de la civilización maya. Incluye Chichén Itzá y Ek Balam con explicaciones detalladas de arqueólogos profesionales. Transporte, comida y entradas incluidas.",
-    images: ["https://picsum.photos/400?random=2", "https://picsum.photos/400?random=12", "https://picsum.photos/400?random=22"],
-    duration: "8 horas",
-    included: ["Transporte privado", "Arqueólogo guía", "Entradas", "Comida típica"]
+    title: "Surf Casting – Pesca en el Golfo",
+    pricePerPerson: 3500,
+    img: "https://i.postimg.cc/B6Wzgfj6/surf.jpg",
+    shortDescription: "Pesca deportiva en el Golfo de México: corvina, robalo, jurel, pargo y más.",
+    fullDescription: `Disfruta una jornada de pesca inolvidable en las aguas color verde esmeralda del Golfo de México. Captura especies como corvina, robalo o pargo mientras disfrutas del mar y un ceviche fresco estilo ribereño. Ideal para grupos de amigos o familias.`,
+    images: [
+      "https://i.postimg.cc/W3MHYYZv/sruf-2.jpg",
+      "https://i.postimg.cc/gJvTtthd/surf3.jpg",
+      "https://i.postimg.cc/zBnc22hN/surf4.jpg"
+    ],
+    duration: "5 horas",
+    included: [
+      "Embarcación privada (hasta 4 personas)",
+      "Guía y equipo de pesca",
+      "Ceviche fresco estilo ribereño",
+      "Salida recomendada 6:30 a.m."
+    ]
   },
   {
     id: 3,
-    title: "Experiencia Gastronómica",
-    pricePerPerson: 950,
-    img: "https://picsum.photos/400?random=3",
-    shortDescription: "Saborea la auténtica cocina yucateca en un tour culinario único",
-    fullDescription: "Disfruta de una experiencia gastronómica completa visitando mercados locales, aprendiendo a cocinar platillos tradicionales y degustando los mejores sabores de Yucatán. Incluye clase de cocina, degustaciones y recetas para llevar.",
-    images: ["https://picsum.photos/400?random=3", "https://picsum.photos/400?random=13", "https://picsum.photos/400?random=23"],
-    duration: "5 horas",
-    included: ["Chef profesional", "Ingredientes", "Degustaciones", "Recetario"]
+    title: "Kayak en el Corazón del Manglar",
+    pricePerPerson: 1550,
+    img: "https://i.postimg.cc/dVYm4QBn/Chat-GPT-Image-Oct-18-2025-07-24-00-PM.png",
+    badge: "popular",
+    shortDescription: "Remo entre manglares al amanecer o al anochecer, rodeado de aves, flamencos y luciérnagas.",
+    fullDescription: `Vive una experiencia única dentro de la gran reserva Ría Celestún. Navega entre manglares hasta el corazón del humedal, donde descubrirás aves como el martín pescador enano y los flamencos rosados al amanecer.  
+    También puedes elegir la versión nocturna: “Kayak de noche”, donde el cocodrilo es el anfitrión y las luciérnagas iluminan el camino.`,
+    images: [
+      "https://i.postimg.cc/1X04tSNT/Chat-GPT-Image-Oct-18-2025-07-27-34-PM.png",
+      "https://i.postimg.cc/h4MBShJD/Chat-GPT-Image-Oct-18-2025-07-31-17-PM.png",
+      "https://i.postimg.cc/XqNXphcK/Chat-GPT-Image-Oct-18-2025-07-42-58-PM.png",
+    ],
+    duration: "2 horas",
+    included: [
+      "Kayak doble (2 personas)",
+      "Guía certificado bilingüe",
+      "Lámparas para recorrido nocturno",
+      "Transporte en tuc tuc (si aplica)"
+    ]
   },
   {
     id: 4,
-    title: "Kayak y Flamencos",
-    pricePerPerson: 1100,
-    img: "https://picsum.photos/400?random=4",
-    badge: "popular",
-    shortDescription: "Navega en kayak por manglares y observa flamencos rosados",
-    fullDescription: "Una experiencia única navegando por los manglares de Celestún o Río Lagartos, hogar de miles de flamencos rosados. Incluye kayak, guía naturalista, avistamiento de aves y fauna local. Ideal para amantes de la naturaleza.",
-    images: ["https://picsum.photos/400?random=4", "https://picsum.photos/400?random=14", "https://picsum.photos/400?random=24"],
-    duration: "7 horas",
-    included: ["Kayak y equipo", "Guía naturalista", "Transporte", "Box lunch"]
+    title: "Birdwatching – Observación de Aves",
+    pricePerPerson: 1450,
+    img: "https://i.postimg.cc/9Ff85YqW/Chat-GPT-Image-Oct-18-2025-08-17-33-PM.png",
+    shortDescription: "Más de 200 especies de aves en la Ría Celestún con guía experto y equipo óptico.",
+    fullDescription: `Es de mañana, binoculares en mano y olor a café... Es hora de ver aves.  
+    Disfruta observando más de 200 especies, muchas endémicas de Yucatán como el colibrí tijereta mexicano o la matraca yucateca. Nuestro guía certificado te ayudará a encontrarlas en su hábitat natural.`,
+    images: [
+      "https://i.postimg.cc/hPtW5gtG/Chat-GPT-Image-Oct-18-2025-07-55-03-PM.png",
+      "https://i.postimg.cc/Fs5NWwJ8/Chat-GPT-Image-Oct-18-2025-07-48-32-PM.png",
+      "https://i.postimg.cc/BQXHpLHc/Chat-GPT-Image-Oct-18-2025-07-51-54-PM.png"
+    ],
+    duration: "4.5 horas",
+    included: [
+      "Guía federal NOM 09-TUR-2002",
+      "Transportación terrestre en tuc tuc",
+      "Equipo óptico básico",
+      "Salida recomendada: 6:00 a.m."
+    ]
   },
   {
     id: 5,
-    title: "Noche de Leyendas",
-    pricePerPerson: 750,
-    img: "https://picsum.photos/400?random=5",
+    title: "Ría Celestún – Flamingo Tour",
+    pricePerPerson: 4100,
+    img: "https://i.postimg.cc/6QbggbMs/Chat-GPT-Image-Oct-18-2025-08-12-03-PM.png",
     badge: "oferta",
-    shortDescription: "Recorrido nocturno por el centro histórico con cuentos y leyendas",
-    fullDescription: "Descubre el lado místico de Mérida en un recorrido nocturno lleno de leyendas, historias y misterios. Visita lugares emblemáticos bajo la luz de la luna mientras escuchas relatos fascinantes. Incluye bebida tradicional.",
-    images: ["https://picsum.photos/400?random=5", "https://picsum.photos/400?random=15", "https://picsum.photos/400?random=25"],
-    duration: "3 horas",
-    included: ["Guía narrador", "Bebida típica", "Entrada a sitios"]
+    shortDescription: "Tour en lancha por la Ría Celestún: flamencos, túnel de manglar, isla de aves y ojo de agua.",
+    fullDescription: `Descubre la magia de la Ría Celestún en una aventura que combina observación de flamencos, navegación por manglares y baño en el ojo de agua.  
+Incluye visita a la isla de aves, túnel de manglar y observación de cocodrilos.  
+Una experiencia imperdible para amantes de la naturaleza.`,
+    images: [
+      "https://i.postimg.cc/d3Hyjv5D/491518218-18006243275739535-6303338094946747857-n.jpg",
+      "https://i.postimg.cc/kg70bmkM/491499260-18006243257739535-4895587472905209765-n.jpg",
+      "https://i.postimg.cc/52Fsyktj/486561792-1223155886478538-1220087316864002473-n.jpg",
+      "https://i.postimg.cc/rFTxXVdC/Chat-GPT-Image-Oct-18-2025-08-09-28-PM.png"
+    ],
+    duration: "1 hora 20 min",
+    included: [
+      "Guía certificado NOM 09-TUR-2003",
+      "Guía bilingüe",
+      "Embarcación (1 a 6 personas)",
+      "Pago de acceso al parque",
+      "Estacionamiento y W.C."
+    ]
   },
   {
     id: 6,
-    title: "Hacienda y Spa",
-    pricePerPerson: 2200,
-    img: "https://picsum.photos/400?random=6",
-    shortDescription: "Relájate en una hacienda histórica con spa y comida gourmet",
-    fullDescription: "Pasa un día de lujo en una hacienda henequenera restaurada. Incluye tour por la hacienda, masaje relajante, acceso a spa, piscina y comida gourmet de tres tiempos. La experiencia perfecta para desconectar.",
-    images: ["https://picsum.photos/400?random=6", "https://picsum.photos/400?random=16", "https://picsum.photos/400?random=26"],
-    duration: "8 horas",
-    included: ["Spa completo", "Masaje", "Comida gourmet", "Alberca"]
+    title: "Moonlight Safari – Tour Nocturno en la Ría",
+    pricePerPerson: 5600,
+    img: "/src/assets/Ceremonia y Tour Nocturno-08.jpg",
+    shortDescription: "Avistamiento de cocodrilos y luciérnagas bajo la luz de la luna.",
+    fullDescription: `Únete a nuestro exclusivo tour nocturno en la Reserva de la Biosfera Ría Celestún.  
+    Observa cocodrilos en su hábitat natural, aves durmiendo entre los manglares y el mágico espectáculo de las luciérnagas.  
+    Una experiencia para verdaderos aventureros.`,
+    images: [
+      "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
+      "https://i.postimg.cc/xTLBc77n/Ceremonia-y-Tour-Nocturno-16.jpg",
+      "https://i.postimg.cc/zXT4VMMD/coco-pos.jpg"
+    ],
+    duration: "2 horas",
+    included: [
+      "Embarcación privada (1 a 5 personas)",
+      "Guía certificado NOM 09-TUR-2002",
+      "Equipo de iluminación nocturna",
+      "Reserva con 50% de anticipo"
+    ]
+  },
+  {
+    id: 7,
+    title: "Ceremonia XUKULEM – Conexión Espiritual al Atardecer",
+    pricePerPerson: 2400,
+    img: "https://i.postimg.cc/5tVDVMmf/Ceremonia-y-Tour-Nocturno-22.jpg",
+    shortDescription: "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
+    fullDescription: `Vive una experiencia espiritual guiada por el fuego, el copal y la sabiduría maya.  
+    Una ceremonia sagrada para cerrar ciclos y recibir el mensaje de la naturaleza.  
+    Incluye limpia energética y ofrendas a los cuatro vientos.`,
+    images: [
+      "https://i.postimg.cc/3NRPcCFD/Ceremonia-y-Tour-Nocturno-24.jpg",
+      "https://i.postimg.cc/k5mLmdyd/Ceremonia-y-Tour-Nocturno-25.jpg",
+      "https://i.postimg.cc/9Xg3qKcy/Ceremonia-y-Tour-Nocturno-26.jpg",
+      "https://i.postimg.cc/J0G2q7Rs/Ceremonia-y-Tour-Nocturno-33.jpg"
+    ],
+    duration: "40 minutos",
+    included: [
+      "Ceremonia guiada al atardecer frente al mar",
+      "Ofrendas y limpia con copal",
+      "Mensaje ritual personalizado",
+      "Hasta 10 personas por grupo"
+    ]
+  },
+  {
+    id: 8,
+    title: "Biking Tour: Pueblo Fantasma",
+    pricePerPerson: 350,
+    img: "https://i.postimg.cc/g02qRSzy/Whats-App-Image-2024-10-19-at-2-19-56-PM.jpg",
+    shortDescription: "Recorre en bicicleta la selva nocturna rumbo a un pueblo fantasma lleno de leyendas.",
+    fullDescription: `Atrévete a pedalear bajo la luna por la Reserva de la Biosfera Ría Celestún.  
+    Viaja hacia un pueblo fantasma y conoce sus relatos más misteriosos.  
+    Una mezcla perfecta de historia, adrenalina y misticismo.`,
+    images: [
+      "https://i.postimg.cc/Y9g4mYWn/Whats-App-Image-2024-10-19-at-2-19-55-PM-1-1.jpg",
+      "https://i.postimg.cc/nz7sQBDd/Whats-App-Image-2024-10-19-at-2-19-55-PM.jpg",
+      "https://i.postimg.cc/WzvdmzGC/IMG-0467.jpg",
+      "https://i.postimg.cc/sxrMPxYb/IMG-0443.jpg"
+    ],
+    duration: "2 a 2.5 horas",
+    included: [
+      "Guía certificado federal",
+      "Bicicleta y equipo nocturno",
+      "Iluminación de seguridad",
+      "Relatos y leyendas locales"
+    ]
   }
 ];
+
 
 const searchQuery = ref('');
 const selectedExperience = ref<Experience | null>(null);
@@ -229,7 +339,7 @@ const changeImage = (index: number) => {
                 </div>
 
                 <div class="price-section">
-                  <p class="price-label">Precio por persona:</p>
+                  <p class="price-label">Precio</p>
                   <p class="modal-price">
                     ${{ selectedExperience.pricePerPerson.toLocaleString() }} MXN
                   </p>
@@ -507,6 +617,7 @@ const changeImage = (index: number) => {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
+  margin-top: 135px;
   border-radius: 12px;
   background-color: #F5F5F5;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -659,6 +770,7 @@ const changeImage = (index: number) => {
   color: #FFFFFF;
 }
 
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .modal-grid {
@@ -693,6 +805,17 @@ const changeImage = (index: number) => {
     font-size: 1.25rem;
   }
 }
+.price-section {
+  background: linear-gradient(135deg, #1B3B2F 0%, #1DA851 100%);
+  padding: 0.25rem 0.5rem; /* 🔹 menos espacio */
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.8rem;       /* 🔹 texto más pequeño */
+  font-weight: 400;
+  color: white;
+  display: inline-block;   /* 🔹 evita ocupar todo el ancho */
+}
+
 
 
 @media (max-width: 768px) {

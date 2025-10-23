@@ -1,74 +1,85 @@
+<!-- App.vue (o la vista principal) -->
 <script setup lang="ts">
 import NavBar from './components/base/NavBar.vue'
-import Section from './components/control/Section.vue'
 import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
 import About from './components/organisms/About.vue'
 import Experiences from './components/organisms/Experiences.vue'
+import OurTeam from './components/organisms/OurTeam.vue'
+import ContactUs from './components/organisms/ContactUs.vue'
+import Store from './components/organisms/Store.vue'
 </script>
 
 <template>
   <header>
     <NavBar />
   </header>
-  <!-- Contenido principal -->
-  <main>
-    <!-- Seccion Hero -->
-    <Hero/>
-    <!-- Sección acerca de nosotros -->
-    <About/>
 
-    <Experiences/>
-    <Section class="section section4">
-      <h1>Sección 4</h1>
-      <p>Contenido de la tercera sección</p>
-    </Section>
-    <Section class="section section5">
-      <h1>Sección 6</h1>
-      <p>Contenido de la tercera sección</p>
-    </Section>
-    <Section class="section section6">
-      <h1>Sección 7</h1>
-      <p>Contenido de la tercera sección</p>
-    </Section>
+  <main>
+    <section id="inicio" class="section"><Hero /></section>
+    <section id="nosotros" class="section"><About /></section>
+    <section id="experiencias" class="section"><Experiences /></section>
+    <section id="equipo" class="section"><OurTeam /></section>
+    <section id="contacto" class="section"><ContactUs /></section>
+    <section id="opiniones" class="section"><Store /></section>
   </main>
+
   <footer>
     <Footer/>
   </footer>
 </template>
 
 <style scoped>
+:root{
+  /* alto aproximado del navbar fijo (ajústalo a tu diseño) */
+  --nav-height: 100px;
+}
+
+/* activa smooth scroll nativo */
+html { scroll-behavior: smooth; }
+
+/* IMPORTANTE: aquí tenías un typo "187x" -> debe ser "px" */
 main {
-  margin-top: 187x; /* deja espacio para el navbar */
+  margin-top: 178px; /* deja espacio para el navbar fijo */
 }
 
-/* Hacemos que cada sección ocupe toda la pantalla */
+/* 1) Las secciones no aportan espacio extra */
 .section {
-  min-height: 100vh; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;   
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
+  margin: 0;                /* quita márgenes */
+  padding: 0;               /* quita relleno si lo tuvieras */
+  border: 0;                /* por si alguna tiene borde superior/inferior */
 }
 
-/* Colores de fondo distintos para diferenciar secciones */
-.section1, .section2,  .section3, .section4, .section5, .section6{
-  background-color: #E5E0D3;
-  width: 100%;
+/* 2) Evita el “colapso de márgenes” de los hijos (h1, p, etc.) */
+.section > *:first-child { margin-top: 0 !important; }
+.section > *:last-child  { margin-bottom: 0 !important; }
+
+/* 3) Normaliza títulos y párrafos dentro de la sección */
+.section :where(h1,h2,h3,h4,h5,h6,p) {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
-
-/* Para que los títulos se vean bien */
-.section h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+/* 4) Si dentro usas un .container con padding vertical, elimínalo */
+.section :where(.container) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-.section p {
-  font-size: 1.5rem;
-  max-width: 600px;
+/* 5) Asegura que dos secciones consecutivas no tengan “línea” entre ellas */
+.section + .section {
+  margin-top: 0;
+  border-top: 0;
 }
+
+/* 6) Evita pequeños espacios por imágenes inline o iframes */
+.section img, 
+.section iframe {
+  display: block;       /* quita el espacio de baseline */
+}
+
+/* 7) Si usas fondos distintos, asegúrate que body y secciones empalmen bien */
+body { background: #fff; }
+.section { background: #fff; } /* o el color que corresponda */
+
 </style>
