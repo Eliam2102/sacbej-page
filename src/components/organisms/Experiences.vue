@@ -11,7 +11,6 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFReYtFFkq7B
 const experiences: Experience[] = [
   {
     id: 1,
-<<<<<<< HEAD
     title: "Sac Bej – Camino Blanco",
     pricePerPerson: 1250,
     img: "https://i.postimg.cc/C1s5JJr8/5.png",
@@ -192,78 +191,6 @@ Una experiencia imperdible para amantes de la naturaleza.`,
 ];
 
 
-=======
-    title: "Aventura en Cenotes",
-    pricePerPerson: 1200,
-    img: "https://picsum.photos/400?random=1",
-    badge: "popular",
-    shortDescription: "Explora los místicos cenotes de la región con guía experto",
-    fullDescription: "Sumérgete en la magia de los cenotes sagrados mayas. Esta experiencia incluye visita a 3 cenotes diferentes, equipo de snorkel, guía certificado y transporte. Descubre la belleza natural y la historia ancestral de estos lugares únicos.",
-    images: ["https://picsum.photos/400?random=1", "https://picsum.photos/400?random=11", "https://picsum.photos/400?random=21"],
-    duration: "6 horas",
-    included: ["Transporte", "Guía certificado", "Equipo de snorkel", "Comida"]
-  },
-  {
-    id: 2,
-    title: "Tour Arqueológico Maya",
-    pricePerPerson: 1800,
-    img: "https://picsum.photos/400?random=2",
-    badge: "oferta",
-    shortDescription: "Descubre las antiguas ciudades mayas con arqueólogos expertos",
-    fullDescription: "Viaja en el tiempo visitando las ruinas más impresionantes de la civilización maya. Incluye Chichén Itzá y Ek Balam con explicaciones detalladas de arqueólogos profesionales. Transporte, comida y entradas incluidas.",
-    images: ["https://picsum.photos/400?random=2", "https://picsum.photos/400?random=12", "https://picsum.photos/400?random=22"],
-    duration: "8 horas",
-    included: ["Transporte privado", "Arqueólogo guía", "Entradas", "Comida típica"]
-  },
-  {
-    id: 3,
-    title: "Experiencia Gastronómica",
-    pricePerPerson: 950,
-    img: "https://picsum.photos/400?random=3",
-    shortDescription: "Saborea la auténtica cocina yucateca en un tour culinario único",
-    fullDescription: "Disfruta de una experiencia gastronómica completa visitando mercados locales, aprendiendo a cocinar platillos tradicionales y degustando los mejores sabores de Yucatán. Incluye clase de cocina, degustaciones y recetas para llevar.",
-    images: ["https://picsum.photos/400?random=3", "https://picsum.photos/400?random=13", "https://picsum.photos/400?random=23"],
-    duration: "5 horas",
-    included: ["Chef profesional", "Ingredientes", "Degustaciones", "Recetario"]
-  },
-  {
-    id: 4,
-    title: "Kayak y Flamencos",
-    pricePerPerson: 1100,
-    img: "https://picsum.photos/400?random=4",
-    badge: "popular",
-    shortDescription: "Navega en kayak por manglares y observa flamencos rosados",
-    fullDescription: "Una experiencia única navegando por los manglares de Celestún o Río Lagartos, hogar de miles de flamencos rosados. Incluye kayak, guía naturalista, avistamiento de aves y fauna local. Ideal para amantes de la naturaleza.",
-    images: ["https://picsum.photos/400?random=4", "https://picsum.photos/400?random=14", "https://picsum.photos/400?random=24"],
-    duration: "7 horas",
-    included: ["Kayak y equipo", "Guía naturalista", "Transporte", "Box lunch"]
-  },
-  {
-    id: 5,
-    title: "Noche de Leyendas",
-    pricePerPerson: 750,
-    img: "https://picsum.photos/400?random=5",
-    badge: "oferta",
-    shortDescription: "Recorrido nocturno por el centro histórico con cuentos y leyendas",
-    fullDescription: "Descubre el lado místico de Mérida en un recorrido nocturno lleno de leyendas, historias y misterios. Visita lugares emblemáticos bajo la luz de la luna mientras escuchas relatos fascinantes. Incluye bebida tradicional.",
-    images: ["https://picsum.photos/400?random=5", "https://picsum.photos/400?random=15", "https://picsum.photos/400?random=25"],
-    duration: "3 horas",
-    included: ["Guía narrador", "Bebida típica", "Entrada a sitios"]
-  },
-  {
-    id: 6,
-    title: "Hacienda y Spa",
-    pricePerPerson: 2200,
-    img: "https://picsum.photos/400?random=6",
-    shortDescription: "Relájate en una hacienda histórica con spa y comida gourmet",
-    fullDescription: "Pasa un día de lujo en una hacienda henequenera restaurada. Incluye tour por la hacienda, masaje relajante, acceso a spa, piscina y comida gourmet de tres tiempos. La experiencia perfecta para desconectar.",
-    images: ["https://picsum.photos/400?random=6", "https://picsum.photos/400?random=16", "https://picsum.photos/400?random=26"],
-    duration: "8 horas",
-    included: ["Spa completo", "Masaje", "Comida gourmet", "Alberca"]
-  }
-];
-
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
 const searchQuery = ref('');
 const selectedExperience = ref<Experience | null>(null);
 const currentImageIndex = ref(0);
@@ -412,11 +339,7 @@ const changeImage = (index: number) => {
                 </div>
 
                 <div class="price-section">
-<<<<<<< HEAD
                   <p class="price-label">Precio</p>
-=======
-                  <p class="price-label">Precio por persona:</p>
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
                   <p class="modal-price">
                     ${{ selectedExperience.pricePerPerson.toLocaleString() }} MXN
                   </p>
@@ -694,10 +617,7 @@ const changeImage = (index: number) => {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-<<<<<<< HEAD
   margin-top: 135px;
-=======
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
   border-radius: 12px;
   background-color: #F5F5F5;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -850,10 +770,6 @@ const changeImage = (index: number) => {
   color: #FFFFFF;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .modal-grid {
@@ -888,7 +804,6 @@ const changeImage = (index: number) => {
     font-size: 1.25rem;
   }
 }
-<<<<<<< HEAD
 .price-section {
   background: linear-gradient(135deg, #1B3B2F 0%, #1DA851 100%);
   padding: 0.25rem 0.5rem; /* 🔹 menos espacio */
@@ -900,8 +815,6 @@ const changeImage = (index: number) => {
   display: inline-block;   /* 🔹 evita ocupar todo el ancho */
 }
 
-=======
->>>>>>> 56f13d2f231dec018fa25590f89d926496f87baa
 
 
 @media (max-width: 768px) {
