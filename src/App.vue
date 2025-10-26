@@ -56,7 +56,7 @@ main {
 /* 3) Normaliza títulos y párrafos dentro de la sección */
 .section :where(h1,h2,h3,h4,h5,h6,p) {
   margin-block-start: 0;
-  margin-block-end: 0;
+  margin-block-end: 1;
 }
 
 /* 4) Si dentro usas un .container con padding vertical, elimínalo */

@@ -11,8 +11,8 @@
         <div class="info-wrapper">
           <p class="info-item"><font-awesome-icon icon="map-marker-alt" /> Celestun, Yucatán</p>
           <p class="info-item"><font-awesome-icon icon="clock" /> 9:00 am - 6:00 pm</p>
-          <p class="info-item"><font-awesome-icon icon="phone" /> +52 999 123 4567</p>
-          <p class="info-item"><font-awesome-icon icon="envelope" /> sacbejatencion@sacbej.com</p>
+          <p class="info-item"><font-awesome-icon icon="phone" /> +52 999 827 0891</p>
+          <p class="info-item"><font-awesome-icon icon="envelope" />ecoturismo.sac.bej@gmail.com</p>
         </div>
       </div>
     </transition>
@@ -432,7 +432,6 @@ onUnmounted(() => {
 
 /* ==================== RESPONSIVE ==================== */
 
-/* Móvil pequeño (320px - 374px) */
 @media (max-width: 374px) {
   .info-item {
     font-size: 0.65rem;
@@ -441,39 +440,25 @@ onUnmounted(() => {
   
   .info-wrapper {
     gap: 0.5rem;
+    padding: 0.25rem 0;
+  }
+  
+  .info-nav-top {
+    padding: 0.35rem 0.75rem;
+  }
+  
+  .nav-main {
+    padding: 0.5rem 0.75rem;
   }
   
   .logo {
-    height: 40px;
+    height: 80px;
   }
   
   .logo-mobile {
-    height: 50px;
+    height: 70px;
   }
-  
-  .hamburger {
-    width: 36px;
-    height: 36px;
   }
-  
-  .hamburger .material-icons {
-    font-size: 22px;
-  }
-  
-  .menu-mobile-link {
-    font-size: 1.3rem;
-    padding: 0.85rem;
-  }
-  
-  .menu-mobile-content {
-    padding: 1.5rem 1rem;
-  }
-  
-  .btn-mobile {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
 
 /* Móvil (375px - 639px) */
 @media (min-width: 375px) and (max-width: 639px) {
@@ -487,8 +472,10 @@ onUnmounted(() => {
   
   .logo {
     height: 58px;
+    transform: scale(1.2);
     margin-right: 29px;
   }
+  
   
   .logo-mobile {
     height: 90px;

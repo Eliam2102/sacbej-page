@@ -45,7 +45,7 @@
                 <h3>Seguridad y Profesionalismo</h3>
                 <ul>
                   <li>Guías certificados en Primeros Auxilios y RCP</li>
-                  <li>Vehículos y equipo revisados rigurosamente</li>
+                  <li>Guías certificados en calidad turística Yucatán</li>
                   <li>Cumplimiento de estándares de seguridad</li>
                 </ul>
               </div>
@@ -84,6 +84,7 @@
         <div class="cards-column right-cards">
           <div class="card animate-on-scroll">
             <div class="card-content">
+              <div class="icon"><img src="/src/assets/insignia.png" alt=""></div>
               <div class="card-text">
                 <h3>Credibilidad y Respaldo Oficial</h3>
                 <ul>
@@ -92,12 +93,12 @@
                   <li>Experiencia legal y de calidad que te mereces</li>
                 </ul>
               </div>
-              <div class="icon"><img src="/src/assets/insignia.png" alt=""></div>
             </div>
           </div>
 
           <div class="card animate-on-scroll">
             <div class="card-content">
+              <div class="icon"><img src="/src/assets/servicio-de-consultoria.png" alt=""></div>
               <div class="card-text">
                 <h3>Habilidades de Servicio y Comunicación</h3>
                 <ul>
@@ -106,7 +107,6 @@
                   <li>Viajes fluidos y excepcionales</li>
                 </ul>
               </div>
-              <div class="icon"><img src="/src/assets/servicio-de-consultoria.png" alt=""></div>
             </div>
           </div>
         </div>
