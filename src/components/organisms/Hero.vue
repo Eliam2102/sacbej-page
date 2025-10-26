@@ -40,8 +40,8 @@
 
 /* ========== HERO SECTION ========== */
 .hero {
-  margin-top: 80px;
-  height: 100vh;
+  margin-top: -38px;
+  height: 80vh;
   min-height: 500px;
   position: relative;
   display: flex;
@@ -147,7 +147,6 @@
 /* Mobile Extra Small (320px - 374px) */
 @media (max-width: 374px) {
   .hero {
-    margin-top: 60px;
     min-height: 450px;
   }
   
@@ -187,8 +186,7 @@
 /* Mobile Small (375px - 424px) */
 @media (min-width: 375px) and (max-width: 424px) {
   .hero {
-    margin-top: 65px;
-    min-height: 480px;
+    height: 50px;
   }
   
   .hero-content {
@@ -218,7 +216,6 @@
 /* Mobile Medium (425px - 639px) */
 @media (min-width: 425px) and (max-width: 639px) {
   .hero {
-    margin-top: 70px;
     min-height: 500px;
   }
   

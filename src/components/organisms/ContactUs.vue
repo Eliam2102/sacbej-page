@@ -148,22 +148,22 @@
                   <div class="item-contacto">
                     <Icon icon="mdi:map-marker" width="24" class="icono-contacto" />
                     <p class="texto-contacto">
-                      C. 10 x 11 y 13, Centro<br />
+                      Calle 11 x 8 y 10 s/n, Plaza flamingo<br />
                       97367 Celestún, Yucatán
                     </p>
                   </div>
                   
                   <div class="item-contacto">
                     <Icon icon="mdi:phone" width="24" class="icono-contacto" />
-                    <a href="tel:+529991234567" class="enlace-contacto">
-                      +52 999 123 4567
+                    <a href="tel:+529998270891" class="enlace-contacto">
+                      +52 999 827 0891
                     </a>
                   </div>
                   
                   <div class="item-contacto">
                     <Icon icon="mdi:email" width="24" class="icono-contacto" />
                     <a href="mailto:sacbejcelestun@gmail.com" class="enlace-contacto">
-                      sacbejcelestun@gmail.com
+                      ecoturismo.sac.bej@gmail.com
                     </a>
                   </div>
                 </div>
@@ -182,15 +182,33 @@
     <!-- Redes Sociales - Desktop -->
     <div class="redes-fijas-desktop">
       <div class="contenedor-redes">
-        <a href="https://www.facebook.com/p/Ecoturismo-sac-bej-Celest%C3%BAn-100063497890923/" class="icono-red facebook" aria-label="Facebook" target="_blank">
+        <a href="https://www.facebook.com/p/Ecoturismo-sac-bej-Celest%C3%BAn-100063497890923/" 
+          class="icono-red facebook" 
+          aria-label="Facebook" 
+          target="_blank">
           <Icon icon="mdi:facebook" width="22" />
         </a>
-        <a href="https://www.instagram.com/sacbejcelestun/" class="icono-red instagram" aria-label="Instagram" target="_blank">
+
+        <a href="https://www.instagram.com/sacbejcelestun/" 
+          class="icono-red instagram" 
+          aria-label="Instagram" 
+          target="_blank">
           <Icon icon="mdi:instagram" width="22" />
         </a>
-        <a href="https://www.tripadvisor.com/" class="icono-red tripadvisor" aria-label="Tripadvisor" target="_blank">
-        <Icon icon="simple-icons:tripadvisor" width="22" />
-      </a>
+
+        <a href="https://www.tripadvisor.com/" 
+          class="icono-red tripadvisor" 
+          aria-label="Tripadvisor" 
+          target="_blank">
+          <Icon icon="simple-icons:tripadvisor" width="22" />
+        </a>
+
+        <a href="https://wa.me/529998270891?text=Hola,%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20tours, por favor" 
+          class="icono-red whatsapp" 
+          aria-label="WhatsApp" 
+          target="_blank">
+          <Icon icon="mdi:whatsapp" width="22" />
+        </a>
       </div>
     </div> 
   </main>
@@ -725,6 +743,7 @@ const enviarFormulario = () => {
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
 }
 
+/* Colores por red */
 .icono-red.facebook:hover {
   background: #1877f2;
   color: white;
@@ -737,6 +756,16 @@ const enviarFormulario = () => {
 
 .icono-red.twitter:hover {
   background: #1da1f2;
+  color: white;
+}
+
+.icono-red.tripadvisor:hover {
+  background: #34E0A1;
+  color: white;
+}
+
+.icono-red.whatsapp:hover {
+  background: #25D366;
   color: white;
 }
 

@@ -17,8 +17,7 @@ const experiences: Experience[] = [
     badge: "popular",
     shortDescription: "Recorre la zona sur de la Reserva Ría Celestún en tuc tuc: salinas rosas, bosque petrificado y flamencos.",
     fullDescription: `¡Bienvenidos a una experiencia única de conexión con la naturaleza! Te invitamos a disfrutar de un recorrido exclusivo por la parte sur de la Reserva de la Biosfera Ría Celestún, conocido como Sac Bej (“Camino Blanco” en lengua maya).
-    Durante una hora y media a dos horas en tuc tuc explorarás el puerto de pescadores, las charcas de sal rosa, el bosque petrificado, la ex hacienda Real de Salinas y, de diciembre a marzo, la zona de flamencos rosados.
-    Ideal para quienes buscan historia, paisajes y contacto directo con la naturaleza.`,
+    Durante una hora y media a dos horas en tuc tuc explorarás el puerto de pescadores, las charcas de sal rosa, el bosque petrificado, la ex hacienda Real de Salinas. Ideal para quienes buscan historia, paisajes y contacto directo con la naturaleza.`,
     images: [
       "https://i.postimg.cc/Jn50KKYH/6.png",
       "https://i.postimg.cc/RFLhGGpH/7.png",
