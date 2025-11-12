@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { Experience } from '../interfaces/Experience';
-import { Icon } from '@iconify/vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import { Icon } from "@iconify/vue";
 
-// CONFIGURACIÓN - REEMPLAZA CON TU URL DE GOOGLE APPS SCRIPT
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFReYtFFkq7BQqHC491qXSU6UIax2QUQTbkjDviUUwv7RoRXOqinIa5RTENRGVLL7q4w/exec';
+interface Experience {
+  id: number;
+  title: string;
+  pricePerPerson: number;
+  img: string;
+  badge?: string;
+  shortDescription: string;
+  fullDescription: string;
+  images: string[];
+  duration: string;
+  included: string[];
+}
 
-
-
+/* ================== DATOS ================== */
 const experiences: Experience[] = [
   {
     id: 1,
@@ -15,41 +23,38 @@ const experiences: Experience[] = [
     pricePerPerson: 1250,
     img: "https://i.postimg.cc/C1s5JJr8/5.png",
     badge: "popular",
-    shortDescription: "Recorre la zona sur de la Reserva Ría Celestún en tuc tuc: salinas rosas, bosque petrificado y flamencos.",
-    fullDescription: `¡Bienvenidos a una experiencia única de conexión con la naturaleza! Te invitamos a disfrutar de un recorrido exclusivo por la parte sur de la Reserva de la Biosfera Ría Celestún, conocido como Sac Bej (“Camino Blanco” en lengua maya).
-    Durante una hora y media a dos horas en tuc tuc explorarás el puerto de pescadores, las charcas de sal rosa, el bosque petrificado, la ex hacienda Real de Salinas. Ideal para quienes buscan historia, paisajes y contacto directo con la naturaleza.`,
+    shortDescription:
+      "Recorre la zona sur de la Reserva Ría Celestún: salinas rosas, bosque petrificado y flamencos.",
+    fullDescription:
+      "Disfruta de un recorrido único en tuc tuc por la parte sur de la Reserva de la Biosfera Ría Celestún. Explora salinas rosas, bosque petrificado y ex haciendas, mientras descubres la historia natural de este lugar mágico.",
     images: [
       "https://i.postimg.cc/Jn50KKYH/6.png",
       "https://i.postimg.cc/RFLhGGpH/7.png",
-      "https://i.postimg.cc/76nhXXtG/9.png"
+      "https://i.postimg.cc/76nhXXtG/9.png",
     ],
     duration: "1.5 a 2 horas",
     included: [
       "Transporte en tuc tuc",
-      "Guía certificado bilingüe (NOM 09 TUR 2002)",
-      "Servicio de pick-up en hoteles de Celestún",
-      "Descuentos para adulto mayor y personas con discapacidad"
-    ]
+      "Guía certificado bilingüe",
+      "Servicio de pick-up",
+    ],
   },
   {
     id: 2,
     title: "Surf Casting – Pesca en el Golfo",
     pricePerPerson: 3500,
     img: "https://i.postimg.cc/B6Wzgfj6/surf.jpg",
-    shortDescription: "Pesca deportiva en el Golfo de México: corvina, robalo, jurel, pargo y más.",
-    fullDescription: `Disfruta una jornada de pesca inolvidable en las aguas color verde esmeralda del Golfo de México. Captura especies como corvina, robalo o pargo mientras disfrutas del mar y un ceviche fresco estilo ribereño. Ideal para grupos de amigos o familias.`,
+    shortDescription:
+      "Pesca deportiva en el Golfo: corvina, robalo, jurel, pargo y más.",
+    fullDescription:
+      "Vive la pesca deportiva en las aguas del Golfo de México. Disfruta el amanecer, pesca especies locales y saborea un ceviche fresco estilo ribereño.",
     images: [
       "https://i.postimg.cc/W3MHYYZv/sruf-2.jpg",
       "https://i.postimg.cc/gJvTtthd/surf3.jpg",
-      "https://i.postimg.cc/zBnc22hN/surf4.jpg"
+      "https://i.postimg.cc/zBnc22hN/surf4.jpg",
     ],
     duration: "5 horas",
-    included: [
-      "Embarcación privada (hasta 4 personas)",
-      "Guía y equipo de pesca",
-      "Ceviche fresco estilo ribereño",
-      "Salida recomendada 6:30 a.m."
-    ]
+    included: ["Embarcación privada", "Guía y equipo de pesca", "Ceviche fresco"],
   },
   {
     id: 3,
@@ -57,9 +62,10 @@ const experiences: Experience[] = [
     pricePerPerson: 1550,
     img: "https://i.postimg.cc/dVYm4QBn/Chat-GPT-Image-Oct-18-2025-07-24-00-PM.png",
     badge: "popular",
-    shortDescription: "Remo entre manglares al amanecer o al anochecer, rodeado de aves, flamencos y luciérnagas.",
-    fullDescription: `Vive una experiencia única dentro de la gran reserva Ría Celestún. Navega entre manglares hasta el corazón del humedal, donde descubrirás aves como el martín pescador enano y los flamencos rosados al amanecer.  
-    También puedes elegir la versión nocturna: “Kayak de noche”, donde el cocodrilo es el anfitrión y las luciérnagas iluminan el camino.`,
+    shortDescription:
+      "Remo entre manglares al amanecer o anochecer, rodeado de aves y luciérnagas.",
+    fullDescription:
+      "Navega entre manglares hasta el corazón del humedal. Observa aves y flamencos al amanecer o el espectáculo de luciérnagas al anochecer.",
     images: [
       "https://i.postimg.cc/1X04tSNT/Chat-GPT-Image-Oct-18-2025-07-27-34-PM.png",
       "https://i.postimg.cc/h4MBShJD/Chat-GPT-Image-Oct-18-2025-07-31-17-PM.png",
@@ -67,32 +73,28 @@ const experiences: Experience[] = [
     ],
     duration: "2 horas",
     included: [
-      "Kayak doble (2 personas)",
-      "Guía certificado bilingüe",
-      "Lámparas para recorrido nocturno",
-      "Transporte en tuc tuc (si aplica)"
-    ]
+      "Kayak doble",
+      "Guía bilingüe",
+      "Lámparas nocturnas",
+      "Transporte tuc tuc",
+    ],
   },
   {
     id: 4,
     title: "Birdwatching – Observación de Aves",
     pricePerPerson: 1450,
     img: "https://i.postimg.cc/9Ff85YqW/Chat-GPT-Image-Oct-18-2025-08-17-33-PM.png",
-    shortDescription: "Más de 200 especies de aves en la Ría Celestún con guía experto y equipo óptico.",
-    fullDescription: `Es de mañana, binoculares en mano y olor a café... Es hora de ver aves.  
-    Disfruta observando más de 200 especies, muchas endémicas de Yucatán como el colibrí tijereta mexicano o la matraca yucateca. Nuestro guía certificado te ayudará a encontrarlas en su hábitat natural.`,
+    shortDescription:
+      "Más de 200 especies en la Ría Celestún con guía experto y equipo óptico.",
+    fullDescription:
+      "Descubre aves endémicas como el colibrí tijereta mexicano. Ideal para amantes de la fotografía y la naturaleza.",
     images: [
       "https://i.postimg.cc/hPtW5gtG/Chat-GPT-Image-Oct-18-2025-07-55-03-PM.png",
       "https://i.postimg.cc/Fs5NWwJ8/Chat-GPT-Image-Oct-18-2025-07-48-32-PM.png",
-      "https://i.postimg.cc/BQXHpLHc/Chat-GPT-Image-Oct-18-2025-07-51-54-PM.png"
+      "https://i.postimg.cc/BQXHpLHc/Chat-GPT-Image-Oct-18-2025-07-51-54-PM.png",
     ],
     duration: "4.5 horas",
-    included: [
-      "Guía federal NOM 09-TUR-2002",
-      "Transportación terrestre en tuc tuc",
-      "Equipo óptico básico",
-      "Salida recomendada: 6:00 a.m."
-    ]
+    included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico"],
   },
   {
     id: 5,
@@ -100,248 +102,249 @@ const experiences: Experience[] = [
     pricePerPerson: 4100,
     img: "https://i.postimg.cc/6QbggbMs/Chat-GPT-Image-Oct-18-2025-08-12-03-PM.png",
     badge: "oferta",
-    shortDescription: "Tour en lancha por la Ría Celestún: flamencos, túnel de manglar, isla de aves y ojo de agua.",
-    fullDescription: `Descubre la magia de la Ría Celestún en una aventura que combina observación de flamencos, navegación por manglares y baño en el ojo de agua.  
-Incluye visita a la isla de aves, túnel de manglar y observación de cocodrilos.  
-Una experiencia imperdible para amantes de la naturaleza.`,
+    shortDescription:
+      "Tour en lancha: flamencos, túnel de manglar, isla de aves y ojo de agua.",
+    fullDescription:
+      "Aventura mágica navegando por manglares y observando flamencos rosados. Incluye baño en ojo de agua.",
     images: [
       "https://i.postimg.cc/d3Hyjv5D/491518218-18006243275739535-6303338094946747857-n.jpg",
       "https://i.postimg.cc/kg70bmkM/491499260-18006243257739535-4895587472905209765-n.jpg",
       "https://i.postimg.cc/52Fsyktj/486561792-1223155886478538-1220087316864002473-n.jpg",
-      "https://i.postimg.cc/rFTxXVdC/Chat-GPT-Image-Oct-18-2025-08-09-28-PM.png"
     ],
     duration: "1 hora 20 min",
-    included: [
-      "Guía certificado NOM 09-TUR-2003",
-      "Guía bilingüe",
-      "Embarcación (1 a 6 personas)",
-      "Pago de acceso al parque",
-      "Estacionamiento y W.C."
-    ]
+    included: ["Guía bilingüe", "Lancha privada", "Acceso al parque"],
   },
   {
     id: 6,
-    title: "Moonlight Safari – Tour Nocturno en la Ría",
+    title: "Moonlight Safari – Tour Nocturno",
     pricePerPerson: 5600,
-    img: "/src/assets/Ceremonia y Tour Nocturno-08.jpg",
-    shortDescription: "Avistamiento de cocodrilos y luciérnagas bajo la luz de la luna.",
-    fullDescription: `Únete a nuestro exclusivo tour nocturno en la Reserva de la Biosfera Ría Celestún.  
-    Observa cocodrilos en su hábitat natural, aves durmiendo entre los manglares y el mágico espectáculo de las luciérnagas.  
-    Una experiencia para verdaderos aventureros.`,
+    img: "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
+    shortDescription:
+      "Avistamiento de cocodrilos y luciérnagas bajo la luz de la luna.",
+    fullDescription:
+      "Tour nocturno en lancha: cocodrilos, aves dormidas y el brillo natural de las luciérnagas. Una experiencia mágica y segura.",
     images: [
-      "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
       "https://i.postimg.cc/xTLBc77n/Ceremonia-y-Tour-Nocturno-16.jpg",
-      "https://i.postimg.cc/zXT4VMMD/coco-pos.jpg"
+      "https://i.postimg.cc/zXT4VMMD/coco-pos.jpg",
+      "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
     ],
     duration: "2 horas",
-    included: [
-      "Embarcación privada (1 a 5 personas)",
-      "Guía certificado NOM 09-TUR-2002",
-      "Equipo de iluminación nocturna",
-      "Reserva con 50% de anticipo"
-    ]
+    included: ["Guía certificado", "Equipo de iluminación", "Lancha privada"],
   },
   {
     id: 7,
-    title: "Ceremonia XUKULEM – Conexión Espiritual al Atardecer",
+    title: "Ceremonia XUKULEM – Conexión Espiritual",
     pricePerPerson: 2400,
     img: "https://i.postimg.cc/5tVDVMmf/Ceremonia-y-Tour-Nocturno-22.jpg",
-    shortDescription: "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
-    fullDescription: `Vive una experiencia espiritual guiada por el fuego, el copal y la sabiduría maya.  
-    Una ceremonia sagrada para cerrar ciclos y recibir el mensaje de la naturaleza.  
-    Incluye limpia energética y ofrendas a los cuatro vientos.`,
+    shortDescription:
+      "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
+    fullDescription:
+      "Una experiencia espiritual guiada por fuego, copal y sabiduría maya. Limpia energética y ofrendas al mar.",
     images: [
       "https://i.postimg.cc/3NRPcCFD/Ceremonia-y-Tour-Nocturno-24.jpg",
       "https://i.postimg.cc/k5mLmdyd/Ceremonia-y-Tour-Nocturno-25.jpg",
       "https://i.postimg.cc/9Xg3qKcy/Ceremonia-y-Tour-Nocturno-26.jpg",
-      "https://i.postimg.cc/J0G2q7Rs/Ceremonia-y-Tour-Nocturno-33.jpg"
     ],
     duration: "40 minutos",
-    included: [
-      "Ceremonia guiada al atardecer frente al mar",
-      "Ofrendas y limpia con copal",
-      "Mensaje ritual personalizado",
-      "Hasta 10 personas por grupo"
-    ]
+    included: ["Ceremonia frente al mar", "Ofrendas", "Guía espiritual"],
   },
   {
     id: 8,
-    title: "Biking Tour: Pueblo Fantasma",
+    title: "Biking Tour – Pueblo Fantasma",
     pricePerPerson: 350,
     img: "https://i.postimg.cc/g02qRSzy/Whats-App-Image-2024-10-19-at-2-19-56-PM.jpg",
-    shortDescription: "Recorre en bicicleta la selva nocturna rumbo a un pueblo fantasma lleno de leyendas.",
-    fullDescription: `Atrévete a pedalear bajo la luna por la Reserva de la Biosfera Ría Celestún.  
-    Viaja hacia un pueblo fantasma y conoce sus relatos más misteriosos.  
-    Una mezcla perfecta de historia, adrenalina y misticismo.`,
+    shortDescription:
+      "Recorre en bicicleta la selva nocturna hacia un pueblo fantasma lleno de leyendas.",
+    fullDescription:
+      "Pedalea bajo la luna y descubre las historias ocultas del bosque y el antiguo pueblo.",
     images: [
       "https://i.postimg.cc/Y9g4mYWn/Whats-App-Image-2024-10-19-at-2-19-55-PM-1-1.jpg",
-      "https://i.postimg.cc/nz7sQBDd/Whats-App-Image-2024-10-19-at-2-19-55-PM.jpg",
       "https://i.postimg.cc/WzvdmzGC/IMG-0467.jpg",
-      "https://i.postimg.cc/sxrMPxYb/IMG-0443.jpg"
+      "https://i.postimg.cc/sxrMPxYb/IMG-0443.jpg",
     ],
     duration: "2 a 2.5 horas",
-    included: [
-      "Guía certificado federal",
-      "Bicicleta y equipo nocturno",
-      "Iluminación de seguridad",
-      "Relatos y leyendas locales"
-    ]
-  }
+    included: ["Guía federal", "Bicicleta", "Equipo nocturno"],
+  },
 ];
 
+/* ============= Estado catálogo (4x2 desktop, 1 móvil) + paginación ============= */
+const currentPage = ref(1);
+const perPage = 8; // 4 arriba + 4 abajo
+const totalPages = computed(() => Math.ceil(experiences.length / perPage));
+const paginatedExperiences = computed(() => {
+  const start = (currentPage.value - 1) * perPage;
+  return experiences.slice(start, start + perPage);
+});
+function nextPage() { if (currentPage.value < totalPages.value) currentPage.value++; }
+function prevPage() { if (currentPage.value > 1) currentPage.value--; }
 
-const searchQuery = ref('');
+/* ================== Modal + Galería ================== */
 const selectedExperience = ref<Experience | null>(null);
 const currentImageIndex = ref(0);
-const isSubmitting = ref(false);
-const bookingSuccess = ref(false);
-const bookingResult = ref<any>(null);
+const imageLoaded = ref(false);
 
-// Datos del formulario
-const bookingData = ref({
-  fullName: '',
-  phone: '',
-  email: '',
-  numberOfPeople: 1,
-  selectedDate: '',
-  selectedTime: '09:00',
-  comments: ''
-});
-
-const filteredExperiences = computed(() => {
-  return experiences.filter(e => 
-    e.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
-const totalAmount = computed(() => {
-  if (!selectedExperience.value) return 0;
-  return selectedExperience.value.pricePerPerson * bookingData.value.numberOfPeople;
-});
-
-const depositAmount = computed(() => {
-  return Math.round(totalAmount.value * 0.4);
-});
-
-const openModal = (experience: Experience) => {
-  selectedExperience.value = experience;
+function openModal(exp: Experience) {
+  selectedExperience.value = exp;
   currentImageIndex.value = 0;
-  bookingSuccess.value = false;
-  bookingResult.value = null;
-  // Reset form
-  bookingData.value = {
-    fullName: '',
-    phone: '',
-    email: '',
-    numberOfPeople: 1,
-    selectedDate: '',
-    selectedTime: '09:00',
-    comments: ''
-  };
-};
+  imageLoaded.value = false;
+}
 
-const closeModal = () => {
+function closeModal() {
   selectedExperience.value = null;
-  bookingSuccess.value = false;
-};
+}
 
-const changeImage = (index: number) => {
-  currentImageIndex.value = index;
-};
+function nextImage() {
+  if (!selectedExperience.value) return;
+  imageLoaded.value = false;
+  currentImageIndex.value =
+    (currentImageIndex.value + 1) % selectedExperience.value.images.length;
+}
+function prevImage() {
+  if (!selectedExperience.value) return;
+  imageLoaded.value = false;
+  currentImageIndex.value =
+    (currentImageIndex.value - 1 + selectedExperience.value.images.length) %
+    selectedExperience.value.images.length;
+}
+
+/* ============= Bloqueo de scroll del body cuando el modal está abierto ============= */
+const originalBodyOverflow = ref<string>("");
+watch(selectedExperience, (val) => {
+  if (typeof document === "undefined") return;
+  if (val) {
+    originalBodyOverflow.value = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = originalBodyOverflow.value || "";
+  }
+});
+
+/* ============= Accesibilidad y atajos (Esc, ←, →) ============= */
+function onKeydown(e: KeyboardEvent) {
+  if (!selectedExperience.value) return;
+  if (e.key === "Escape") closeModal();
+  if (e.key === "ArrowRight") nextImage();
+  if (e.key === "ArrowLeft") prevImage();
+}
+onMounted(() => window.addEventListener("keydown", onKeydown));
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", onKeydown);
+  // por si desmonta con modal abierto
+  document.body.style.overflow = originalBodyOverflow.value || "";
+});
 </script>
 
 <template>
-  <div class="catalog-view">
-    <main class="main-content">
-      <!-- <h4 class="section-subtitle">El secreto rosado de Yucatán.</h4> -->
-      <h2 class="section-title">Aventura Salvaje en el Corazón de la costa Yucateca</h2>
-      <hr class="hero-divider" />
-      <p class="section-subtitle">Olvida los tours convencionales. Te ofrecemos aventuras exclusivas en Celestún: desde un místico baño de arcilla maya hasta la exploración de un bosque petrificado y las fascinantes charcas de sal rosada. Descubre un Celestún que pocos conocen.</p>
-      
-      <div class="products-grid">
-        <div 
-          v-for="experience in filteredExperiences" 
-          :key="experience.id"
-          class="product-card"
-          @click="openModal(experience)"
-        >
-          <div class="product-image-wrapper">
-            <img :src="experience.img" :alt="experience.title" class="product-image" />
-            <span v-if="experience.badge" class="badge" :class="experience.badge">
-              {{ experience.badge }}
-            </span>
-            <div class="overlay">
-              <button class="btn-overlay">Ver Detalles</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">{{ experience.title }}</h3>
-            <p class="product-description">{{ experience.shortDescription }}</p>
-          </div>
+  <section class="catalog">
+    <h2 class="title">Explora experiencias únicas</h2>
+    <p class="subtitle">
+      Aventuras exclusivas en la costa yucateca. Vive naturaleza, cultura y magia.
+    </p>
+
+    <!-- GRID 4 x 2 en desktop | 1 col en móvil -->
+    <div class="grid">
+      <div
+        v-for="exp in paginatedExperiences"
+        :key="exp.id"
+        class="card"
+        @click="openModal(exp)"
+        role="button"
+        tabindex="0"
+        @keyup.enter="openModal(exp)"
+        aria-label="Abrir detalle de experiencia"
+      >
+        <div class="thumb-wrap">
+          <img :src="exp.img" class="thumb" loading="lazy" :alt="exp.title" />
+          <span v-if="exp.badge" class="badge">{{ exp.badge }}</span>
+        </div>
+        <div class="card-content">
+          <h3>{{ exp.title }}</h3>
+          <p>{{ exp.shortDescription }}</p>
+          <span class="price">
+            {{ exp.pricePerPerson > 0 ? `$${exp.pricePerPerson} MXN` : "Personalizado" }}
+          </span>
         </div>
       </div>
-    </main>
+    </div>
+
+    <!-- Paginación -->
+    <div class="pagination" v-if="totalPages > 1">
+      <button @click="prevPage" :disabled="currentPage === 1">← Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente →</button>
+    </div>
 
     <!-- MODAL -->
     <Teleport to="body">
-      <Transition name="modal">
-        <div v-if="selectedExperience" class="modal-overlay" @click="closeModal">
-          <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeModal">&times;</button>
+      <Transition name="fade">
+        <div
+          v-if="selectedExperience"
+          class="overlay"
+          @click.self="closeModal"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="modal" role="document">
+            <!-- Header -->
+            <div class="modal-header">
+              <h2 class="modal-title">{{ selectedExperience.title }}</h2>
+              <button class="icon-btn" @click="closeModal" aria-label="Cerrar">
+                ×
+              </button>
+            </div>
 
-            <div class="modal-grid">
-              <!-- GALERÍA -->
-              <div class="modal-gallery">
-                <img 
-                  :src="selectedExperience.images[currentImageIndex]" 
-                  :alt="selectedExperience.title" 
-                  class="modal-main-image"
-                />
-                <div class="image-thumbnails">
-                  <img 
-                    v-for="(img, index) in selectedExperience.images"
-                    :key="index"
-                    :src="img"
-                    class="thumbnail"
-                    :class="{ active: currentImageIndex === index }"
-                    @click="changeImage(index)"
+            <!-- Cuerpo -->
+            <div class="modal-body">
+              <!-- Galería -->
+              <div class="gallery">
+                <div class="main-image">
+                  <div v-if="!imageLoaded" class="skeleton"></div>
+                  <img
+                    v-show="imageLoaded"
+                    :src="selectedExperience.images[currentImageIndex]"
+                    @load="imageLoaded = true"
+                    class="active-img"
+                    :alt="selectedExperience.title"
                   />
+                  <button class="nav prev" @click="prevImage" aria-label="Anterior">‹</button>
+                  <button class="nav next" @click="nextImage" aria-label="Siguiente">›</button>
+                  <div class="counter">
+                    {{ currentImageIndex + 1 }} / {{ selectedExperience.images.length }}
+                  </div>
+                </div>
+
+                <div class="thumbs" aria-label="Miniaturas">
+                  <button
+                    v-for="(img, i) in selectedExperience.images"
+                    :key="i"
+                    class="thumb-btn"
+                    :class="{ active: i === currentImageIndex }"
+                    @click="(currentImageIndex = i), (imageLoaded = false)"
+                  >
+                    <img :src="img" :alt="`${selectedExperience.title} imagen ${i+1}`" loading="lazy" />
+                  </button>
                 </div>
               </div>
 
-              <!-- INFORMACIÓN -->
-              <div class="modal-details">
-                <span 
-                  v-if="selectedExperience.badge" 
-                  class="modal-badge" 
-                  :class="selectedExperience.badge"
-                >
-                  {{ selectedExperience.badge }}
-                </span>
+              <!-- Detalles -->
+              <div class="details">
+                <p class="full-desc">{{ selectedExperience.fullDescription }}</p>
 
-                <h2 class="modal-title">{{ selectedExperience.title }}</h2>
-
-                <div class="info-chip">
-                  <span class="info-label"><Icon icon="mdi:schedule" width="16"/> Duración:</span>
-                  {{ selectedExperience.duration }}
+                <div class="meta">
+                  <Icon icon="mdi:clock-outline" width="18" />
+                  <span>{{ selectedExperience.duration }}</span>
                 </div>
 
-                <p class="modal-description">
-                  {{ selectedExperience.fullDescription }}
-                </p>
+                <ul class="included">
+                  <li v-for="i in selectedExperience.included" :key="i"> {{ i }} </li>
+                </ul>
 
-                <div class="included-section">
-                  <h4 class="included-title"><Icon icon="mdi:check-circle-outline" width="20"/> Incluye:</h4>
-                  <ul class="included-list">
-                    <li v-for="item in selectedExperience.included" :key="item">{{ item }}</li>
-                  </ul>
-                </div>
-
-                <div class="price-section">
-                  <p class="price-label">Precio</p>
-                  <p class="modal-price">
-                    ${{ selectedExperience.pricePerPerson.toLocaleString() }} MXN
-                  </p>
+                <div class="price-box">
+                  {{
+                    selectedExperience.pricePerPerson > 0
+                      ? `$${selectedExperience.pricePerPerson} MXN por persona`
+                      : "Servicio personalizado – cotiza con nosotros"
+                  }}
                 </div>
               </div>
             </div>
@@ -349,557 +352,325 @@ const changeImage = (index: number) => {
         </div>
       </Transition>
     </Teleport>
-  </div> 
+  </section>
 </template>
 
-
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
-
-.catalog-view {
-  font-family: "Cormorant Garamond", sans-serif;
-  background-color: #F5E6D3;
-  min-height: 11vh;
-}
-
-.main-content {
-  max-width: 1400px;
-  margin: 0 auto;
+/* ====== Base catálogo ====== */
+.catalog {
+  background: #f5e6d3;
   padding: 3rem 2rem;
-}
-
-.section-title {
-  font-size: 4rem;
-  font-weight: 700;
-  color: #1B3B2F;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-/* Separador decorativo */
-.hero-divider {
-  border: none;
-  border-top: 3px solid #4caf50; /* verde para estilo natural */
-  width: 100px;
-  margin: 2rem auto; /* más separación */
-  border-radius: 2px;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  color: #4E342E;
-  font-family: "Merriweather", serif !important;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.product-card {
-  background-color: #A68A6D;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  animation: slideUp 0.5s ease backwards;
-}
-
-.product-card:nth-child(1) { animation-delay: 0.1s; }
-.product-card:nth-child(2) { animation-delay: 0.2s; }
-.product-card:nth-child(3) { animation-delay: 0.3s; }
-.product-card:nth-child(4) { animation-delay: 0.4s; }
-.product-card:nth-child(5) { animation-delay: 0.5s; }
-.product-card:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-}
-
-.product-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-  background-color: #F5F5F5;
-}
-
-.product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.product-card:hover .product-image {
-  transform: scale(1.08);
-}
-
-.badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.badge.popular {
-  background: linear-gradient(135deg, #1DA851 0%, #25D366 100%);
-  color: #FFFFFF;
-}
-
-.badge.oferta {
-  background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
-  color: #FFFFFF;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 2rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.product-card:hover .overlay {
-  opacity: 1;
-}
-
-.btn-overlay {
-  padding: 0.75rem 2rem;
-  border: 2px solid #F5E6D3;
-  background-color: #f5e6d3f5;
-  color: #1B3B2F;
-  border-radius: 25px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Bebas Neue", sans-serif;
-  backdrop-filter: blur(10px);
-}
-
-.btn-overlay:hover {
-  background-color: #4CAF50 ;
-  border-color: #1B3B2F;;
-  color: #F5E6D3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 165, 34, 0.4);
-}
-
-.product-info {
-  padding: 1.5rem;
-}
-
-.product-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  font-family: "Bebas Neue", sans-serif;
-  margin-bottom: 0.75rem;
-  color: #4E342E;
-}
-
-.product-description {
-  font-size: 0.95rem;
-  font-family: 'Merriweather', sans-serif;
-  line-height: 1.6;
-  color: #F5E6D3;
-  font-weight: bold;
-}
-
-/* --- MODAL MINIMALISTA PROFESIONAL --- */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.modal-content {
-  background-color: #F5E6D3;
-  border-radius: 16px;
-  max-width: 1100px;
-  width: 100%;
-  max-height: 95vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 2rem;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  margin: auto;
-  transition: all 0.3s ease;
-}
-
-.modal-close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 36px;
-  height: 36px;
-  border: none;
-  background-color: #FFFFFF;
-  color: #4E342E;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: all 0.25s ease;
-  line-height: 1;
-}
-
-.modal-close:hover {
-  background-color: #4E342E;
-  color: #FFFFFF;
-  transform: rotate(45deg) scale(1.05);
-}
-
-.modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 2rem;
-}
-
-.modal-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: sticky;
-  top: 0;
-}
-
-.modal-main-image {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  margin-top: 135px;
-  border-radius: 12px;
-  background-color: #F5F5F5;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.image-thumbnails {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.thumbnail {
-  min-width: 70px;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: all 0.25s ease;
-  border: 2px solid transparent;
-}
-
-.thumbnail:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
-}
-
-.thumbnail.active {
-  opacity: 1;
-  border-color: #25D366;
-}
-
-.modal-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.modal-badge {
-  display: inline-block;
-  padding: 0.4rem 1.1rem;
-  border-radius: 16px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  width: fit-content;
-}
-
-.modal-badge.popular {
-  background: linear-gradient(135deg, #1DA851 0%, #25D366 100%);
-  color: #FFFFFF;
-}
-
-.modal-badge.oferta {
-  background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
-  color: #FFFFFF;
-}
-
-.modal-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  font-family: "Bebas Neue", sans-serif;
-  color: #4E342E;
-  line-height: 1.3;
-}
-
-.info-chip {
-  display: inline-flex;
-  align-items: center;
   font-family: "Merriweather", serif;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  width: fit-content;
-  background-color: rgba(245, 230, 211, 0.3);
+  color: #1b3b2f;
+  text-align: center;
 }
-
-.info-label {
-  font-weight: 600;
-  color: #1A1A1A;
-}
-
-.modal-description {
-  font-size: 0.975rem;
-  font-weight: bold;
-  font-family: "Merriweather", serif;
-  line-height: 1.65;
-  color: #2C2C2C;
-}
-
-.included-section {
-  padding: 1rem;
-  border-radius: 10px;
-  background-color: rgba(245, 230, 211, 0.2);
-}
-
-.included-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+.title {
   font-family: "Bebas Neue", sans-serif;
-  color: #4E342E;
-  margin-bottom: 0.75rem;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  letter-spacing: 1px;
+}
+.subtitle {
+  max-width: 700px;
+  margin: 0.5rem auto 2rem;
+  color: #4e342e;
 }
 
-.included-list {
-  list-style: none;
-  font-family: "Merriweather", serif;
+/* Grid 4x2 desktop, 1 col móvil */
+.grid {
   display: grid;
-  gap: 0.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
 }
-
-.included-list li {
-  padding-left: 1.5rem;
-  position: relative;
-  color: #2C2C2C;
-  font-size: 0.95rem;
-}
-
-.included-list li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #25D366;
-  font-weight: bold;
-}
-
-.price-section {
-  background: linear-gradient(135deg, #1B3B2F  0%, #1DA851 100%);
-  padding: 1rem;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-}
-
-.price-label {
-  font-size: 0.9rem;
-  opacity: 0.95;
-  font-family: "Bebas Neue", sans-serif;
-  margin-bottom: 0.25rem;
-}
-
-.modal-price {
-  font-size: 1.75rem;
-  font-weight: 700;
-  font-family: "Bebas Neue", sans-serif;
-  color: #FFFFFF;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .modal-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .modal-main-image {
-    border-radius: 10px;
-  }
-
-  .thumbnail {
-    min-width: 60px;
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-  }
-
-  .modal-title {
-    font-size: 1.5rem;
-  }
-
-  .modal-price {
-    font-size: 1.5rem;
-  }
-
-  .info-chip {
-    padding: 0.4rem 0.8rem;
-  }
-
-  .included-title {
-    font-size: 1.25rem;
-  }
-}
-.price-section {
-  background: linear-gradient(135deg, #1B3B2F 0%, #1DA851 100%);
-  padding: 0.25rem 0.5rem; /* 🔹 menos espacio */
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.8rem;       /* 🔹 texto más pequeño */
-  font-weight: 400;
-  color: white;
-  display: inline-block;   /* 🔹 evita ocupar todo el ancho */
-}
-
-
-
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .section-subtitle {
-    font-size: 1rem;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .modal-content {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-
-  .modal-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .modal-gallery {
-    position: static;
-  }
-
-  .modal-title {
-    font-size: 1.5rem;
-  }
-
-  .modal-price {
-    font-size: 1.75rem;
-  }
-
-  .form-row.two-cols {
-    grid-template-columns: 1fr;
-  }
-
-  .booking-form {
-    padding: 1.5rem;
-  }
-
-  .form-title {
-    font-size: 1.25rem;
-  }
-
-  .btn-book {
-    font-size: 1rem;
-  }
-
-  .success-message {
-    padding: 2rem 1rem;
-  }
-
-  .success-icon {
-    font-size: 3rem;
-  }
-
-  .success-title {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .products-grid {
+@media (max-width: 1024px) {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .modal-grid {
+}
+@media (max-width: 640px) {
+  .grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (min-width: 1025px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* Tarjeta */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+}
+.thumb-wrap {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #1b3b2f;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.thumb {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.card-content {
+  padding: 1rem 1rem 1.2rem;
+}
+.card-content h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.6rem;
+  color: #1b3b2f;
+  line-height: 1.1;
+  margin-bottom: .25rem;
+}
+.card-content p {
+  font-size: .95rem;
+  color: #4e342e;
+  margin: 0 0 .6rem;
+}
+.price {
+  color: #1b3b2f;
+  font-weight: 700;
 }
 
-@media (min-width: 1400px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 2rem;
+  font-family: "Bebas Neue", sans-serif;
 }
+.pagination button {
+  background: #1b3b2f;
+  color: #fff;
+  border: none;
+  padding: .55rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background .2s ease, transform .1s ease;
+}
+.pagination button:hover { background: #1da851; }
+.pagination button:active { transform: translateY(1px); }
+.pagination button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ====== Modal ====== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 20, 17, 0.72);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 9999;
+  /* aísla el scroll del modal para que no 'empuje' el body */
+  overscroll-behavior: contain;
+}
+
+.modal {
+  background: #fffdf8;
+  border-radius: 20px;
+  width: min(100%, 1040px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* importante para que el scroll sea interno */
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+}
+
+/* Header modal */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 1.2rem .9rem 1.2rem;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  background: linear-gradient(180deg,#ffffff 0%, #fffaf3 100%);
+}
+.modal-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  color: #1b3b2f;
+  letter-spacing: 1px;
+}
+.icon-btn {
+  appearance: none;
+  background: #f0efe9;
+  border: none;
+  color: #1b3b2f;
+  width: 36px; height: 36px;
+  border-radius: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background .2s ease, transform .08s ease;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover { background: #e7e5dc; }
+.icon-btn:active { transform: translateY(1px); }
+
+/* Body modal: dos columnas con scroll propio */
+.modal-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.2rem;
+  padding: 1.2rem;
+  overflow: auto;       /* <- el scroll vive aquí, no en el body */
+}
+
+/* Galería */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.main-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #eee;
+}
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #eee, #f6f6f6, #eee);
+  background-size: 200% 100%;
+  animation: loading 1.4s infinite linear;
+}
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.active-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Botones navegación de imagen */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .2s ease, transform .08s ease;
+}
+.nav:hover { background: rgba(0,0,0,.6); }
+.nav:active { transform: translateY(-50%) scale(.98); }
+.nav.prev { left: 10px; }
+.nav.next { right: 10px; }
+
+.counter {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: .8rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* Thumbnails */
+.thumbs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(72px, 1fr);
+  gap: .5rem;
+  overflow-x: auto;
+  padding-bottom: .2rem;
+  scrollbar-width: thin;
+}
+.thumb-btn {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .15s ease, transform .08s ease;
+}
+.thumb-btn:hover { transform: translateY(-1px); }
+.thumb-btn.active { border-color: #1b3b2f; }
+.thumb-btn img {
+  width: 100%; height: 72px; object-fit: cover; border-radius: 8px; display: block;
+}
+
+/* Detalles */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  color: #1b3b2f;
+  font-size: .98rem;
+}
+.full-desc {
+  color: #4e342e;
+  line-height: 1.65;
+}
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: #1b3b2f;
+  font-weight: 600;
+}
+.included {
+  list-style: none;
+  padding: 0; margin: .2rem 0 0;
+  display: grid; gap: .4rem;
+}
+.included li::before {
+  content: "✓";
+  color: #1da851;
+  margin-right: .5rem;
+  font-weight: 700;
+}
+.price-box {
+  margin-top: .4rem;
+  background: linear-gradient(135deg, #1b3b2f, #1da851);
+  color: #fff;
+  padding: .8rem 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Responsive modal */
+@media (max-width: 920px) {
+  .modal-body { grid-template-columns: 1fr; }
+  .main-image { aspect-ratio: 16/11; }
+}
+
+/* Fade del overlay/modal (no afecta story/scroll) */
+.fade-enter-active, .fade-leave-active { transition: opacity .18s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

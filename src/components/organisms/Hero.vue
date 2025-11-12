@@ -3,7 +3,7 @@
     <section class="hero">
       <!-- 🎥 Video de fondo -->
       <video class="hero-video" autoplay muted loop playsinline>
-        <source src="https://sacbej.b-cdn.net/DJI_20250903102029_0636_D.MP4" type="video/mp4" />
+        <source src="/src/assets/hero-video.mp4" type="video/mp4" />
         Tu navegador no soporta video HTML5.
       </video>
 
@@ -373,7 +373,7 @@
 /* Desktop (1440px - 1919px) */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .hero {
-    height: 100vh;
+    height: 85vh;
     min-height: 750px;
   }
   

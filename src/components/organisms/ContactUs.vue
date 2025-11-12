@@ -275,15 +275,6 @@ const enviarFormulario = () => {
   background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.4), rgba(248, 250, 252, 1));
 }
 
-.hero-waves {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 8rem;
-  color: #B4977A;
-}
-
 .hero-waves path {
   fill: currentColor;
 }

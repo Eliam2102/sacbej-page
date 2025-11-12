@@ -206,8 +206,19 @@ onMounted(() => {
     },
     { threshold: 0.2 }
   );
-  elements.forEach((el) => observer.observe(el));
+
+  // 👇 Evita observar el storytelling
+  elements.forEach((el) => {
+    if (!el.classList.contains("story")) {
+      observer.observe(el);
+    }
+  });
+
+  // 👇 Deja el storytelling visible desde el inicio
+  const story = document.querySelector(".story");
+  if (story) story.classList.add("visible");
 });
+
 
 /* Slider */
 const slides = [

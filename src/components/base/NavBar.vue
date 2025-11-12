@@ -100,18 +100,33 @@ const showTopInfo = ref(true);
 const showBottomNav = ref(true);
 const isOpen = ref(false);
 let lastScrollY = 0;
+let hideTimeout: ReturnType<typeof setTimeout> | null = null;
 
 const handleScroll = () => {
   const currentScroll = window.scrollY;
-  
+
   if (currentScroll > 50) {
     showTopInfo.value = false;
-    showBottomNav.value = currentScroll < lastScrollY;
+
+    // Si hace scroll hacia arriba, mostramos la barra
+    if (currentScroll < lastScrollY) {
+      showBottomNav.value = true;
+
+      // 🔹 Reinicia el temporizador para ocultar después de 3s sin scroll
+      if (hideTimeout) clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        if (window.scrollY > 100) showBottomNav.value = false;
+      }, 1000);
+    } else {
+      // Si hace scroll hacia abajo, ocultamos
+      showBottomNav.value = false;
+    }
   } else {
+    // Cuando está arriba, siempre visible
     showTopInfo.value = true;
     showBottomNav.value = true;
   }
-  
+
   lastScrollY = currentScroll;
 };
 
@@ -128,9 +143,9 @@ const handleResize = () => {
 // Bloquear scroll cuando el menú está abierto
 watch(isOpen, (newValue) => {
   if (newValue) {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   } else {
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }
 });
 
@@ -142,9 +157,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
   window.removeEventListener("resize", handleResize);
-  document.body.style.overflow = '';
+  document.body.style.overflow = "";
 });
 </script>
+
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap');
