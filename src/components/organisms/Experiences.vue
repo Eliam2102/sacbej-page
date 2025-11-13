@@ -175,22 +175,34 @@ const paginatedExperiences = computed(() => {
   const start = (currentPage.value - 1) * perPage;
   return experiences.slice(start, start + perPage);
 });
-function nextPage() { if (currentPage.value < totalPages.value) currentPage.value++; }
-function prevPage() { if (currentPage.value > 1) currentPage.value--; }
+function nextPage() {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+}
+function prevPage() {
+  if (currentPage.value > 1) currentPage.value--;
+}
 
 /* ================== Modal + Galería ================== */
 const selectedExperience = ref<Experience | null>(null);
 const currentImageIndex = ref(0);
 const imageLoaded = ref(false);
 
+// estado de carga por thumbnail del modal
+const thumbsLoaded = ref<boolean[]>([]);
+
 function openModal(exp: Experience) {
   selectedExperience.value = exp;
   currentImageIndex.value = 0;
   imageLoaded.value = false;
+  thumbsLoaded.value = exp.images.map(() => false);
 }
 
 function closeModal() {
   selectedExperience.value = null;
+}
+
+function onMainImageLoad() {
+  imageLoaded.value = true;
 }
 
 function nextImage() {
@@ -205,6 +217,19 @@ function prevImage() {
   currentImageIndex.value =
     (currentImageIndex.value - 1 + selectedExperience.value.images.length) %
     selectedExperience.value.images.length;
+}
+function goToImage(i: number) {
+  if (!selectedExperience.value) return;
+  imageLoaded.value = false;
+  currentImageIndex.value = i;
+}
+
+/* skeleton / blur-up para las cards del grid */
+function onCardThumbLoad(e: Event) {
+  const img = e.target as HTMLImageElement | null;
+  if (img) {
+    img.classList.add("is-loaded");
+  }
 }
 
 /* ============= Bloqueo de scroll del body cuando el modal está abierto ============= */
@@ -229,7 +254,6 @@ function onKeydown(e: KeyboardEvent) {
 onMounted(() => window.addEventListener("keydown", onKeydown));
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", onKeydown);
-  // por si desmonta con modal abierto
   document.body.style.overflow = originalBodyOverflow.value || "";
 });
 </script>
@@ -254,7 +278,16 @@ onBeforeUnmount(() => {
         aria-label="Abrir detalle de experiencia"
       >
         <div class="thumb-wrap">
-          <img :src="exp.img" class="thumb" loading="lazy" :alt="exp.title" />
+          <!-- Skeleton blur-up -->
+          <div class="thumb-skeleton"></div>
+          <img
+            :src="exp.img"
+            class="thumb"
+            loading="lazy"
+            decoding="async"
+            :alt="exp.title"
+            @load="onCardThumbLoad"
+          />
           <span v-if="exp.badge" class="badge">{{ exp.badge }}</span>
         </div>
         <div class="card-content">
@@ -271,12 +304,14 @@ onBeforeUnmount(() => {
     <div class="pagination" v-if="totalPages > 1">
       <button @click="prevPage" :disabled="currentPage === 1">← Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente →</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages">
+        Siguiente →
+      </button>
     </div>
 
     <!-- MODAL -->
     <Teleport to="body">
-      <Transition name="fade">
+      <Transition name="fade-overlay">
         <div
           v-if="selectedExperience"
           class="overlay"
@@ -284,71 +319,98 @@ onBeforeUnmount(() => {
           aria-modal="true"
           role="dialog"
         >
-          <div class="modal" role="document">
-            <!-- Header -->
-            <div class="modal-header">
-              <h2 class="modal-title">{{ selectedExperience.title }}</h2>
-              <button class="icon-btn" @click="closeModal" aria-label="Cerrar">
-                ×
-              </button>
-            </div>
+          <Transition name="scale-in">
+            <div v-if="selectedExperience" class="modal" role="document">
+              <!-- Header -->
+              <div class="modal-header">
+                <h2 class="modal-title">{{ selectedExperience.title }}</h2>
+                <button class="icon-btn" @click="closeModal" aria-label="Cerrar">
+                  ×
+                </button>
+              </div>
 
-            <!-- Cuerpo -->
-            <div class="modal-body">
-              <!-- Galería -->
-              <div class="gallery">
-                <div class="main-image">
-                  <div v-if="!imageLoaded" class="skeleton"></div>
-                  <img
-                    v-show="imageLoaded"
-                    :src="selectedExperience.images[currentImageIndex]"
-                    @load="imageLoaded = true"
-                    class="active-img"
-                    :alt="selectedExperience.title"
-                  />
-                  <button class="nav prev" @click="prevImage" aria-label="Anterior">‹</button>
-                  <button class="nav next" @click="nextImage" aria-label="Siguiente">›</button>
-                  <div class="counter">
-                    {{ currentImageIndex + 1 }} / {{ selectedExperience.images.length }}
+              <!-- Cuerpo -->
+              <div class="modal-body">
+                <!-- Galería -->
+                <div class="gallery">
+                  <div class="main-image">
+                    <!-- Skeleton de fondo mientras carga -->
+                    <div v-if="!imageLoaded" class="main-skeleton"></div>
+
+                    <!-- Imagen principal con fade + blur-up + zoom hover -->
+                    <transition name="fade-img" mode="out-in">
+                      <img
+                        v-if="selectedExperience"
+                        :key="selectedExperience.images[currentImageIndex]"
+                        :src="selectedExperience.images[currentImageIndex]"
+                        class="active-img"
+                        :class="{ 'is-loaded': imageLoaded }"
+                        :alt="selectedExperience.title"
+                        loading="lazy"
+                        decoding="async"
+                        @load="onMainImageLoad"
+                      />
+                    </transition>
+
+                    <button class="nav prev" @click.stop="prevImage" aria-label="Anterior">
+                      ‹
+                    </button>
+                    <button class="nav next" @click.stop="nextImage" aria-label="Siguiente">
+                      ›
+                    </button>
+                    <div class="counter">
+                      {{ currentImageIndex + 1 }} /
+                      {{ selectedExperience.images.length }}
+                    </div>
+                  </div>
+
+                  <div class="thumbs" aria-label="Miniaturas">
+                    <button
+                      v-for="(img, i) in selectedExperience.images"
+                      :key="i"
+                      class="thumb-btn"
+                      :class="{ active: i === currentImageIndex }"
+                      @click="goToImage(i)"
+                    >
+                      <div v-if="!thumbsLoaded[i]" class="thumb-skeleton"></div>
+                      <img
+                        v-show="thumbsLoaded[i]"
+                        :src="img"
+                        loading="lazy"
+                        decoding="async"
+                        :alt="`${selectedExperience.title} imagen ${i + 1}`"
+                        @load="thumbsLoaded[i] = true"
+                      />
+                    </button>
                   </div>
                 </div>
 
-                <div class="thumbs" aria-label="Miniaturas">
-                  <button
-                    v-for="(img, i) in selectedExperience.images"
-                    :key="i"
-                    class="thumb-btn"
-                    :class="{ active: i === currentImageIndex }"
-                    @click="(currentImageIndex = i), (imageLoaded = false)"
-                  >
-                    <img :src="img" :alt="`${selectedExperience.title} imagen ${i+1}`" loading="lazy" />
-                  </button>
-                </div>
-              </div>
+                <!-- Detalles -->
+                <div class="details">
+                  <p class="full-desc">{{ selectedExperience.fullDescription }}</p>
 
-              <!-- Detalles -->
-              <div class="details">
-                <p class="full-desc">{{ selectedExperience.fullDescription }}</p>
+                  <div class="meta">
+                    <Icon icon="mdi:clock-outline" width="18" />
+                    <span>{{ selectedExperience.duration }}</span>
+                  </div>
 
-                <div class="meta">
-                  <Icon icon="mdi:clock-outline" width="18" />
-                  <span>{{ selectedExperience.duration }}</span>
-                </div>
+                  <ul class="included">
+                    <li v-for="i in selectedExperience.included" :key="i">
+                      {{ i }}
+                    </li>
+                  </ul>
 
-                <ul class="included">
-                  <li v-for="i in selectedExperience.included" :key="i"> {{ i }} </li>
-                </ul>
-
-                <div class="price-box">
-                  {{
-                    selectedExperience.pricePerPerson > 0
-                      ? `$${selectedExperience.pricePerPerson} MXN por persona`
-                      : "Servicio personalizado – cotiza con nosotros"
-                  }}
+                  <div class="price-box">
+                    {{
+                      selectedExperience.pricePerPerson > 0
+                        ? `$${selectedExperience.pricePerPerson} MXN por persona`
+                        : "Servicio personalizado – cotiza con nosotros"
+                    }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Transition>
         </div>
       </Transition>
     </Teleport>
@@ -394,23 +456,64 @@ onBeforeUnmount(() => {
 
 /* Tarjeta */
 .card {
-  background: #fff;
+  background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
   text-align: left;
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
+
+/* Blur-up + skeleton card */
 .thumb-wrap {
   position: relative;
+  overflow: hidden;
+  background: #e0ded6;
 }
+.thumb-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #e0ded6, #f5e6d3, #e0ded6);
+  background-size: 200% 100%;
+  animation: loading-skeleton 1.2s linear infinite;
+}
+@keyframes loading-skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.thumb {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: blur(10px);
+  transition: opacity 0.4s ease, transform 0.6s ease, filter 0.6s ease;
+  will-change: transform, filter, opacity;
+}
+.thumb.is-loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+.card:hover .thumb.is-loaded {
+  transform: scale(1.05);
+}
+
+/* Badge */
 .badge {
   position: absolute;
   top: 12px;
@@ -419,16 +522,12 @@ onBeforeUnmount(() => {
   color: #fff;
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
-.thumb {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
+
+/* Contenido card */
 .card-content {
   padding: 1rem 1rem 1.2rem;
 }
@@ -437,12 +536,12 @@ onBeforeUnmount(() => {
   font-size: 1.6rem;
   color: #1b3b2f;
   line-height: 1.1;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 .card-content p {
-  font-size: .95rem;
+  font-size: 0.95rem;
   color: #4e342e;
-  margin: 0 0 .6rem;
+  margin: 0 0 0.6rem;
 }
 .price {
   color: #1b3b2f;
@@ -454,7 +553,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .9rem;
+  gap: 0.9rem;
   margin-top: 2rem;
   font-family: "Bebas Neue", sans-serif;
 }
@@ -462,15 +561,22 @@ onBeforeUnmount(() => {
   background: #1b3b2f;
   color: #fff;
   border: none;
-  padding: .55rem 1.2rem;
+  padding: 0.55rem 1.2rem;
   border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background .2s ease, transform .1s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
-.pagination button:hover { background: #1da851; }
-.pagination button:active { transform: translateY(1px); }
-.pagination button:disabled { opacity: .5; cursor: not-allowed; }
+.pagination button:hover:not(:disabled) {
+  background: #1da851;
+}
+.pagination button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* ====== Modal ====== */
 .overlay {
@@ -484,7 +590,6 @@ onBeforeUnmount(() => {
   justify-content: center;
   padding: 1rem;
   z-index: 9999;
-  /* aísla el scroll del modal para que no 'empuje' el body */
   overscroll-behavior: contain;
 }
 
@@ -495,8 +600,8 @@ onBeforeUnmount(() => {
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* importante para que el scroll sea interno */
-  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
 }
 
 /* Header modal */
@@ -504,9 +609,9 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .9rem 1.2rem .9rem 1.2rem;
-  border-bottom: 1px solid rgba(0,0,0,.06);
-  background: linear-gradient(180deg,#ffffff 0%, #fffaf3 100%);
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf3 100%);
 }
 .modal-title {
   font-family: "Bebas Neue", sans-serif;
@@ -519,15 +624,22 @@ onBeforeUnmount(() => {
   background: #f0efe9;
   border: none;
   color: #1b3b2f;
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border-radius: 12px;
   font-size: 22px;
   cursor: pointer;
-  transition: background .2s ease, transform .08s ease;
-  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, transform 0.08s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.icon-btn:hover { background: #e7e5dc; }
-.icon-btn:active { transform: translateY(1px); }
+.icon-btn:hover {
+  background: #e7e5dc;
+}
+.icon-btn:active {
+  transform: translateY(1px);
+}
 
 /* Body modal: dos columnas con scroll propio */
 .modal-body {
@@ -535,14 +647,14 @@ onBeforeUnmount(() => {
   grid-template-columns: 1.2fr 1fr;
   gap: 1.2rem;
   padding: 1.2rem;
-  overflow: auto;       /* <- el scroll vive aquí, no en el body */
+  overflow: auto;
 }
 
 /* Galería */
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: .8rem;
+  gap: 0.8rem;
 }
 .main-image {
   position: relative;
@@ -550,24 +662,46 @@ onBeforeUnmount(() => {
   aspect-ratio: 16 / 10;
   border-radius: 14px;
   overflow: hidden;
-  background: #eee;
+  background: #e0ded6;
 }
-.skeleton {
+.main-skeleton {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #eee, #f6f6f6, #eee);
+  background: linear-gradient(90deg, #e0ded6, #f5e6d3, #e0ded6);
   background-size: 200% 100%;
-  animation: loading 1.4s infinite linear;
+  animation: loading-skeleton 1.2s linear infinite;
 }
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+
+/* Imagen principal: fade + blur-up + hover zoom */
 .active-img {
   position: absolute;
   inset: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  filter: blur(12px);
+  transition: opacity 0.4s ease, transform 0.6s ease, filter 0.6s ease;
+  will-change: transform, filter, opacity;
+}
+.active-img.is-loaded {
+  opacity: 1;
+  transform: scale(1.01);
+  filter: blur(0);
+}
+.main-image:hover .active-img.is-loaded {
+  transform: scale(1.06);
+}
+
+/* Transición fade entre imágenes */
+.fade-img-enter-active,
+.fade-img-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-img-enter-from,
+.fade-img-leave-to {
+  opacity: 0;
 }
 
 /* Botones navegación de imagen */
@@ -575,39 +709,51 @@ onBeforeUnmount(() => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 38px; height: 38px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: none;
-  background: rgba(0,0,0,.45);
+  background: rgba(0, 0, 0, 0.45);
   color: #fff;
   font-size: 24px;
   cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-  transition: background .2s ease, transform .08s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.08s ease;
 }
-.nav:hover { background: rgba(0,0,0,.6); }
-.nav:active { transform: translateY(-50%) scale(.98); }
-.nav.prev { left: 10px; }
-.nav.next { right: 10px; }
+.nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+.nav:active {
+  transform: translateY(-50%) scale(0.98);
+}
+.nav.prev {
+  left: 10px;
+}
+.nav.next {
+  right: 10px;
+}
 
 .counter {
   position: absolute;
-  bottom: 10px; right: 10px;
-  background: rgba(0,0,0,.55);
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
-  font-size: .8rem;
+  font-size: 0.8rem;
   padding: 4px 8px;
   border-radius: 999px;
 }
 
-/* Thumbnails */
+/* Thumbnails modal */
 .thumbs {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(72px, 1fr);
-  gap: .5rem;
+  gap: 0.5rem;
   overflow-x: auto;
-  padding-bottom: .2rem;
+  padding-bottom: 0.2rem;
   scrollbar-width: thin;
 }
 .thumb-btn {
@@ -616,21 +762,31 @@ onBeforeUnmount(() => {
   border-radius: 10px;
   background: transparent;
   cursor: pointer;
-  transition: border-color .15s ease, transform .08s ease;
+  transition: border-color 0.15s ease, transform 0.08s ease;
+  position: relative;
+  overflow: hidden;
 }
-.thumb-btn:hover { transform: translateY(-1px); }
-.thumb-btn.active { border-color: #1b3b2f; }
+.thumb-btn:hover {
+  transform: translateY(-1px);
+}
+.thumb-btn.active {
+  border-color: #1b3b2f;
+}
 .thumb-btn img {
-  width: 100%; height: 72px; object-fit: cover; border-radius: 8px; display: block;
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
 
 /* Detalles */
 .details {
   display: flex;
   flex-direction: column;
-  gap: .9rem;
+  gap: 0.9rem;
   color: #1b3b2f;
-  font-size: .98rem;
+  font-size: 0.98rem;
 }
 .full-desc {
   color: #4e342e;
@@ -639,26 +795,28 @@ onBeforeUnmount(() => {
 .meta {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   color: #1b3b2f;
   font-weight: 600;
 }
 .included {
   list-style: none;
-  padding: 0; margin: .2rem 0 0;
-  display: grid; gap: .4rem;
+  padding: 0;
+  margin: 0.2rem 0 0;
+  display: grid;
+  gap: 0.4rem;
 }
 .included li::before {
   content: "✓";
   color: #1da851;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   font-weight: 700;
 }
 .price-box {
-  margin-top: .4rem;
+  margin-top: 0.4rem;
   background: linear-gradient(135deg, #1b3b2f, #1da851);
   color: #fff;
-  padding: .8rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 12px;
   text-align: center;
   font-weight: 700;
@@ -666,11 +824,30 @@ onBeforeUnmount(() => {
 
 /* Responsive modal */
 @media (max-width: 920px) {
-  .modal-body { grid-template-columns: 1fr; }
-  .main-image { aspect-ratio: 16/11; }
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+  .main-image {
+    aspect-ratio: 16 / 11;
+  }
 }
 
-/* Fade del overlay/modal (no afecta story/scroll) */
-.fade-enter-active, .fade-leave-active { transition: opacity .18s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+/* Animaciones overlay / modal (apertura suave, ayuda a Lighthouse) */
+.fade-overlay-enter-active,
+.fade-overlay-leave-active {
+  transition: opacity 0.18s ease;
+}
+.fade-overlay-enter-from,
+.fade-overlay-leave-to {
+  opacity: 0;
+}
+.scale-in-enter-active,
+.scale-in-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.scale-in-enter-from,
+.scale-in-leave-to {
+  opacity: 0;
+  transform: scale(0.96);
+}
 </style>

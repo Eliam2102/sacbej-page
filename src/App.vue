@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
 import NavBar from './components/base/NavBar.vue'
 import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
@@ -7,78 +9,162 @@ import Experiences from './components/organisms/Experiences.vue'
 import OurTeam from './components/organisms/OurTeam.vue'
 import ContactUs from './components/organisms/ContactUs.vue'
 import Store from './components/organisms/Store.vue'
+
+/* ======================
+   LOADER GLOBAL
+====================== */
+
+const loading = ref(true)
+
+// Imágenes que deben precargarse
+const preloadImages = [
+  '/src/assets/IMagen.jpeg',
+  '/src/assets/torusitas-tour.jpeg',
+  '/src/assets/logo_transparente_beige.png',
+  '/src/assets/premio-dorado-1.png',
+  '/src/assets/premio-dorado-2.png'
+]
+
+function loadImages(list: string[]) {
+  const promises = list.map(
+    src =>
+      new Promise(resolve => {
+        const img = new Image()
+        img.src = src
+        img.onload = resolve
+        img.onerror = resolve
+      })
+  )
+  return Promise.all(promises)
+}
+
+onMounted(async () => {
+  await loadImages(preloadImages)
+  setTimeout(() => {
+    loading.value = false
+  }, 450)
+})
 </script>
 
 <template>
-  <header>
-    <NavBar />
-  </header>
+  <!-- ==================== TRANSITION DEL LOADER ==================== -->
+  <transition name="fade">
+    <!-- LOADER -->
+    <div v-if="loading" class="loader-screen">
+      <div class="loader-circle"></div>
+      <p class="loader-text">Cargando experiencia...</p>
+    </div>
 
-  <main>
-    <section id="inicio" class="section"><Hero /></section>
-    <section id="nosotros" class="section"><About /></section>
-    <section id="experiencias" class="section"><Experiences /></section>
-    <section id="equipo" class="section"><OurTeam /></section>
-    <section id="contacto" class="section"><ContactUs /></section>
-    <section id="opiniones" class="section"><Store /></section>
-  </main>
+    <!-- CONTENIDO REAL (v-else ADYACENTE → SIN ERROR) -->
+    <div v-else>
+      <header>
+        <NavBar />
+      </header>
 
-  <footer>
-    <Footer/>
-  </footer>
+      <main>
+        <section id="inicio" class="section"><Hero /></section>
+        <section id="nosotros" class="section"><About /></section>
+        <section id="experiencias" class="section"><Experiences /></section>
+        <section id="equipo" class="section"><OurTeam /></section>
+        <section id="contacto" class="section"><ContactUs /></section>
+        <section id="opiniones" class="section"><Store /></section>
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
+/* ==================== LOADER ==================== */
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #F5E6D3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+.loader-circle {
+  width: 70px;
+  height: 70px;
+  border: 6px solid #A68A6D;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1.2rem;
+}
+
+.loader-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  color: #4E342E;
+  letter-spacing: 1px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Fade animación */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.45s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* ==================== TU CSS ORIGINAL ==================== */
+
 :root{
-  /* alto aproximado del navbar fijo (ajústalo a tu diseño) */
   --nav-height: 100px;
 }
 
-/* activa smooth scroll nativo */
 html { scroll-behavior: smooth; }
 
-/* IMPORTANTE: aquí tenías un typo "187x" -> debe ser "px" */
 main {
-  margin-top: 178px; /* deja espacio para el navbar fijo */
+  margin-top: 178px;
 }
 
-/* 1) Las secciones no aportan espacio extra */
 .section {
-  margin: 0;                /* quita márgenes */
-  padding: 0;               /* quita relleno si lo tuvieras */
-  border: 0;                /* por si alguna tiene borde superior/inferior */
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
-/* 2) Evita el “colapso de márgenes” de los hijos (h1, p, etc.) */
 .section > *:first-child { margin-top: 0 !important; }
 .section > *:last-child  { margin-bottom: 0 !important; }
 
-/* 3) Normaliza títulos y párrafos dentro de la sección */
 .section :where(h1,h2,h3,h4,h5,h6,p) {
   margin-block-start: 0;
   margin-block-end: 1;
 }
 
-/* 4) Si dentro usas un .container con padding vertical, elimínalo */
 .section :where(.container) {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
-/* 5) Asegura que dos secciones consecutivas no tengan “línea” entre ellas */
 .section + .section {
   margin-top: 0;
   border-top: 0;
 }
 
-/* 6) Evita pequeños espacios por imágenes inline o iframes */
 .section img, 
 .section iframe {
-  display: block;       /* quita el espacio de baseline */
+  display: block;
 }
 
-/* 7) Si usas fondos distintos, asegúrate que body y secciones empalmen bien */
 body { background: #fff; }
-.section { background: #fff; } /* o el color que corresponda */
+.section { background: #fff; }
 
 </style>
