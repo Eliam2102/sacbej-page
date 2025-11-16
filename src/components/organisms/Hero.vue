@@ -197,6 +197,7 @@
   
   .hero-content {
     padding: 25px 18px;
+    margin-top:  142px;
   }
   
   .hero-title {
@@ -385,6 +386,7 @@
   
   .hero-content {
     max-width: 900px;
+    margin-top: 14rem;
   }
   
   .hero-title {
