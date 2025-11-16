@@ -239,11 +239,11 @@ onMounted(() => {
 
 /* Slider */
 const slides = [
-  { src: "/src/assets/lancha.jpg", text: "Día de observación de aves" },
-  { src: "/src/assets/fotografia-expedition.jpg", text: "Aventura fotográfica" },
-  { src: "/src/assets/muelle-ceelestun.jpg", text: "Paseos en lancha" },
-  { src: "/src/assets/lancha-niños.jpg", text: "Logo SACBEJ" },
-  { src: "/src/assets/image-prueba.jpg", text: "Paisajes naturales" },
+  { src: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/carrusel2.jpg", text: "Día de SurfCast" },
+  { src: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/carrusel3.jpg", text: "Atardecer en ceremonía XUKULEM"},
+  { src: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/carrusel1.jpg", text: "Paseos en lancha" },
+  { src: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/carrusel4.jpg", text: "XUKULEM - Unión con la naturaleza" },
+  { src: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/carrusel5.jpg", text: "Paisajes naturales que endulzan en alma" },
 ];
 
 const slideIndex = ref(0);

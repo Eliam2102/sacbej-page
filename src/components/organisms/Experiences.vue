@@ -21,16 +21,17 @@ const experiences: Experience[] = [
     id: 1,
     title: "Sac Bej – Camino Blanco",
     pricePerPerson: 1250,
-    img: "https://i.postimg.cc/C1s5JJr8/5.png",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
     badge: "popular",
     shortDescription:
       "Recorre la zona sur de la Reserva Ría Celestún: salinas rosas, bosque petrificado y flamencos.",
     fullDescription:
       "Disfruta de un recorrido único en tuc tuc por la parte sur de la Reserva de la Biosfera Ría Celestún. Explora salinas rosas, bosque petrificado y ex haciendas, mientras descubres la historia natural de este lugar mágico.",
     images: [
-      "https://i.postimg.cc/Jn50KKYH/6.png",
-      "https://i.postimg.cc/RFLhGGpH/7.png",
-      "https://i.postimg.cc/76nhXXtG/9.png",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej-1.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej2.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej3.jpg",
     ],
     duration: "1.5 a 2 horas",
     included: [
@@ -43,15 +44,15 @@ const experiences: Experience[] = [
     id: 2,
     title: "Surf Casting – Pesca en el Golfo",
     pricePerPerson: 3500,
-    img: "https://i.postimg.cc/B6Wzgfj6/surf.jpg",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
     shortDescription:
       "Pesca deportiva en el Golfo: corvina, robalo, jurel, pargo y más.",
     fullDescription:
       "Vive la pesca deportiva en las aguas del Golfo de México. Disfruta el amanecer, pesca especies locales y saborea un ceviche fresco estilo ribereño.",
     images: [
-      "https://i.postimg.cc/W3MHYYZv/sruf-2.jpg",
-      "https://i.postimg.cc/gJvTtthd/surf3.jpg",
-      "https://i.postimg.cc/zBnc22hN/surf4.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast1.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast2.jpeg",
     ],
     duration: "5 horas",
     included: ["Embarcación privada", "Guía y equipo de pesca", "Ceviche fresco"],
@@ -60,16 +61,16 @@ const experiences: Experience[] = [
     id: 3,
     title: "Kayak en el Corazón del Manglar",
     pricePerPerson: 1550,
-    img: "https://i.postimg.cc/dVYm4QBn/Chat-GPT-Image-Oct-18-2025-07-24-00-PM.png",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak-manglar1.png",
     badge: "popular",
     shortDescription:
       "Remo entre manglares al amanecer o anochecer, rodeado de aves y luciérnagas.",
     fullDescription:
       "Navega entre manglares hasta el corazón del humedal. Observa aves y flamencos al amanecer o el espectáculo de luciérnagas al anochecer.",
     images: [
-      "https://i.postimg.cc/1X04tSNT/Chat-GPT-Image-Oct-18-2025-07-27-34-PM.png",
-      "https://i.postimg.cc/h4MBShJD/Chat-GPT-Image-Oct-18-2025-07-31-17-PM.png",
-      "https://i.postimg.cc/XqNXphcK/Chat-GPT-Image-Oct-18-2025-07-42-58-PM.png",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak2.png",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak3.png",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/manglares4.jpg",
     ],
     duration: "2 horas",
     included: [
@@ -83,15 +84,15 @@ const experiences: Experience[] = [
     id: 4,
     title: "Birdwatching – Observación de Aves",
     pricePerPerson: 1450,
-    img: "https://i.postimg.cc/9Ff85YqW/Chat-GPT-Image-Oct-18-2025-08-17-33-PM.png",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
     shortDescription:
       "Más de 200 especies en la Ría Celestún con guía experto y equipo óptico.",
     fullDescription:
       "Descubre aves endémicas como el colibrí tijereta mexicano. Ideal para amantes de la fotografía y la naturaleza.",
     images: [
-      "https://i.postimg.cc/hPtW5gtG/Chat-GPT-Image-Oct-18-2025-07-55-03-PM.png",
-      "https://i.postimg.cc/Fs5NWwJ8/Chat-GPT-Image-Oct-18-2025-07-48-32-PM.png",
-      "https://i.postimg.cc/BQXHpLHc/Chat-GPT-Image-Oct-18-2025-07-51-54-PM.png",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves2.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves3.JPG",
     ],
     duration: "4.5 horas",
     included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico"],
@@ -100,16 +101,16 @@ const experiences: Experience[] = [
     id: 5,
     title: "Ría Celestún – Flamingo Tour",
     pricePerPerson: 4100,
-    img: "https://i.postimg.cc/6QbggbMs/Chat-GPT-Image-Oct-18-2025-08-12-03-PM.png",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest3.jpeg",
     badge: "oferta",
     shortDescription:
       "Tour en lancha: flamencos, túnel de manglar, isla de aves y ojo de agua.",
     fullDescription:
       "Aventura mágica navegando por manglares y observando flamencos rosados. Incluye baño en ojo de agua.",
     images: [
-      "https://i.postimg.cc/d3Hyjv5D/491518218-18006243275739535-6303338094946747857-n.jpg",
-      "https://i.postimg.cc/kg70bmkM/491499260-18006243257739535-4895587472905209765-n.jpg",
-      "https://i.postimg.cc/52Fsyktj/486561792-1223155886478538-1220087316864002473-n.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest3.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest2.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest.jpg",
     ],
     duration: "1 hora 20 min",
     included: ["Guía bilingüe", "Lancha privada", "Acceso al parque"],
@@ -124,9 +125,9 @@ const experiences: Experience[] = [
     fullDescription:
       "Tour nocturno en lancha: cocodrilos, aves dormidas y el brillo natural de las luciérnagas. Una experiencia mágica y segura.",
     images: [
-      "https://i.postimg.cc/xTLBc77n/Ceremonia-y-Tour-Nocturno-16.jpg",
-      "https://i.postimg.cc/zXT4VMMD/coco-pos.jpg",
-      "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/moonlight.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-11.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/moonlight2.jpg",
     ],
     duration: "2 horas",
     included: ["Guía certificado", "Equipo de iluminación", "Lancha privada"],
@@ -135,15 +136,15 @@ const experiences: Experience[] = [
     id: 7,
     title: "Ceremonia XUKULEM – Conexión Espiritual",
     pricePerPerson: 2400,
-    img: "https://i.postimg.cc/5tVDVMmf/Ceremonia-y-Tour-Nocturno-22.jpg",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-24.jpg",
     shortDescription:
       "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
     fullDescription:
       "Una experiencia espiritual guiada por fuego, copal y sabiduría maya. Limpia energética y ofrendas al mar.",
     images: [
-      "https://i.postimg.cc/3NRPcCFD/Ceremonia-y-Tour-Nocturno-24.jpg",
-      "https://i.postimg.cc/k5mLmdyd/Ceremonia-y-Tour-Nocturno-25.jpg",
-      "https://i.postimg.cc/9Xg3qKcy/Ceremonia-y-Tour-Nocturno-26.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-24.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia2.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia-3.jpg",
     ],
     duration: "40 minutos",
     included: ["Ceremonia frente al mar", "Ofrendas", "Guía espiritual"],
@@ -152,15 +153,16 @@ const experiences: Experience[] = [
     id: 8,
     title: "Biking Tour – Pueblo Fantasma",
     pricePerPerson: 350,
-    img: "https://i.postimg.cc/g02qRSzy/Whats-App-Image-2024-10-19-at-2-19-56-PM.jpg",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/biking-tour1.jpg",
     shortDescription:
       "Recorre en bicicleta la selva nocturna hacia un pueblo fantasma lleno de leyendas.",
     fullDescription:
       "Pedalea bajo la luna y descubre las historias ocultas del bosque y el antiguo pueblo.",
     images: [
-      "https://i.postimg.cc/Y9g4mYWn/Whats-App-Image-2024-10-19-at-2-19-55-PM-1-1.jpg",
-      "https://i.postimg.cc/WzvdmzGC/IMG-0467.jpg",
-      "https://i.postimg.cc/sxrMPxYb/IMG-0443.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour2.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour3.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/nocturno-1.jpeg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/nocturno%202.jpeg"
     ],
     duration: "2 a 2.5 horas",
     included: ["Guía federal", "Bicicleta", "Equipo nocturno"],
@@ -532,7 +534,7 @@ onBeforeUnmount(() => {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: #1b3b2f;
+  background: #1da851;
   color: #fff;
   padding: 4px 10px;
   border-radius: 999px;

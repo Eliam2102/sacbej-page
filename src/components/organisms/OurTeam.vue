@@ -5,11 +5,11 @@
       <!-- Sección de imágenes -->
       <div class="equipo-imagenes">
         <div class="imagen-principal">
-          <img src="/src/assets/grupal-sacbej.jpeg" alt="Integrantes del equipo SacBej-Celestún" />
+          <img src="https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/grupal-sacbej.jpeg" alt="Integrantes del equipo SacBej-Celestún" />
         </div>
         <div class="decor-pattern"></div>
         <div class="imagen-secundaria">
-          <img src="/src/assets/grupal2-sacbej.jpeg" alt="Turistas disfrutando" />
+          <img src="https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/grupal2-sacbej.jpeg" alt="Turistas disfrutando" />
         </div>
         <img
           src="/src/assets/logo_transparente_beige.png"
@@ -217,7 +217,7 @@ const premios = ref<Premio[]>([
     title: 'Galardón Estatal de Turismo',
     shortDescription: 'Reconocimiento por experiencias turísticas excepcionales y servicio de alta calidad.',
     fullDescription: 'Este prestigioso galardón reconoce nuestro compromiso excepcional con la calidad del servicio turístico, la innovación en experiencias eco-turísticas y la calidez humana que caracteriza cada interacción con nuestros visitantes. Representa el más alto honor otorgado por la Secretaría de Turismo del Estado de Yucatán.',
-    image: '/src/assets/galardon_jaguar_4k_transparent.png',
+    image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/galardon_jaguar_4k_transparent.png',
     category: 'Excelencia en Turismo',
     issuer: 'Secretaría de Turismo del Estado',
     year: '2025',
@@ -233,7 +233,7 @@ const premios = ref<Premio[]>([
     title: 'Distintivo Yucatán',
     shortDescription: 'Certificación oficial que avala nuestros estándares de calidad y hospitalidad.',
     fullDescription: 'El Distintivo Yucatán es una certificación de prestigio que garantiza el cumplimiento de los más altos estándares en calidad de servicio, sostenibilidad ambiental y hospitalidad auténtica. Este reconocimiento nos posiciona como líderes en turismo responsable en la región.',
-    image: '/src/assets/DISTINTIVOYUC-LOGO_COLOR-SINFONDO.png',
+    image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/DISTINTIVOYUC-LOGO_COLOR-SINFONDO.png',
     category: 'Calidad y Sostenibilidad',
     issuer: 'Gobierno del Estado de Yucatán',
     year: '2025',

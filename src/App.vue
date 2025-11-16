@@ -11,40 +11,18 @@ import ContactUs from './components/organisms/ContactUs.vue'
 import Store from './components/organisms/Store.vue'
 
 /* ======================
-   LOADER GLOBAL
+3LOADER GLOBAL (solo por tiempo)
 ====================== */
-
 const loading = ref(true)
 
-// Imágenes que deben precargarse
-const preloadImages = [
-  '/src/assets/IMagen.jpeg',
-  '/src/assets/torusitas-tour.jpeg',
-  '/src/assets/logo_transparente_beige.png',
-  '/src/assets/premio-dorado-1.png',
-  '/src/assets/premio-dorado-2.png'
-]
-
-function loadImages(list: string[]) {
-  const promises = list.map(
-    src =>
-      new Promise(resolve => {
-        const img = new Image()
-        img.src = src
-        img.onload = resolve
-        img.onerror = resolve
-      })
-  )
-  return Promise.all(promises)
-}
-
-onMounted(async () => {
-  await loadImages(preloadImages)
+onMounted(() => {
+  // Mostrar loader solo durante 900 ms
   setTimeout(() => {
     loading.value = false
-  }, 450)
+  }, 1600)
 })
 </script>
+
 
 <template>
   <!-- ==================== TRANSITION DEL LOADER ==================== -->
