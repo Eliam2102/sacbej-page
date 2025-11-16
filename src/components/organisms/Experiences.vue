@@ -136,13 +136,13 @@ const experiences: Experience[] = [
     id: 7,
     title: "Ceremonia XUKULEM – Conexión Espiritual",
     pricePerPerson: 2400,
-    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-24.jpg",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/xukulem3.jpg",
     shortDescription:
       "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
     fullDescription:
       "Una experiencia espiritual guiada por fuego, copal y sabiduría maya. Limpia energética y ofrendas al mar.",
     images: [
-      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-24.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/xukulem1.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia-3.jpg",
     ],
