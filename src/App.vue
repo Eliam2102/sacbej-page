@@ -131,9 +131,6 @@ onMounted(async () => {
 
 html { scroll-behavior: smooth; }
 
-main {
-  margin-top: 178px;
-}
 
 .section {
   margin: 0;

@@ -49,7 +49,7 @@
         </nav>
 
         <!-- Botón reserva (solo desktop) -->
-        <a href="#contacto" class="btn-reserva btn-desktop">Reserva</a>
+        <a href="#experiencias" class="btn-reserva btn-desktop">Reserva</a>
       </div>
     </div>
 
@@ -112,7 +112,6 @@ const handleScroll = () => {
     if (currentScroll < lastScrollY) {
       showBottomNav.value = true;
 
-      // 🔹 Reinicia el temporizador para ocultar después de 3s sin scroll
       if (hideTimeout) clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
         if (window.scrollY > 100) showBottomNav.value = false;
@@ -161,33 +160,31 @@ onUnmounted(() => {
 });
 </script>
 
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ==================== VARIABLES ==================== */
+/* ==================== PALETA / TOKENS ==================== */
 :root {
-  --primary-color: #4caf50;
-  --primary-dark: #45a049;
-  --secondary-color: #a68a6d;
-  --text-dark: #333;
-  --text-light: #fff;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-bg: rgba(15, 23, 42, 0.82);      /* fondo oscuro vidrioso */
+  --nav-bg-soft: rgba(15, 23, 42, 0.9);
+  --accent-main: #f5e6d3;                /* beige sacbej para acentos */
+  --accent-soft: #a68a6d;
+  --text-dark: #f9fafb;                  /* texto claro */
+  --text-muted: #e5e7eb;
+
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.55);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==================== NAVBAR PRINCIPAL ==================== */
 .nav-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   z-index: 1000;
-  background: white;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .nav-header.nav-hidden {
@@ -196,9 +193,11 @@ onUnmounted(() => {
 
 /* ==================== BARRA SUPERIOR INFO ==================== */
 .info-nav-top {
-  background: #c4a57b;
+  background: rgba(15, 23, 42, 0.398);
   color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  backdrop-filter: blur(10px);
 }
 
 .info-wrapper {
@@ -208,24 +207,37 @@ onUnmounted(() => {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  column-gap: 2rem;
+  row-gap: 0.35rem;
 }
 
 .info-item {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 400;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   margin: 0;
+  color: #fff;
   white-space: nowrap;
+  opacity: 0.95;
+}
+.info-item :deep(svg) {
+  color: #f5e6d3 !important;
 }
 
 /* ==================== BARRA PRINCIPAL ==================== */
 .nav-main {
-  background: white;
-  padding: 0.75rem 1rem;
+  background: linear-gradient(
+    180deg,
+    var(--nav-bg-soft) 0%,
+    var(--nav-bg) 100%
+  );
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: var(--shadow-md);
+  padding: 0.6rem 1rem;
+  backdrop-filter: blur(18px);
 }
 
 .nav-container {
@@ -245,16 +257,23 @@ onUnmounted(() => {
 }
 
 .logo {
-  height: 50px;
+  height: 58px;
   width: auto;
   object-fit: contain;
-  transition: var(--transition);
+  /* 🔹 volvemos el logo café en blanco sobre el fondo oscuro */
+  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.logo-wrapper:hover .logo {
+  transform: translateY(-1px) scale(1.02);
 }
 
 .logo-mobile {
-  height: 60px;
+  height: 70px;
   width: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
 }
 
 /* ==================== HAMBURGER ==================== */
@@ -262,22 +281,22 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border: none;
   background: transparent;
-  border-radius: 8px;
+  border-radius: 999px;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .hamburger:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(148, 163, 184, 0.25);
 }
 
 .hamburger .material-icons {
-  font-size: 24px;
-  color: var(--text-dark);
+  font-size: 26px;
+  color: #f9fafb;
 }
 
 /* ==================== MENÚ DESKTOP ==================== */
@@ -285,64 +304,70 @@ onUnmounted(() => {
   display: none;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .menu-link {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.25rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  color: var(--text-dark);
+  letter-spacing: 0.14em;
+  color: #f9fafb;
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
-  padding: 0.5rem 0;
-  transition: var(--transition);
+  padding: 0.35rem 0;
+  transition: color 0.25s ease;
 }
 
 .menu-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -0.15rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: var(--primary-color);
-  transition: width 0.3s ease;
+  border-radius: 999px;
+  background: var(--accent-main);
+  transition: width 0.25s ease;
 }
 
 .menu-link:hover {
-  color: var(--primary-color);
+  color: var(--accent-main);
 }
 
 .menu-link:hover::after {
-  width: 100%;
+  width: 70%;
 }
 
 /* ==================== BOTÓN RESERVA ==================== */
 .btn-reserva {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 0.65rem 1.5rem;
-  border: 2px solid var(--primary-color);
-  background: transparent;
-  color: var(--primary-color);
-  border-radius: 8px;
+  padding: 0.65rem 1.8rem;
+  border-radius: 999px;
+  border: 2px solid #a68a6d;
+  background: var(--accent-main);
+  color: #f5e6d3;
   cursor: pointer;
-  border: 2px solid #4E342E;
-  transition: var(--transition);
+  text-decoration: none;
   white-space: nowrap;
-}
-.btn-reserva {
-  display: inline-block; /* para que se comporte como botón */
-  text-decoration: none; /* elimina subrayado */
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.6);
+  transition: var(--transition);
+  text-shadow: 
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
 }
 
 .btn-reserva:hover {
-  background: #45a049;
-  color: #4E342E;
+  background: transparent;
+  color: #a68a6d;
   box-shadow: var(--shadow-md);
 }
 
@@ -352,17 +377,16 @@ onUnmounted(() => {
 
 .btn-mobile {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 
 /* ==================== MENÚ MÓVIL (FULLSCREEN) ==================== */
 .menu-mobile-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: white;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(148, 163, 184, 0.18), transparent 55%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.95) 60%);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -373,9 +397,10 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(14px);
 }
 
 .close-button {
@@ -386,18 +411,18 @@ onUnmounted(() => {
   height: 44px;
   border: none;
   background: transparent;
-  border-radius: 50%;
+  border-radius: 999px;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .close-button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(148, 163, 184, 0.25);
 }
 
 .close-button .material-icons {
   font-size: 28px;
-  color: var(--text-dark);
+  color: #f9fafb;
 }
 
 .menu-mobile-content {
@@ -405,101 +430,101 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 1.5rem;
-  gap: 0.5rem;
+  padding: 2rem 1.75rem 2.5rem;
+  gap: 0.75rem;
 }
 
 .menu-mobile-link {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  color: var(--text-dark);
+  font-size: 1.6rem;
+  letter-spacing: 0.16em;
+  color: #f9fafb;
   text-decoration: none;
   text-transform: uppercase;
   padding: 1rem;
-  border-radius: 8px;
-  transition: var(--transition);
+  border-radius: 12px;
   text-align: center;
+  transition: var(--transition);
 }
 
 .menu-mobile-link:hover,
 .menu-mobile-link:active {
-  background: rgba(76, 175, 80, 0.1);
-  color: var(--primary-color);
+  background: rgba(249, 250, 251, 0.06);
+  color: var(--accent-main);
 }
 
 /* ==================== TRANSICIONES ==================== */
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: transform 0.3s ease;
 }
 
-.slide-enter-from, .slide-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   transform: translateX(-100%);
 }
 
 /* ==================== RESPONSIVE ==================== */
 
+/* Móvil muy pequeño */
 @media (max-width: 374px) {
   .info-item {
     font-size: 0.65rem;
     gap: 0.3rem;
   }
-  
+
   .info-wrapper {
-    gap: 0.5rem;
-    padding: 0.25rem 0;
+    column-gap: 0.75rem;
   }
-  
+
   .info-nav-top {
-    padding: 0.35rem 0.75rem;
+    padding-inline: 0.75rem;
   }
-  
+
   .nav-main {
-    padding: 0.5rem 0.75rem;
+    padding-inline: 0.75rem;
   }
-  
+
   .logo {
-    height: 80px;
-  }
-  
-  .logo-mobile {
     height: 70px;
   }
+
+  .logo-mobile {
+    height: 68px;
   }
+}
 
 /* Móvil (375px - 639px) */
 @media (min-width: 375px) and (max-width: 639px) {
   .info-item {
     font-size: 0.7rem;
   }
-  
+
   .info-wrapper {
-    gap: 0.75rem;
+    column-gap: 1.1rem;
   }
-  
+
   .logo {
-    height: 58px;
-    transform: scale(1.2);
-    margin-right: 29px;
+    height: 76px;
+    margin-right: 31px;
   }
-  
-  
+
   .logo-mobile {
-    height: 90px;
+    height: 86px;
   }
-  
+
   .menu-mobile-link {
-    font-size: 1.4rem;
-    padding: 0.95rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -508,100 +533,71 @@ onUnmounted(() => {
   .info-item {
     font-size: 0.75rem;
   }
-  
-  .info-wrapper {
-    gap: 1rem;
-  }
-  
+
   .logo {
-    height: 55px;
+    height: 78px;
   }
-  
+
   .logo-mobile {
-    height: 65px;
+    height: 80px;
   }
-  
+
   .hamburger {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
-  
+
   .menu-mobile-link {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     padding: 1.1rem;
   }
-  
+
   .menu-mobile-content {
-    padding: 2rem 2rem;
-  }
-  
-  .btn-mobile {
-    font-size: 1rem;
+    padding-inline: 2.25rem;
   }
 }
 
 /* Tablet (768px - 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .info-nav-top {
-    padding: 0.65rem 1.5rem;
+    padding-inline: 1.5rem;
   }
-  
+
   .info-item {
     font-size: 0.8rem;
   }
-  
+
   .info-wrapper {
-    gap: 1.25rem;
+    column-gap: 1.5rem;
   }
-  
+
   .nav-main {
-    padding: 1rem 1.5rem;
+    padding-inline: 1.75rem;
   }
-  
+
   .logo {
-    height: 65px;
+    height: 82px;
   }
-  
+
   .logo-mobile {
-    height: 70px;
+    height: 82px;
   }
-  
-  .hamburger {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .hamburger .material-icons {
-    font-size: 26px;
-  }
-  
-  .close-button {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .close-button .material-icons {
-    font-size: 30px;
-  }
-  
+
   .menu-mobile-header {
-    padding: 1.25rem 2rem;
+    padding-inline: 2rem;
   }
-  
+
   .menu-mobile-content {
-    padding: 2.5rem 3rem;
-    gap: 0.75rem;
+    padding-inline: 3rem;
   }
-  
+
   .menu-mobile-link {
     font-size: 2rem;
-    padding: 1.25rem;
+    padding-block: 1.25rem;
   }
-  
+
   .btn-mobile {
-    font-size: 1.05rem;
-    padding: 0.8rem 2rem;
-    margin-top: 1.5rem;
+    font-size: 1.02rem;
   }
 }
 
@@ -609,33 +605,32 @@ onUnmounted(() => {
 @media (min-width: 1024px) {
   .info-item {
     font-size: 0.85rem;
-    gap: 0.5rem;
   }
-  
+
   .nav-main {
-    padding: 1rem 2rem;
+    padding: 1rem 2.25rem;
   }
-  
+
   .logo {
-    height: 80px;
+    height: 88px;
   }
-  
+
   .hamburger {
     display: none;
   }
-  
+
   .menu-desktop {
     display: flex;
   }
-  
+
   .menu-link {
     font-size: 1.3rem;
   }
-  
+
   .btn-desktop {
-    display: block;
+    display: inline-flex;
   }
-  
+
   .menu-mobile-overlay {
     display: none !important;
   }
@@ -644,74 +639,66 @@ onUnmounted(() => {
 /* Desktop grande (1280px+) */
 @media (min-width: 1280px) {
   .info-nav-top {
-    padding: 0.75rem 2rem;
+    padding-inline: 2.25rem;
   }
-  
-  .info-item {
-    font-size: 0.9rem;
-  }
-  
+
   .info-wrapper {
-    gap: 2rem;
+    column-gap: 2.25rem;
   }
-  
+
   .logo {
-    height: 90px;
+    height: 96px;
   }
-  
+
   .menu-desktop {
-    gap: 2.5rem;
+    gap: 2.8rem;
   }
-  
+
   .menu-link {
     font-size: 1.45rem;
   }
-  
+
   .btn-reserva {
     font-size: 1rem;
-    padding: 0.75rem 2rem;
+    padding-inline: 2.2rem;
   }
 }
 
 /* Desktop extra grande (1536px+) */
 @media (min-width: 1536px) {
   .logo {
-    height: 150px;      /* aumenta directamente la imagen */
-    width: auto;
-    transform: scale(1.2); /* 🔹 zoom visual sin romper el layout */
-    transform-origin: center;
+    height: 120px;
   }
-  
-  
+
   .menu-desktop {
-    gap: 3rem;
+    gap: 3.1rem;
   }
-  
+
   .menu-link {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
   }
-  
+
   .btn-reserva {
-    padding: 0.8rem 2.25rem;
+    padding-inline: 2.4rem;
   }
 }
 
 /* Desktop ultra grande (1920px+) */
 @media (min-width: 1920px) {
   .info-nav-top {
-    padding: 0.85rem 3rem;
+    padding-inline: 3rem;
   }
-  
+
   .nav-main {
-    padding: 1.25rem 3rem;
+    padding-inline: 3rem;
   }
-  
+
   .logo {
-    height: 110px;
+    height: 130px;
   }
-  
+
   .menu-link {
-    font-size: 1.7rem;
+    font-size: 1.65rem;
   }
 }
 </style>

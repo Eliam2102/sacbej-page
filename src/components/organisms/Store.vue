@@ -7,7 +7,9 @@ import { shopify } from '../../services/shopify'
 // -----------------------------
 const REVIEWS = Object.freeze([
   { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flccamara.celis%2Fposts%2Fpfbid0d5gPfWrkN87s4yY5AH7aaBA63Wfnx1C3xVXrZNrHPoP4HoVvpu3GaWYwpXwhExrLl&width=200&show_text=true&height=551&appId", height: "551" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid0Yaa9JncbhcEiCQXkeFj79CAzDPm5uf6RmXFcHeXecj9JqrMFPQTqMGAuUinbfd4Kl%26id%3D100063497890923&show_text=true&height=551&appId", height: "551" },
+  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid034gd9rkyaQEw85XSa6Py3naZ4BhTVBwKTZrqV6UyCreRa7SsKkLiLQDfMr5K8vvmVl%26id%3D100063497890923&show_text=true&width=250&show_text=true&&height=546&appId", height: "546" },
+  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02t6D2CYqXPfmDAVE8KQkEibHvCYzSkK4ryodj9WYcEdkAswnwV7pCGz3X2B4acjqul%26id%3D100063497890923&&width=200&show_text=true&&height=560&appId", height: "560" },
+  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid0Yaa9JncbhcEiCQXkeFj79CAzDPm5uf6RmXFcHeXecj9JqrMFPQTqMGAuUinbfd4Kl%26id%3D100063497890923&show_text=true&height=5491&appId", height: "549" },
   { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fanaid.lopez.737%2Fposts%2Fpfbid02ShPJ2abWyNLy5xxK8nfDpGsNFKPgrahAPEjPuFZCTk4Vj3aAWJHMEGBbipfoRzpwl&width=250&show_text=true&height=706&appId", height: "706" },
   { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjuan.sarmientosantiago%2Fposts%2Fpfbid028qrYGtCWB16qEB42z8pr3esfqRSzCMgi1F4jJfbLViipB4XmLZ2ZL3nWAXRjZkg4l&width=250&show_text=true&height=402&appId", height: "402" },
   { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdiana.tamayo.964404%2Fposts%2Fpfbid0fjZG35HCSQv2RMkYz4gJmktRruNRepfqxMnhHvqSUYK8bkmkefoTXi1Gf7SRj3pcl&width=250&show_text=true&height=745&appId", height: "745" },
@@ -374,12 +376,30 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 
 /* RESEÑAS */
 .reviews-section {
-  background: linear-gradient(to bottom, #f8fafc, #ffffff);
+  background-image: url('/src/assets/manglares.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Overlay suave para no distraer */
+  position: relative;
   padding-bottom: clamp(4rem, 8vw, 6rem);
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
 }
+
+.reviews-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.56); /* aclarado suave */
+  backdrop-filter: blur(2px);
+  z-index: 0;
+}
+
+.reviews-section > * {
+  position: relative;
+  z-index: 2; /* El contenido no queda atrás del overlay */
+}
+
 
 .reviews-grid {
   display: flex;
@@ -515,7 +535,7 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 
 /* CATÁLOGO */
 .catalog-section {
-  background: #fff;
+  background: #F5E6D3;
   padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 

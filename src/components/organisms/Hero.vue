@@ -1,26 +1,27 @@
 <template>
   <main>
     <section class="hero">
-      <!-- 🎥 Video de fondo -->
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="/src/assets/hero-video.mp4" type="video/mp4" />
-        Tu navegador no soporta video HTML5.
-      </video>
 
-      <!-- Contenido sobre el video -->
+      <!-- Imagen hero -->
+      <div class="hero-bg"></div>
+
+      <!-- Contenido -->
       <div class="hero-content">
+        <p class="hero-tagline">DESCUBRE EL ENCANTO SALVAJE DE CELESTÚN</p>
+
         <h1 class="hero-title">
-          Diseñamos el escape perfecto.<br />
-          La naturaleza pone la magia
+          DISEÑAMOS EL ESCAPE PERFECTO.<br />
+          LA NATURALEZA PONE LA MAGIA
         </h1>
 
         <hr class="hero-divider" />
 
         <h2 class="hero-subtitle">
-          Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.
+          Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de
+          <strong>Celestún</strong>.
         </h2>
 
-        <a class="hero-btn" href="#experiencias">Descúbrelo Ahora</a>
+        <a class="hero-btn" href="#experiencias">DESCÚBRELO AHORA</a>
       </div>
     </section>
   </main>
@@ -38,41 +39,47 @@
   box-sizing: border-box;
 }
 
-/* ========== HERO SECTION ========== */
+/* ======== HERO SECTION (ESTILO EXACTO DE LA IMAGEN) ======== */
+
 .hero {
-  margin-top: -38px;
-  height: 80vh;
-  min-height: 500px;
   position: relative;
+  height: 100vh !important;
+  min-height: 650px;
+  width: 100%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
-  overflow: hidden;
+  margin-top: 0 !important;
 }
 
-/* 🎥 Video de fondo */
-.hero-video {
+/* Imagen de fondo */
+.hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  inset: 0;
+  background-image: url('/src/assets/ría-celest.png'); /* <- pon tu imagen aquí */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: 0;
+  filter: brightness(0.72) contrast(1.1) saturate(0.9);
 }
 
-/* Overlay para contraste */
+/* Overlay cálido igual al ejemplo */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    rgba(20, 15, 5, 0.55),
+    rgba(20, 15, 5, 0.40),
+    rgba(20, 15, 5, 0.75)
+  );
   z-index: 1;
 }
 
-/* Contenido sobre el video */
+/* Contenido */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -81,65 +88,64 @@
   width: 100%;
 }
 
-/* Frase principal / título */
-.hero-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.2;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  margin: 2rem 0 2.5rem;
-  color: #f5e6d3;
+/* Top Tagline */
+.hero-tagline {
+  color: #e2d3b7;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.33em;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
 }
 
-/* Separador decorativo */
+/* Título principal */
+.hero-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  margin: 0.5rem 0 2rem;
+  color: #f7ead1;
+}
+
+/* Separador */
 .hero-divider {
   border: none;
-  border-top: 3px solid #4caf50;
-  width: clamp(60px, 15vw, 100px);
-  margin: 2rem auto;
-  border-radius: 2px;
+  border-top: 3px solid #7d8c63;
+  width: 120px;
+  margin: 0 auto 2rem;
 }
 
 /* Subtítulo */
 .hero-subtitle {
   font-family: "Merriweather", serif;
-  font-size: clamp(1.1rem, 3vw, 1.8rem);
-  font-weight: 400;
-  margin-top: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1.5;
-  letter-spacing: 0.3px;
-  margin: 2rem 0 4rem;
-  color: #e0cfa5;
-  padding: 0 1rem;
+  color: #e7d9b5;
+  font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  line-height: 1.6;
+  margin-bottom: 3rem;
 }
 
 /* Botón */
 .hero-btn {
   background: #f5e6d3;
   color: #4e342e;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 36px);
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: all 0.3s ease;
   font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 1px;
-  box-shadow: 0 8px 24px rgba(245, 230, 211, 0.3);
+  letter-spacing: 0.15em;
+  padding: 14px 40px;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .hero-btn:hover {
-  background: #a68a6d;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(245, 230, 211, 0.4);
-}
-
-.hero-btn:active {
-  transform: translateY(0);
+  background: #bda98d;
+  color: #f8f5ef;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
 
 /* ========== RESPONSIVE COMPLETO ========== */

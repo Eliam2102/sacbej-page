@@ -334,14 +334,11 @@ onBeforeUnmount(() => {
                 <!-- Galería -->
                 <div class="gallery">
                   <div class="main-image">
-                    <!-- Skeleton de fondo mientras carga -->
-                    <div v-if="!imageLoaded" class="main-skeleton"></div>
-
                     <!-- Imagen principal con fade + blur-up + zoom hover -->
                     <transition name="fade-img" mode="out-in">
                       <img
-                        v-if="selectedExperience"
-                        :key="selectedExperience.images[currentImageIndex]"
+                        v-if="selectedExperience && selectedExperience.images[currentImageIndex]"
+                        :key="currentImageIndex"
                         :src="selectedExperience.images[currentImageIndex]"
                         class="active-img"
                         :class="{ 'is-loaded': imageLoaded }"
@@ -351,7 +348,6 @@ onBeforeUnmount(() => {
                         @load="onMainImageLoad"
                       />
                     </transition>
-
                     <button class="nav prev" @click.stop="prevImage" aria-label="Anterior">
                       ‹
                     </button>
@@ -372,15 +368,7 @@ onBeforeUnmount(() => {
                       :class="{ active: i === currentImageIndex }"
                       @click="goToImage(i)"
                     >
-                      <div v-if="!thumbsLoaded[i]" class="thumb-skeleton"></div>
-                      <img
-                        v-show="thumbsLoaded[i]"
-                        :src="img"
-                        loading="lazy"
-                        decoding="async"
-                        :alt="`${selectedExperience.title} imagen ${i + 1}`"
-                        @load="thumbsLoaded[i] = true"
-                      />
+                      <img :src="img" alt="" />
                     </button>
                   </div>
                 </div>
@@ -420,12 +408,38 @@ onBeforeUnmount(() => {
 <style scoped>
 /* ====== Base catálogo ====== */
 .catalog {
-  background: #f5e6d3;
   padding: 3rem 2rem;
   font-family: "Merriweather", serif;
-  color: #1b3b2f;
   text-align: center;
+
+  /*  FONDO SELVÁTICO HUMEDO */
+  background-image: url('/src/assets/background-selva.png'); /* cambia el nombre si lo guardaste distinto */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Overlay suave para que no opaque las cards */
+  position: relative;
+  color: #1b3b2f;
 }
+
+.catalog::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      rgba(15, 30, 20, 0.45),
+      rgba(15, 30, 20, 0.35),
+      rgba(15, 30, 20, 0.50)
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.catalog > * {
+  position: relative;
+  z-index: 2; /* Hace que todo el contenido quede arriba del overlay */
+}
+
 .title {
   font-family: "Bebas Neue", sans-serif;
   font-size: clamp(2.2rem, 4vw, 3rem);
@@ -662,7 +676,7 @@ onBeforeUnmount(() => {
   aspect-ratio: 16 / 10;
   border-radius: 14px;
   overflow: hidden;
-  background: #e0ded6;
+
 }
 .main-skeleton {
   position: absolute;
@@ -678,9 +692,8 @@ onBeforeUnmount(() => {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 0;
-  transform: scale(1.03);
   filter: blur(12px);
   transition: opacity 0.4s ease, transform 0.6s ease, filter 0.6s ease;
   will-change: transform, filter, opacity;

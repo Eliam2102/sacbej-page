@@ -35,9 +35,7 @@
 
               <form @submit.prevent="enviarFormulario" class="formulario" novalidate>
                 <div class="campo-grupo">
-                  <label for="nombre" class="etiqueta-campo">
-                    Nombre completo
-                  </label>
+                  <label for="nombre" class="etiqueta-campo">Nombre completo</label>
                   <input
                     id="nombre"
                     v-model="formData.nombre"
@@ -50,9 +48,7 @@
                 </div>
 
                 <div class="campo-grupo">
-                  <label for="email" class="etiqueta-campo">
-                    Correo electrónico
-                  </label>
+                  <label for="email" class="etiqueta-campo">Correo electrónico</label>
                   <input
                     id="email"
                     v-model="formData.email"
@@ -65,9 +61,20 @@
                 </div>
 
                 <div class="campo-grupo">
-                  <label for="mensaje" class="etiqueta-campo">
-                    Tu mensaje
-                  </label>
+                  <label for="telefono" class="etiqueta-campo">Teléfono</label>
+                  <input
+                    id="telefono"
+                    v-model="formData.telefono"
+                    type="tel"
+                    required
+                    placeholder="999 999 9999"
+                    class="campo-input"
+                    autocomplete="tel"
+                  />
+                </div>
+
+                <div class="campo-grupo">
+                  <label for="mensaje" class="etiqueta-campo">Tu mensaje</label>
                   <textarea
                     id="mensaje"
                     v-model="formData.mensaje"
@@ -217,21 +224,66 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
+import emailjs from 'emailjs-com'
 
+// ==========================
+// DATOS DEL FORMULARIO
+// ==========================
 const formData = ref({
   nombre: '',
   email: '',
-  mensaje: ''
+  telefono: '',
+  mensaje: '',
 })
 
 const enviado = ref(false)
+const cargando = ref(false)
 
-const enviarFormulario = () => {
-  enviado.value = true
-  setTimeout(() => {
-    enviado.value = false
-    formData.value = { nombre: '', email: '', mensaje: '' }
-  }, 3000)
+// ==========================
+// FUNCIÓN PARA ENVIAR FORMULARIO
+// ==========================
+const enviarFormulario = async () => {
+  if (!formData.value.nombre || !formData.value.email || !formData.value.telefono || !formData.value.mensaje) {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
+
+  cargando.value = true
+
+  try {
+    await emailjs.send(
+      "service_e75bx9d",    
+      "template_6satnkh",    
+      {
+        nombre: formData.value.nombre,
+        email: formData.value.email,
+        telefono: formData.value.telefono,
+        mensaje: formData.value.mensaje
+      },
+      "OvSpobO-T9HnvdvTU"     
+    );
+
+    enviado.value = true
+
+    // Limpiar formulario
+    formData.value = {
+      nombre: '',
+      email: '',
+      telefono: '',
+      mensaje: '',
+    }
+
+    // Reiniciar estado
+    setTimeout(() => {
+      enviado.value = false
+    }, 4000)
+
+  } catch (error) {
+    console.error("❌ Error al enviar", error)
+    alert("Hubo un error al enviar el mensaje. Intenta de nuevo.")
+  }
+
+  cargando.value = false
 }
 </script>
 
