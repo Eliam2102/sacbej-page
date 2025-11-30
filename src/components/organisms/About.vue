@@ -76,7 +76,7 @@
         <!-- Imagen central -->
         <div class="center-section animate-on-scroll">
           <div class="image-wrapper">
-            <img src="/src/assets/credencial.png" alt="Guía turístico" />
+            <img src="/src/assets/credencial.jpg" alt="Guía turístico" />
             <div class="image-overlay">
               <div class="certification-badge">
                 <div class="badge-icon">

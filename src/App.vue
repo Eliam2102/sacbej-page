@@ -1,14 +1,36 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { useHead } from '@vueuse/head'
+import { SiteContent } from './constants/content'
 
+// Critical Components (Above the Fold)
 import NavBar from './components/base/NavBar.vue'
-import Footer from './components/base/Footer.vue'
 import Hero from './components/organisms/Hero.vue'
-import About from './components/organisms/About.vue'
-import Experiences from './components/organisms/Experiences.vue'
-import OurTeam from './components/organisms/OurTeam.vue'
-import ContactUs from './components/organisms/ContactUs.vue'
-import Store from './components/organisms/Store.vue'
+
+// Lazy Loaded Components (Below the Fold)
+const About = defineAsyncComponent(() => import('./components/organisms/About.vue'))
+const Experiences = defineAsyncComponent(() => import('./components/organisms/Experiences.vue'))
+const OurTeam = defineAsyncComponent(() => import('./components/organisms/OurTeam.vue'))
+const ContactUs = defineAsyncComponent(() => import('./components/organisms/ContactUs.vue'))
+const Store = defineAsyncComponent(() => import('./components/organisms/Store.vue'))
+const Footer = defineAsyncComponent(() => import('./components/base/Footer.vue'))
+
+/* ======================
+3LOADER GLOBAL (solo por tiempo)
+====================== */
+/* ======================
+   SEO & META TAGS
+====================== */
+useHead({
+  title: SiteContent.brandName,
+  titleTemplate: '%s | Experiencias Inolvidables',
+  meta: [
+    { name: 'description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
+    { property: 'og:title', content: SiteContent.brandName },
+    { property: 'og:description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
+    { property: 'og:image', content: '/src/assets/logo_sac_bej_celestun_transparente.png' },
+  ],
+})
 
 /* ======================
 3LOADER GLOBAL (solo por tiempo)
@@ -16,7 +38,7 @@ import Store from './components/organisms/Store.vue'
 const loading = ref(true)
 
 onMounted(() => {
-  // Mostrar loader solo durante 900 ms
+  // Fallback seguro: siempre quitar el loader después de 1.6s
   setTimeout(() => {
     loading.value = false
   }, 1600)

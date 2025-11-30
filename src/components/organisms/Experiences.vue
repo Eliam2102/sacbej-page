@@ -571,7 +571,6 @@ function onCardThumbLoad(e: Event) {
                     <span class="hero-badge" v-if="selectedExperience.badge">
                       {{ selectedExperience.badge }}
                     </span>
-                    <span class="hero-category">{{ selectedExperience.category }}</span>
                   </div>
                   <h1 class="hero-experience-title">{{ selectedExperience.title }}</h1>
                 </div>
@@ -972,7 +971,7 @@ function onCardThumbLoad(e: Event) {
   font-family: "Merriweather", serif;
   color: #1b3b2f;
   
-  background-image: url('/src/assets/background-selva.png');
+  background-image: url('/src/assets/background-selva.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -2197,7 +2196,7 @@ function onCardThumbLoad(e: Event) {
 .fullscreen-gallery {
   position: fixed;
   inset: 0;
-  background: rgba(27, 59, 47, 0.98);
+ background: rgba(0, 0, 0, 0.780);
   z-index: 11000;
   display: grid;
   place-items: center;
@@ -2287,9 +2286,16 @@ function onCardThumbLoad(e: Event) {
 }
 
 /* ==================== RESPONSIVE ==================== */
-@media (max-width: 768px) {
+/* ==================== RESPONSIVE ==================== */
+
+/* Móvil pequeño (< 375px) */
+@media (max-width: 374px) {
   .catalog {
     padding: 2rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
   }
 
   .experiences-grid {
@@ -2297,11 +2303,166 @@ function onCardThumbLoad(e: Event) {
     gap: 1.5rem;
   }
 
-  .modal-backdrop {
-    padding: 0;
-    align-items: stretch;
+  .modal-content {
+    padding: 1.5rem 1rem;
   }
 
+  .modal-hero {
+    height: 300px;
+  }
+
+  .hero-experience-title {
+    font-size: 1.8rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Móvil (375px - 639px) */
+@media (min-width: 375px) and (max-width: 639px) {
+  .catalog {
+    padding: 3rem 1.5rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .modal-hero {
+    height: 350px;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet vertical (640px - 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .catalog {
+    padding: 4rem 2rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .modal-container {
+    width: 95%;
+    height: 90vh;
+  }
+
+  .modal-hero {
+    height: 380px;
+  }
+}
+
+/* Tablet horizontal (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .catalog {
+    padding: 4.5rem 2.5rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .modal-container {
+    width: 90%;
+    max-width: 800px;
+    height: 85vh;
+  }
+
+  .modal-hero {
+    height: 400px;
+  }
+}
+
+/* Desktop pequeño (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .catalog {
+    padding: 5rem 3rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .modal-container {
+    width: 85%;
+    max-width: 1000px;
+    flex-direction: row;
+  }
+
+  .modal-hero {
+    width: 45%;
+    height: auto;
+  }
+
+  .modal-content {
+    width: 55%;
+  }
+}
+
+/* Desktop (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .catalog {
+    padding: 6rem 4rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .modal-container {
+    max-width: 1100px;
+    flex-direction: row;
+  }
+
+  .modal-hero {
+    width: 50%;
+  }
+
+  .modal-content {
+    width: 50%;
+  }
+}
+
+/* Desktop grande (1400px+) */
+@media (min-width: 1400px) {
+  .catalog {
+    padding: 7rem 5rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+
+  .modal-container {
+    max-width: 1200px;
+    flex-direction: row;
+  }
+
+  .modal-hero {
+    width: 50%;
+  }
+
+  .modal-content {
+    width: 50%;
+  }
+}
+
+
+
+@media (max-width: 768px) {
   .modal-container {
     margin: 0;
     border-radius: 0;

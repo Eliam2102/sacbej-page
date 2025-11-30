@@ -7,27 +7,23 @@
 
       <!-- Contenido -->
       <div class="hero-content">
-        <p class="hero-tagline">DESCUBRE EL ENCANTO SALVAJE DE CELESTÚN</p>
+        <p class="hero-tagline">{{ SiteContent.hero.tagline }}</p>
 
-        <h1 class="hero-title">
-          DISEÑAMOS EL ESCAPE PERFECTO.<br />
-          LA NATURALEZA PONE LA MAGIA
-        </h1>
+        <h1 class="hero-title" v-html="SiteContent.hero.title.replace('\n', '<br />')"></h1>
 
         <hr class="hero-divider" />
 
-        <h2 class="hero-subtitle">
-          Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de
-          <strong>Celestún</strong>.
-        </h2>
+        <h2 class="hero-subtitle" v-html="SiteContent.hero.subtitle"></h2>
 
-        <a class="hero-btn" href="#experiencias">DESCÚBRELO AHORA</a>
+        <a class="hero-btn" href="#experiencias">{{ SiteContent.hero.cta }}</a>
       </div>
     </section>
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { SiteContent } from "../../constants/content";
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');

@@ -2,6 +2,7 @@
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { SiteContent, MenuLinks, SocialLinks } from "../../constants/content";
 
 library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
 </script>
@@ -13,8 +14,8 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
       <div class="footer-logo">
         <img src="/src/assets/logo_transparente_beige.png" alt="Logo SacBej" class="logo" />
         <div class="brand-info">
-          <h2 class="brand-name">SacBej</h2>
-          <p class="brand-desc">Experiencias inolvidables.</p>
+          <h2 class="brand-name">{{ SiteContent.brandName }}</h2>
+          <p class="brand-desc">{{ SiteContent.brandDesc }}</p>
         </div>
       </div>
 
@@ -22,10 +23,9 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
       <div class="footer-section">
         <h3>Enlaces rápidos</h3>
         <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#nosotros">Nosotros</a></li>
-          <li><a href="#experiencias">Experiencias</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li v-for="link in MenuLinks" :key="link.href">
+            <a :href="link.href">{{ link.label }}</a>
+          </li>
         </ul>
       </div>
 
@@ -43,16 +43,16 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
       <div class="footer-section">
         <h3>Síguenos</h3>
         <div class="social-icons">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <a :href="SocialLinks.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <FontAwesomeIcon :icon="['fab','facebook-f']" />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <a :href="SocialLinks.twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <FontAwesomeIcon :icon="['fab','twitter']" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <a :href="SocialLinks.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <FontAwesomeIcon :icon="['fab','instagram']" />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a :href="SocialLinks.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <FontAwesomeIcon :icon="['fab','linkedin-in']" />
           </a>
         </div>

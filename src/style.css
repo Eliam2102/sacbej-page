@@ -4,5 +4,11 @@ html, body {
   background-color: #fff;
   height: 100%;
   width: 100%;
-   overscroll-behavior: none;
+  overscroll-behavior: none;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none;
 }

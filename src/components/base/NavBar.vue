@@ -9,10 +9,10 @@
     <transition name="fade">
       <div class="info-nav-top" v-show="showTopInfo">
         <div class="info-wrapper">
-          <p class="info-item"><font-awesome-icon icon="map-marker-alt" /> Celestun, Yucatán</p>
-          <p class="info-item"><font-awesome-icon icon="clock" /> 9:00 am - 6:00 pm</p>
-          <p class="info-item"><font-awesome-icon icon="phone" /> +52 999 827 0891</p>
-          <p class="info-item"><font-awesome-icon icon="envelope" />ecoturismo.sac.bej@gmail.com</p>
+          <p class="info-item"><font-awesome-icon icon="map-marker-alt" /> {{ ContactInfo.location }}</p>
+          <p class="info-item"><font-awesome-icon icon="clock" /> {{ ContactInfo.hours }}</p>
+          <p class="info-item"><font-awesome-icon icon="phone" /> {{ ContactInfo.phone }}</p>
+          <p class="info-item"><font-awesome-icon icon="envelope" />{{ ContactInfo.email }}</p>
         </div>
       </div>
     </transition>
@@ -41,11 +41,14 @@
 
         <!-- Menú desktop -->
         <nav class="menu-desktop">
-          <a href="#inicio" class="menu-link">Inicio</a>
-          <a href="#nosotros" class="menu-link">Nosotros</a>
-          <a href="#experiencias" class="menu-link">Experiencias</a>
-          <a href="#contacto" class="menu-link">Contacto</a>
-          <a href="#opiniones" class="menu-link">Opiniones</a>
+          <a
+            v-for="link in MenuLinks"
+            :key="link.href"
+            :href="link.href"
+            class="menu-link"
+          >
+            {{ link.label }}
+          </a>
         </nav>
 
         <!-- Botón reserva (solo desktop) -->
@@ -71,11 +74,15 @@
           </button>
         </div>
         <div class="menu-mobile-content">
-          <a href="#inicio" class="menu-mobile-link" @click="closeMenu">Inicio</a>
-          <a href="#nosotros" class="menu-mobile-link" @click="closeMenu">Nosotros</a>
-          <a href="#experiencias" class="menu-mobile-link" @click="closeMenu">Experiencias</a>
-          <a href="#contacto" class="menu-mobile-link" @click="closeMenu">Contacto</a>
-          <a href="#opiniones" class="menu-mobile-link" @click="closeMenu">Opiniones</a>
+          <a
+            v-for="link in MenuLinks"
+            :key="link.href"
+            :href="link.href"
+            class="menu-mobile-link"
+            @click="handleNavigation($event, link.href)"
+          >
+            {{ link.label }}
+          </a>
           <button class="btn-reserva btn-mobile" @click="closeMenu">Reserva</button>
         </div>
       </div>
@@ -84,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -93,6 +100,8 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { ContactInfo, MenuLinks } from "../../constants/content";
 
 library.add(faMapMarkerAlt, faClock, faPhone, faEnvelope);
 
@@ -139,12 +148,33 @@ const handleResize = () => {
   }
 };
 
+const handleNavigation = async (e: Event, href: string) => {
+  e.preventDefault();
+  closeMenu();
+  
+  // Esperar a que el DOM se actualice y el scroll se desbloquee
+  await nextTick();
+  
+  // Pequeño delay para asegurar que el navegador procese el cambio de estilo
+  setTimeout(() => {
+    const targetId = href.substring(1);
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Actualizar URL sin saltar
+      history.pushState(null, '', href);
+    }
+  }, 100);
+};
+
 // Bloquear scroll cuando el menú está abierto
 watch(isOpen, (newValue) => {
   if (newValue) {
-    document.body.style.overflow = "hidden";
+    document.body.classList.add('no-scroll');
+    document.documentElement.classList.add('no-scroll');
   } else {
-    document.body.style.overflow = "";
+    document.body.classList.remove('no-scroll');
+    document.documentElement.classList.remove('no-scroll');
   }
 });
 
@@ -156,7 +186,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
   window.removeEventListener("resize", handleResize);
-  document.body.style.overflow = "";
+  document.body.classList.remove('no-scroll');
+  document.documentElement.classList.remove('no-scroll');
 });
 </script>
 

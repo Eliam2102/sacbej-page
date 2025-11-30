@@ -1,26 +1,49 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { shopify } from '../../services/shopify'
 
 // -----------------------------
 // Reviews (estáticos)
 // -----------------------------
-const REVIEWS = Object.freeze([
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flccamara.celis%2Fposts%2Fpfbid0d5gPfWrkN87s4yY5AH7aaBA63Wfnx1C3xVXrZNrHPoP4HoVvpu3GaWYwpXwhExrLl&width=200&show_text=true&height=551&appId", height: "551" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid034gd9rkyaQEw85XSa6Py3naZ4BhTVBwKTZrqV6UyCreRa7SsKkLiLQDfMr5K8vvmVl%26id%3D100063497890923&show_text=true&width=250&show_text=true&&height=546&appId", height: "546" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02t6D2CYqXPfmDAVE8KQkEibHvCYzSkK4ryodj9WYcEdkAswnwV7pCGz3X2B4acjqul%26id%3D100063497890923&&width=200&show_text=true&&height=560&appId", height: "560" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid0Yaa9JncbhcEiCQXkeFj79CAzDPm5uf6RmXFcHeXecj9JqrMFPQTqMGAuUinbfd4Kl%26id%3D100063497890923&show_text=true&height=5491&appId", height: "549" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fanaid.lopez.737%2Fposts%2Fpfbid02ShPJ2abWyNLy5xxK8nfDpGsNFKPgrahAPEjPuFZCTk4Vj3aAWJHMEGBbipfoRzpwl&width=250&show_text=true&height=706&appId", height: "706" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjuan.sarmientosantiago%2Fposts%2Fpfbid028qrYGtCWB16qEB42z8pr3esfqRSzCMgi1F4jJfbLViipB4XmLZ2ZL3nWAXRjZkg4l&width=250&show_text=true&height=402&appId", height: "402" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdiana.tamayo.964404%2Fposts%2Fpfbid0fjZG35HCSQv2RMkYz4gJmktRruNRepfqxMnhHvqSUYK8bkmkefoTXi1Gf7SRj3pcl&width=250&show_text=true&height=745&appId", height: "745" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Framiro.paradagranados%2Fposts%2Fpfbid02fdzA3WtXfA67morRJmoYkQt4e8WaTTTQgZKk5GFCHqgyuwjd7iZuuC2ikPoSpH73l&width=250&show_text=true&height=611&appId", height: "611" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmegd478%2Fposts%2Fpfbid0UdevTP16cFg7Y9xG4uCUot57F88M7By4TG7z4ZQWe8sJjCP2zcui6hpELcjjxaiXl&width=250&show_text=true&height=585&appId", height: "585" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcecy.ochoa.54%2Fposts%2Fpfbid02Ar47aXEhxbgNyFr911Jm7EU5HLXSN1YVjZocExW9eLuZhLi38xgtgm2sWDt5Qr1Nl&width=250&show_text=true&height=611&appId", height: "611" },
-  { src: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flula.rubalcava.2025%2Fposts%2Fpfbid02h1i7VTr1NKMQQM9B47ZBN8KFSuAKnKo7JyH4R17zChzkHz8nqE89YGcP27pcY4bvl&width=250&show_text=true&height=546&appId", height: "546" },
+// -----------------------------
+// Reviews (Datos crudos)
+// -----------------------------
+const REVIEW_DATA = Object.freeze([
+  { href: "https://www.facebook.com/lccamara.celis/posts/pfbid0d5gPfWrkN87s4yY5AH7aaBA63Wfnx1C3xVXrZNrHPoP4HoVvpu3GaWYwpXwhExrLl", height: "551" },
+  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid034gd9rkyaQEw85XSa6Py3naZ4BhTVBwKTZrqV6UyCreRa7SsKkLiLQDfMr5K8vvmVl&id=100063497890923", height: "546" },
+  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid02t6D2CYqXPfmDAVE8KQkEibHvCYzSkK4ryodj9WYcEdkAswnwV7pCGz3X2B4acjqul&id=100063497890923", height: "560" },
+  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid0Yaa9JncbhcEiCQXkeFj79CAzDPm5uf6RmXFcHeXecj9JqrMFPQTqMGAuUinbfd4Kl&id=100063497890923", height: "549" },
+  { href: "https://www.facebook.com/anaid.lopez.737/posts/pfbid02ShPJ2abWyNLy5xxK8nfDpGsNFKPgrahAPEjPuFZCTk4Vj3aAWJHMEGBbipfoRzpwl", height: "706" },
+  { href: "https://www.facebook.com/juan.sarmientosantiago/posts/pfbid028qrYGtCWB16qEB42z8pr3esfqRSzCMgi1F4jJfbLViipB4XmLZ2ZL3nWAXRjZkg4l", height: "402" },
+  { href: "https://www.facebook.com/diana.tamayo.964404/posts/pfbid0fjZG35HCSQv2RMkYz4gJmktRruNRepfqxMnhHvqSUYK8bkmkefoTXi1Gf7SRj3pcl", height: "745" },
+  { href: "https://www.facebook.com/ramiro.paradagranados/posts/pfbid02fdzA3WtXfA67morRJmoYkQt4e8WaTTTQgZKk5GFCHqgyuwjd7iZuuC2ikPoSpH73l", height: "611" },
+  { href: "https://www.facebook.com/megd478/posts/pfbid0UdevTP16cFg7Y9xG4uCUot57F88M7By4TG7z4ZQWe8sJjCP2zcui6hpELcjjxaiXl", height: "585" },
+  { href: "https://www.facebook.com/cecy.ochoa.54/posts/pfbid02Ar47aXEhxbgNyFr911Jm7EU5HLXSN1YVjZocExW9eLuZhLi38xgtgm2sWDt5Qr1Nl", height: "611" },
+  { href: "https://www.facebook.com/lula.rubalcava.2025/posts/pfbid02h1i7VTr1NKMQQM9B47ZBN8KFSuAKnKo7JyH4R17zChzkHz8nqE89YGcP27pcY4bvl", height: "546" },
 ])
 
+// Lógica de ancho dinámico
+const containerWidth = ref(350)
+
+const updateWidth = () => {
+  // En móvil restamos padding (aprox 32px), en desktop fijo a 350px
+  if (window.innerWidth < 768) {
+    containerWidth.value = Math.min(window.innerWidth - 48, 500)
+  } else {
+    containerWidth.value = 350
+  }
+}
+
+// Reviews procesadas con URL dinámica
+const processedReviews = computed(() => {
+  return REVIEW_DATA.map(review => ({
+    ...review,
+    src: `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(review.href)}&width=${containerWidth.value}&show_text=true&height=${review.height}&appId`
+  }))
+})
+
 const showAll = ref(false)
-const displayedReviews = computed(() => showAll.value ? REVIEWS : REVIEWS.slice(0, 3))
+const displayedReviews = computed(() => showAll.value ? processedReviews.value : processedReviews.value.slice(0, 3))
 const toggleReviews = () => { showAll.value = !showAll.value }
 
 // Lazy load de iframes
@@ -112,7 +135,10 @@ const normalizeProducts = (fetched: any[]) => {
 }
 
 
+
 onMounted(async () => {
+  updateWidth()
+  window.addEventListener('resize', updateWidth)
   try {
     loading.value = true
     error.value = null
@@ -124,6 +150,10 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWidth)
 })
 
 // -----------------------------
@@ -171,7 +201,7 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
             <iframe
               v-else
               :src="review.src"
-              width="100%"
+              :width="containerWidth"
               :height="review.height"
               class="fb-iframe"
               style="border:none;overflow:hidden;"
