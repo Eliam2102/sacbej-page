@@ -78,10 +78,17 @@
           <div class="image-wrapper">
             <img src="/src/assets/credencial.png" alt="Guía turístico" />
             <div class="image-overlay">
-              <!-- <div class="overlay-badge">
-                <span class="badge-icon">✓</span>
-                <p>Certificación Oficial</p>
-              </div> -->
+              <div class="certification-badge">
+                <div class="badge-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="badge-text">
+                  <span class="badge-title">Certificación Oficial</span>
+                  <span class="badge-subtitle">SECTUR</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -122,23 +129,68 @@
         </div>
       </div>
 
-      <!-- Sección de estadísticas -->
+      <!-- Sección de estadísticas REDISEÑADA -->
       <div class="stats-section animate-on-scroll">
-        <div class="stat-item">
-          <h3>{{ tours }}</h3>
-          <p>Tours Realizados</p>
-        </div>
-        <div class="stat-item">
-          <h3>{{ years }}</h3>
-          <p>Años de Experiencia</p>
-        </div>
-        <div class="stat-item">
-          <h3>{{ satisfaction }}%</h3>
-          <p>Satisfacción Cliente</p>
-        </div>
-        <div class="stat-item">
-          <h3>{{ guides }}</h3>
-          <p>Guías Certificados</p>
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V7.89l7-3.11v8.2z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">{{ displayTours }}<span class="stat-plus">+</span></h3>
+              <p class="stat-label">Tours Realizados</p>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" :style="{ width: toursProgress + '%' }"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">{{ displayYears }}<span class="stat-plus">+</span></h3>
+              <p class="stat-label">Años de Experiencia</p>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" :style="{ width: yearsProgress + '%' }"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">{{ displaySatisfaction }}<span class="stat-percent">%</span></h3>
+              <p class="stat-label">Satisfacción Cliente</p>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" :style="{ width: satisfactionProgress + '%' }"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">{{ displayGuides }}<span class="stat-plus">+</span></h3>
+              <p class="stat-label">Guías Certificados</p>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" :style="{ width: guidesProgress + '%' }"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -172,7 +224,7 @@
             una inmersión completa en la esencia de cada destino. Combinamos estratégicamente cultura, aventura
             y naturaleza para crear una narrativa de viaje única que te conectará profundamente con el lugar.
           </p>
-          <button class="hero-btn">Conoce más ahora!</button>
+          <a href="#contacto" class="hero-btn">Conoce más ahora!</a>
         </div>
 
         <div class="image-block">
@@ -209,7 +261,7 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 /* Animaciones on scroll */
 onMounted(() => {
@@ -226,7 +278,6 @@ onMounted(() => {
     { threshold: 0.2 }
   );
 
-  // Evita observar el storytelling (se muestra completo)
   elements.forEach((el) => {
     if (!el.classList.contains("story")) {
       observer.observe(el);
@@ -278,7 +329,7 @@ onBeforeUnmount(() => {
   clearTimeout(slideTimeout);
 });
 
-/* Stats con efecto ruleta */
+/* ==================== NUEVA ANIMACIÓN DE STATS MEJORADA ==================== */
 const tours = ref(0);
 const years = ref(0);
 const satisfaction = ref(0);
@@ -291,18 +342,56 @@ const targetValues = {
   guides: 10,
 };
 
-function rouletteEffect(refValue: any, target: number, duration = 2000) {
-  const startTime = performance.now();
-  function step(now: number) {
-    const elapsed = now - startTime;
-    if (elapsed < duration) {
-      refValue.value = Math.floor(Math.random() * target * 1.5);
-      requestAnimationFrame(step);
-    } else {
-      refValue.value = target;
+// Valores para las barras de progreso
+const toursProgress = ref(0);
+const yearsProgress = ref(0);
+const satisfactionProgress = ref(0);
+const guidesProgress = ref(0);
+
+// Display values con formato
+const displayTours = computed(() => Math.floor(tours.value));
+const displayYears = computed(() => Math.floor(years.value));
+const displaySatisfaction = computed(() => Math.floor(satisfaction.value));
+const displayGuides = computed(() => Math.floor(guides.value));
+
+// Función de easing suave (ease-out cubic)
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+// Animación fluida y profesional
+function animateValue(
+  refValue: any,
+  progressRef: any,
+  target: number,
+  duration: number = 2000,
+  delay: number = 0
+) {
+  setTimeout(() => {
+    const startTime = performance.now();
+    const startValue = 0;
+
+    function step(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+
+      // Actualizar el valor del número
+      refValue.value = startValue + (target - startValue) * easedProgress;
+      
+      // Actualizar la barra de progreso
+      progressRef.value = easedProgress * 100;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        refValue.value = target;
+        progressRef.value = 100;
+      }
     }
-  }
-  requestAnimationFrame(step);
+
+    requestAnimationFrame(step);
+  }, delay);
 }
 
 onMounted(() => {
@@ -311,10 +400,11 @@ onMounted(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          rouletteEffect(tours, targetValues.tours);
-          rouletteEffect(years, targetValues.years);
-          rouletteEffect(satisfaction, targetValues.satisfaction);
-          rouletteEffect(guides, targetValues.guides);
+          // Animar cada stat con delays escalonados para efecto cascada
+          animateValue(tours, toursProgress, targetValues.tours, 2500, 0);
+          animateValue(years, yearsProgress, targetValues.years, 2500, 200);
+          animateValue(satisfaction, satisfactionProgress, targetValues.satisfaction, 2500, 400);
+          animateValue(guides, guidesProgress, targetValues.guides, 2500, 600);
           observer.disconnect();
         }
       },
@@ -375,7 +465,6 @@ onMounted(() => {
   50% { transform: translateY(-25px) translateX(-10px); }
 }
 
-/* sutil degradado superior para empalme con hero/nav */
 .about::before {
   content: '';
   position: absolute;
@@ -557,7 +646,7 @@ onMounted(() => {
   left: 0;
 }
 
-/* ==================== IMAGEN CENTRAL ==================== */
+/* ==================== IMAGEN CENTRAL MEJORADA ==================== */
 .center-section {
   position: relative;
   display: flex;
@@ -588,97 +677,220 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  padding: 2.1rem 2rem 2.4rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.overlay-badge {
-  background: rgba(245, 230, 211, 0.98);
-  padding: 0.9rem 2.3rem;
-  border-radius: 999px;
+.certification-badge {
+  background: linear-gradient(135deg, rgba(245, 230, 211, 0.98) 0%, rgba(237, 224, 199, 0.95) 100%);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .badge-icon {
-  background: #00c853;
-  color: white;
-  width: 30px;
-  height: 30px;
+  background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 200, 83, 0.4);
 }
 
-.overlay-badge p {
-  margin: 0;
+.badge-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.badge-title {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.1rem;
   color: #2E4D3C;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  line-height: 1;
 }
 
-/* ==================== ESTADÍSTICAS ==================== */
+.badge-subtitle {
+  font-family: "Merriweather", serif;
+  font-size: 0.75rem;
+  color: #4E342E;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* ==================== ESTADÍSTICAS REDISEÑADAS ==================== */
 .stats-section {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 0 1rem;
   opacity: 0;
   position: relative;
   z-index: 10;
+  padding: 4rem 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 .stat-item {
-  background:
-    radial-gradient(circle at top, #1c3c2a, transparent 60%),
-    linear-gradient(145deg, #12261b, #2E4D3C);
-  backdrop-filter: blur(14px);
-  padding: 2rem;
-  border-radius: 22px;
-  text-align: center;
-  border: 1px solid rgba(245, 230, 211, 0.18);
-  transition: all 0.3s ease;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  background: 
+    linear-gradient(145deg, rgba(12, 26, 19, 0.95), rgba(28, 60, 42, 0.9));
+  backdrop-filter: blur(20px);
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 188, 212, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00bcd4, #00e676);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-item:hover::before {
+  transform: scaleX(1);
 }
 
 .stat-item:hover {
-  background:
-    radial-gradient(circle at top, rgba(0, 188, 212, 0.24), transparent 65%),
-    linear-gradient(145deg, #091a12, #1c3c2a);
-  transform: translateY(-6px);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.8);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 60px rgba(0, 188, 212, 0.3),
+    0 0 80px rgba(0, 188, 212, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   border-color: rgba(0, 188, 212, 0.5);
 }
 
-.stat-item h3 {
-  font-size: clamp(2.1rem, 5vw, 3.1rem);
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.2), rgba(0, 230, 118, 0.2));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  border: 1px solid rgba(0, 188, 212, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 188, 212, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 32px rgba(0, 188, 212, 0.4);
+}
+
+.stat-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #00bcd4;
+}
+
+.stat-content {
+  text-align: center;
+}
+
+.stat-number {
   font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   color: #F5E6D3;
-  margin-bottom: 0.4rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.stat-item p {
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
-  font-family: "Merriweather", serif;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
   font-weight: 600;
-  color: #EDE0C7;
-  opacity: 0.9;
 }
 
-/* ==================== SECCIÓN STORY (OSCURA, MATCH HERO) ==================== */
+.stat-plus,
+.stat-percent {
+  font-size: 0.6em;
+  color: #00bcd4;
+  margin-left: 0.2rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-family: "Merriweather", serif;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  color: #EDE0C7;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Barra de progreso */
+.stat-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 188, 212, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00bcd4 0%, #00e676 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+  position: relative;
+}
+
+.stat-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ==================== SECCIÓN STORY ==================== */
 .story {
   padding: 6.5rem 2rem 6rem;
   opacity: 0;
@@ -786,13 +998,13 @@ onMounted(() => {
   opacity: 0.95;
 }
 
-/* botón estilo hero */
 .hero-btn {
   background: #F5E6D3;
   color: #4E342E;
   font-size: clamp(1rem, 2vw, 1.1rem);
   padding: 1rem 2.8rem;
   border: none;
+  text-decoration: none;
   border-radius: 999px;
   cursor: pointer;
   text-transform: uppercase;
@@ -1018,14 +1230,13 @@ onMounted(() => {
     margin-right: 0.5rem;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: 1fr;
     gap: 1.4rem;
-    padding: 2.2rem 0 0.5rem;
   }
 
   .stat-item {
-    padding: 1.6rem;
+    padding: 2rem 1.5rem;
   }
 
   .story {
@@ -1096,10 +1307,9 @@ onMounted(() => {
     margin-right: 0.5rem;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: 1fr;
     gap: 1.6rem;
-    padding: 2.5rem 0 0.5rem;
   }
 
   .story {
@@ -1156,7 +1366,7 @@ onMounted(() => {
     margin-right: 0.5rem;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
   }
@@ -1196,7 +1406,7 @@ onMounted(() => {
     margin: 0 auto;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
@@ -1236,7 +1446,7 @@ onMounted(() => {
     margin: 0 auto;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
@@ -1280,7 +1490,7 @@ onMounted(() => {
     padding: 1.9rem;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.6rem;
   }
@@ -1370,13 +1580,12 @@ onMounted(() => {
     height: 70px;
   }
 
-  .stats-section {
-    max-width: 1400px;
+  .stats-container {
     gap: 2.4rem;
   }
 
   .stat-item {
-    padding: 2.4rem;
+    padding: 2.8rem 2.2rem;
   }
 
   .story {
@@ -1417,14 +1626,13 @@ onMounted(() => {
     min-height: auto;
   }
 
-  .stats-section {
+  .stats-container {
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    padding: 2rem 0 0.5rem;
   }
 
   .stat-item {
-    padding: 1.3rem;
+    padding: 1.5rem 1rem;
   }
 
   .story {

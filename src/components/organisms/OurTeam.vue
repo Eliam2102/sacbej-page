@@ -217,7 +217,7 @@ const premios = ref<Premio[]>([
     title: 'Galardón Estatal de Turismo',
     shortDescription: 'Reconocimiento por experiencias turísticas excepcionales y servicio de alta calidad.',
     fullDescription: 'Este prestigioso galardón reconoce nuestro compromiso excepcional con la calidad del servicio turístico, la innovación en experiencias eco-turísticas y la calidez humana que caracteriza cada interacción con nuestros visitantes. Representa el más alto honor otorgado por la Secretaría de Turismo del Estado de Yucatán.',
-    image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/galardon_jaguar_4k_transparent.png',
+    image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/jaguar-dorado.png',
     category: 'Excelencia en Turismo',
     issuer: 'Secretaría de Turismo del Estado',
     year: '2025',
@@ -232,7 +232,7 @@ const premios = ref<Premio[]>([
     id: 'distintivo',
     title: 'Distintivo Yucatán',
     shortDescription: 'Certificación oficial que avala nuestros estándares de calidad y hospitalidad.',
-    fullDescription: 'El Distintivo Yucatán es una certificación de prestigio que garantiza el cumplimiento de los más altos estándares en calidad de servicio, sostenibilidad ambiental y hospitalidad auténtica. Este reconocimiento nos posiciona como líderes en turismo responsable en la región.',
+    fullDescription: 'Es el reconocimiento integral que otorga la Secretaría de Turismo Federal a los prestadores de servicios turísticos y destinos turísticos con altos estándares de calidad, que cumplen con el marco legal y normativo aplicable, estableciendo procesos de mejora continua.',
     image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/DISTINTIVOYUC-LOGO_COLOR-SINFONDO.png',
     category: 'Calidad y Sostenibilidad',
     issuer: 'Gobierno del Estado de Yucatán',
@@ -652,15 +652,15 @@ const closeModal = () => {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #F5E6D3 0%, #ffffff 100%);
-  min-height: 280px;
+  min-height: 320px;
 }
 
 .card-image {
   width: 100%;
-  max-width: 200px;
-  height: auto;
+  max-width: 280px;
+  height: 280px;
   object-fit: contain;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s ease;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
 }
 
@@ -1092,6 +1092,15 @@ const closeModal = () => {
     padding: 0;
   }
 
+  .card-image-wrapper {
+    min-height: 280px;
+  }
+
+  .card-image {
+    max-width: 240px;
+    height: 240px;
+  }
+
   .modal-header {
     padding: 3rem 1.5rem 2rem;
   }
@@ -1173,6 +1182,15 @@ const closeModal = () => {
   .premios-cards-container {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .card-image-wrapper {
+    min-height: 300px;
+  }
+
+  .card-image {
+    max-width: 260px;
+    height: 260px;
   }
 
   .modal-body {
