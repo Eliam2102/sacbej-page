@@ -8,7 +8,55 @@ import { shopify } from '../../services/shopify'
 // -----------------------------
 // Reviews (Datos crudos)
 // -----------------------------
-const REVIEW_DATA = Object.freeze([
+// -----------------------------
+// Reviews (Datos Estáticos)
+// -----------------------------
+// -----------------------------
+// Reviews (Datos Estáticos - Mobile)
+// -----------------------------
+const MOBILE_REVIEWS = [
+  { 
+    author: "Laura Camara", 
+    date: "Hace 2 meses",
+    text: "¡Una experiencia inolvidable! El recorrido por los manglares fue mágico y ver a los flamingos tan cerca fue espectacular. Los guías son muy amables y conocedores. Súper recomendado.",
+    href: "https://www.facebook.com/lccamara.celis"
+  },
+  { 
+    author: "Juan Sarmiento", 
+    date: "Hace 1 mes",
+    text: "Excelente servicio. Nos explicaron todo sobre la flora y fauna del lugar. Se nota el amor que tienen por su tierra. Sin duda volveremos.",
+    href: "https://www.facebook.com/juan.sarmientosantiago"
+  },
+  { 
+    author: "Diana Tamayo", 
+    date: "Hace 3 semanas",
+    text: "El mejor tour en Celestún. Las lanchas están en muy buen estado y el paseo es muy relajante. ¡Gracias SacBej por este día tan especial!",
+    href: "https://www.facebook.com/diana.tamayo.964404"
+  },
+  { 
+    author: "Ramiro Parada", 
+    date: "Hace 4 meses",
+    text: "Increíble contacto con la naturaleza. Vimos cocodrilos, muchas aves y el ojo de agua es precioso. Vale totalmente la pena.",
+    href: "https://www.facebook.com/ramiro.paradagranados"
+  },
+  { 
+    author: "Cecy Ochoa", 
+    date: "Hace 5 meses",
+    text: "Atención de primera. Desde que llegamos nos trataron muy bien. El recorrido es muy completo y seguro. ¡Felicidades al equipo!",
+    href: "https://www.facebook.com/cecy.ochoa.54"
+  },
+  { 
+    author: "Lula Rubalcava", 
+    date: "Hace 6 meses",
+    text: "Maravilloso lugar y maravillosa gente. Si vienen a Celestún tienen que hacer este tour con ellos. No se arrepentirán.",
+    href: "https://www.facebook.com/lula.rubalcava.2025"
+  },
+]
+
+// -----------------------------
+// Reviews (Facebook Iframes - Desktop)
+// -----------------------------
+const FB_REVIEWS = Object.freeze([
   { href: "https://www.facebook.com/lccamara.celis/posts/pfbid0d5gPfWrkN87s4yY5AH7aaBA63Wfnx1C3xVXrZNrHPoP4HoVvpu3GaWYwpXwhExrLl", height: "551" },
   { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid034gd9rkyaQEw85XSa6Py3naZ4BhTVBwKTZrqV6UyCreRa7SsKkLiLQDfMr5K8vvmVl&id=100063497890923", height: "546" },
   { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid02t6D2CYqXPfmDAVE8KQkEibHvCYzSkK4ryodj9WYcEdkAswnwV7pCGz3X2B4acjqul&id=100063497890923", height: "560" },
@@ -22,31 +70,39 @@ const REVIEW_DATA = Object.freeze([
   { href: "https://www.facebook.com/lula.rubalcava.2025/posts/pfbid02h1i7VTr1NKMQQM9B47ZBN8KFSuAKnKo7JyH4R17zChzkHz8nqE89YGcP27pcY4bvl", height: "546" },
 ])
 
-// Lógica de ancho dinámico
+// Lógica de detección de móvil
+const isMobile = ref(false)
 const containerWidth = ref(350)
 
-const updateWidth = () => {
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
   // En móvil restamos padding (aprox 32px), en desktop fijo a 350px
-  if (window.innerWidth < 768) {
+  if (isMobile.value) {
     containerWidth.value = Math.min(window.innerWidth - 48, 500)
   } else {
     containerWidth.value = 350
   }
 }
 
-// Reviews procesadas con URL dinámica
-const processedReviews = computed(() => {
-  return REVIEW_DATA.map(review => ({
+// Reviews procesadas con URL dinámica para Desktop
+const processedFbReviews = computed(() => {
+  return FB_REVIEWS.map(review => ({
     ...review,
     src: `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(review.href)}&width=${containerWidth.value}&show_text=true&height=${review.height}&appId`
   }))
 })
 
 const showAll = ref(false)
-const displayedReviews = computed(() => showAll.value ? processedReviews.value : processedReviews.value.slice(0, 3))
+
+// Computed que decide qué mostrar basado en el dispositivo
+const displayedReviews = computed<any[]>(() => {
+  const source = isMobile.value ? MOBILE_REVIEWS : processedFbReviews.value
+  return showAll.value ? source : source.slice(0, 3)
+})
+
 const toggleReviews = () => { showAll.value = !showAll.value }
 
-// Lazy load de iframes
+// Lazy load de iframes (solo para desktop)
 const loaded = ref<{ [key: number]: boolean }>({})
 
 const loadIframe = (index: number) => {
@@ -55,7 +111,7 @@ const loadIframe = (index: number) => {
   }
 }
 
-// Directiva de IntersectionObserver para cargar solo cuando se vea
+// Directiva de IntersectionObserver
 const vIntersection = {
   mounted(el: Element, binding: any) {
     const observer = new IntersectionObserver(
@@ -65,10 +121,7 @@ const vIntersection = {
           observer.disconnect()
         }
       },
-      {
-        root: null,
-        threshold: 0.2,
-      }
+      { root: null, threshold: 0.2 }
     )
     observer.observe(el)
   },
@@ -134,11 +187,9 @@ const normalizeProducts = (fetched: any[]) => {
   })
 }
 
-
-
 onMounted(async () => {
-  updateWidth()
-  window.addEventListener('resize', updateWidth)
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
   try {
     loading.value = true
     error.value = null
@@ -153,7 +204,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateWidth)
+  window.removeEventListener('resize', checkMobile)
 })
 
 // -----------------------------
@@ -190,27 +241,54 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
             v-for="(review, index) in displayedReviews"
             :key="index"
             class="review-card"
-            v-intersection="() => loadIframe(index)"
+            :class="{ 'is-mobile-card': isMobile }"
+            v-intersection="() => !isMobile && loadIframe(index)"
           >
-            <!-- Skeleton mientras no se ha cargado el iframe -->
-            <div v-if="!loaded[index]" class="review-skeleton">
-              <div class="skeleton-box"></div>
+            <!-- VISTA MÓVIL: Tarjeta Personalizada -->
+            <div v-if="isMobile" class="review-content">
+              <div class="review-header">
+                <div class="reviewer-avatar">
+                  <span>{{ review.author.charAt(0) }}</span>
+                </div>
+                <div class="reviewer-info">
+                  <h3 class="reviewer-name">{{ review.author }}</h3>
+                  <span class="review-date">{{ review.date }}</span>
+                </div>
+                <div class="review-platform">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <div class="review-rating">
+                <svg v-for="i in 5" :key="i" width="16" height="16" viewBox="0 0 24 24" fill="#FACC15">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+
+              <p class="review-text">"{{ review.text }}"</p>
             </div>
 
-            <!-- Iframe real solo cuando entra al viewport -->
-            <iframe
-              v-else
-              :src="review.src"
-              :width="containerWidth"
-              :height="review.height"
-              class="fb-iframe"
-              style="border:none;overflow:hidden;"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true"
-              allowtransparency="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            ></iframe>
+            <!-- VISTA DESKTOP: Iframe de Facebook -->
+            <template v-else>
+              <div v-if="!loaded[index]" class="review-skeleton">
+                <div class="skeleton-box"></div>
+              </div>
+              <iframe
+                v-else
+                :src="review.src"
+                :width="containerWidth"
+                :height="review.height"
+                class="fb-iframe"
+                style="border:none;overflow:hidden;"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen="true"
+                allowtransparency="true"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              ></iframe>
+            </template>
           </div>
         </div>
 
@@ -473,38 +551,89 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
   border-color: #cbd5e1;
 }
 
-/* Skeleton para iframes */
-.review-skeleton {
-  width: 100%;
-  height: 500px;
-  background: #e5e7eb;
-  border-radius: 12px;
-  overflow: hidden;
+/* Estilos de Tarjeta de Reseña */
+/* Estilos de Tarjeta de Reseña */
+.review-card {
+  width: 350px;
+  max-width: 100%;
+  height: fit-content;
+  flex-shrink: 0;
+  /* Reset default styles for desktop iframes */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
-.skeleton-box {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
-  background-size: 400% 100%;
-  animation: shimmer 2s infinite;
+/* Apply card styling ONLY for mobile custom cards */
+.review-card.is-mobile-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: 0% 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
+.review-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.fb-iframe {
-  display: block;
-  background: transparent !important;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reviewer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+}
+
+.reviewer-info {
+  flex: 1;
+}
+
+.reviewer-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.review-date {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.review-platform {
+  color: #1877f2;
+}
+
+.review-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.review-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.6;
+  font-style: italic;
 }
 
 /* ACCIONES */

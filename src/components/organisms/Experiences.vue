@@ -14,7 +14,6 @@ interface Experience {
   duration: string;
   included: string[];
   category?: string;
-  difficulty?: string;
 }
 
 /* ================== DATOS ================== */
@@ -26,11 +25,10 @@ const experiences: Experience[] = [
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
     badge: "popular",
     category: "Aventura Terrestre",
-    difficulty: "Fácil",
     shortDescription:
       "Recorre la zona sur de la Reserva Ría Celestún: salinas rosas, bosque petrificado y flamencos.",
     fullDescription:
-      "Disfruta de un recorrido único en tuc tuc por la parte sur de la Reserva de la Biosfera Ría Celestún. Explora salinas rosas, bosque petrificado y ex haciendas, mientras descubres la historia natural de este lugar mágico.",
+      "Emprende un viaje fascinante a bordo de un tuc tuc por los senderos ocultos del sur de la Reserva. Maravíllate con el contraste de las charcas salineras y sus tonos rosados, camina entre la historia en el bosque petrificado y descubre las huellas del pasado en las ex haciendas. Una travesía que combina naturaleza virgen y cultura viva.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej-1.jpeg",
@@ -50,11 +48,10 @@ const experiences: Experience[] = [
     pricePerPerson: 3500,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
     category: "Pesca Deportiva",
-    difficulty: "Moderado",
     shortDescription:
       "Pesca deportiva en el Golfo: corvina, robalo, jurel, pargo y más.",
     fullDescription:
-      "Vive la pesca deportiva en las aguas del Golfo de México. Disfruta el amanecer, pesca especies locales y saborea un ceviche fresco estilo ribereño.",
+      "Siente la emoción de la pesca deportiva a orillas del Golfo de México. Con la brisa matutina y el sol naciente, lanzarás tu anzuelo en busca de especies locales. La experiencia culmina con el sabor inigualable de un ceviche fresco, preparado al momento con la pesca del día, al puro estilo ribereño.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast1.jpeg",
@@ -70,11 +67,10 @@ const experiences: Experience[] = [
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak-manglar1.png",
     badge: "popular",
     category: "Aventura Acuática",
-    difficulty: "Fácil",
     shortDescription:
       "Remo entre manglares al amanecer o anochecer, rodeado de aves y luciérnagas.",
     fullDescription:
-      "Navega entre manglares hasta el corazón del humedal. Observa aves y flamencos al amanecer o el espectáculo de luciérnagas al anochecer.",
+      "Deslízate en silencio a través de los túneles de manglar y conecta profundamente con la naturaleza. Ya sea bajo la luz dorada del amanecer rodeado de aves, o bajo el manto estelar presenciando el mágico brillo de las luciérnagas, esta experiencia de remo te llevará al corazón palpitante del humedal.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak2.png",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak3.png",
@@ -94,38 +90,38 @@ const experiences: Experience[] = [
     pricePerPerson: 1450,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
     category: "Naturaleza",
-    difficulty: "Fácil",
     shortDescription:
       "Más de 200 especies en la Ría Celestún con guía experto y equipo óptico.",
     fullDescription:
-      "Descubre aves endémicas como el colibrí tijereta mexicano. Ideal para amantes de la fotografía y la naturaleza.",
+      "Vive una experiencia inolvidable observando aves endémicas como el colibrí tijereta mexicano en un recorrido exclusivo para 1 a 4 personas. Sumérgete en la tranquilidad de la naturaleza, captura momentos únicos con tu cámara y disfruta de un entorno perfecto para los amantes de la fotografía, la fauna y la aventura.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves3.JPG",
     ],
     duration: "4.5 horas",
-    included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico"],
+    included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico","Tour narrado"],
   },
   {
     id: 5,
     title: "Ría Celestún – Flamingo Tour",
-    pricePerPerson: 4100,
+    pricePerPerson: 750,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest3.jpeg",
     badge: "oferta",
     category: "Tour Acuático",
-    difficulty: "Fácil",
     shortDescription:
       "Tour en lancha: flamencos, túnel de manglar, isla de aves y ojo de agua.",
     fullDescription:
-      "Aventura mágica navegando por manglares y observando flamencos rosados. Incluye baño en ojo de agua.",
+      `
+      Navega hacia el encuentro con el ícono de Celestún: el flamenco rosa. En este recorrido en lancha, atravesarás el espectacular Túnel de Manglar, visitarás la Isla de Aves y te refrescarás en un ojo de agua cristalina. Una inmersión total en la biodiversidad de la Ría. (Tour colectivo, requiere reserva previa).
+      `,
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest3.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest.jpg",
     ],
     duration: "1 hora 20 min",
-    included: ["Guía bilingüe", "Lancha privada", "Acceso al parque"],
+    included: ["Guía bilingüe - Certificado", "Lancha privada con sombra", "Acceso al parador turístico"],
   },
   {
     id: 6,
@@ -133,11 +129,10 @@ const experiences: Experience[] = [
     pricePerPerson: 5600,
     img: "https://i.postimg.cc/1RwvHFKG/Ceremonia-y-Tour-Nocturno-02.jpg",
     category: "Experiencia Nocturna",
-    difficulty: "Fácil",
     shortDescription:
       "Avistamiento de cocodrilos y luciérnagas bajo la luz de la luna.",
     fullDescription:
-      "Tour nocturno en lancha: cocodrilos, aves dormidas y el brillo natural de las luciérnagas. Una experiencia mágica y segura.",
+      "Cuando el sol se oculta, la ría despierta. Adéntrate en la oscuridad de la noche en una lancha privada y agudiza tus sentidos. Observa cocodrilos en su hábitat natural, aves descansando y, con suerte, el fascinante espectáculo de bioluminiscencia o luciérnagas. Una aventura segura y exclusiva para los amantes de la naturaleza nocturna.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/moonlight.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-11.jpg",
@@ -152,11 +147,10 @@ const experiences: Experience[] = [
     pricePerPerson: 2400,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/xukulem3.jpg",
     category: "Experiencia Cultural",
-    difficulty: "Fácil",
     shortDescription:
       "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
     fullDescription:
-      "Una experiencia espiritual guiada por fuego, copal y sabiduría maya. Limpia energética y ofrendas al mar.",
+      "Renueva tu energía frente al mar con una ceremonia ancestral maya. Guiado por el aroma del copal, el fuego sagrado y la sabiduría tradicional, vivirás una limpieza energética y entregarás ofrendas al mar. Un momento íntimo de conexión y gratitud para armonizar cuerpo, mente y espíritu.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/xukulem1.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia2.jpg",
@@ -171,11 +165,10 @@ const experiences: Experience[] = [
     pricePerPerson: 350,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/biking-tour1.jpg",
     category: "Aventura Nocturna",
-    difficulty: "Moderado",
     shortDescription:
-      "Recorre en bicicleta la selva nocturna hacia un pueblo fantasma lleno de leyendas.",
+      "Aventura nocturna en bicicleta: explora la selva, ruinas de una hacienda y leyendas bajo las estrellas.",
     fullDescription:
-      "Pedalea bajo la luna y descubre las historias ocultas del bosque y el antiguo pueblo.",
+      "Adéntrate en la selva maya bajo el manto estelar con nuestro Biking Tour Nocturno. Guiado por expertos, recorrerás senderos rodeados de naturaleza hasta llegar al enigmático Pueblo Fantasma de Real de Salinas. Escucha las leyendas que habitan entre las ruinas de la antigua hacienda salinera, siente la brisa nocturna y descubre la biodiversidad que despierta cuando se oculta el sol. Una aventura que combina deporte, historia y misterio en un entorno seguro y fascinante.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour3.jpg",
@@ -449,10 +442,6 @@ function onCardThumbLoad(e: Event) {
                 <Icon icon="mdi:clock-outline" width="16" />
                 <span>{{ exp.duration }}</span>
               </div>
-              <div class="info-item" v-if="exp.difficulty">
-                <Icon icon="mdi:chart-line" width="16" />
-                <span>{{ exp.difficulty }}</span>
-              </div>
             </div>
           </div>
 
@@ -592,13 +581,6 @@ function onCardThumbLoad(e: Event) {
                     <div class="stat-info">
                       <span class="stat-label">Grupo</span>
                       <span class="stat-value">Privado</span>
-                    </div>
-                  </div>
-                  <div class="stat-card" v-if="selectedExperience.difficulty">
-                    <Icon icon="mdi:chart-line" width="24" />
-                    <div class="stat-info">
-                      <span class="stat-label">Dificultad</span>
-                      <span class="stat-value">{{ selectedExperience.difficulty }}</span>
                     </div>
                   </div>
                 </div>
@@ -1477,7 +1459,7 @@ function onCardThumbLoad(e: Event) {
 
 /* Thumbnails */
 .gallery-thumbnails {
-  display: none;
+  display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(100px, 1fr);
   gap: 0.75rem;

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faAward } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { SiteContent, MenuLinks, SocialLinks } from "../../constants/content";
 
-library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
+library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn, faAward)
 </script>
 
 <template>
@@ -16,6 +17,11 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
         <div class="brand-info">
           <h2 class="brand-name">{{ SiteContent.brandName }}</h2>
           <p class="brand-desc">{{ SiteContent.brandDesc }}</p>
+          
+          <a :href="SiteContent.galardonUrl" target="_blank" rel="noopener noreferrer" class="galardon-btn">
+            <FontAwesomeIcon :icon="['fas', 'award']" />
+            <span>Ver Galardón Jaguar</span>
+          </a>
         </div>
       </div>
 
@@ -137,6 +143,29 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn)
   color: #CBD5E1;
   margin: 0;
   font-weight: 400;
+}
+
+.galardon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(45deg, #D4AF37, #F5E6D3, #D4AF37);
+  background-size: 200% auto;
+  color: #2D2420;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+}
+
+.galardon-btn:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
 }
 
 /* ==================== SECCIONES ==================== */

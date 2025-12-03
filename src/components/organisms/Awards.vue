@@ -95,6 +95,20 @@
                 <h3 class="modal-title">{{ selectedPremio.title }}</h3>
                 <p class="modal-description">{{ selectedPremio.fullDescription }}</p>
                 
+                <a 
+                  v-if="selectedPremio.id === 'galardon'" 
+                  :href="SiteContent.galardonUrl" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="galardon-modal-btn"
+                >
+                  <span>Ver Galardón Jaguar</span>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                          fill="currentColor"/>
+                  </svg>
+                </a>
+                
                 <div class="modal-details">
                   <div class="detail-item">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +166,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { AwardsContent, AwardsData } from '../../constants/content'
+import { AwardsContent, AwardsData, SiteContent } from '../../constants/content'
 
 // Definimos la interfaz localmente o podríamos exportarla de un archivo de tipos
 interface Premio {
@@ -504,6 +518,41 @@ const closeModal = () => {
 
 .card-cta:hover svg {
   transform: translateX(4px);
+}
+
+.galardon-modal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #D4AF37, #F5E6D3, #D4AF37);
+  background-size: 200% auto;
+  border-radius: 50px;
+  color: #2D2420;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  width: auto;
+  min-width: 250px;
+}
+
+.galardon-modal-btn:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+}
+
+.galardon-modal-btn svg {
+  width: 24px;
+  height: 24px;
 }
 
 /* ==================== MODAL ==================== */

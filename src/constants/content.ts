@@ -21,6 +21,7 @@ export const SiteContent = {
     subtitle: 'Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.',
     cta: 'DESCÚBRELO AHORA',
   },
+  galardonUrl: 'https://galardonjaguardelturismo.com/',
 }
 
 export const MenuLinks = [

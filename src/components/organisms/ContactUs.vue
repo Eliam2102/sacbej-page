@@ -175,7 +175,7 @@
                   </div>
                 </div>
 
-                <a href="#" class="boton-disponibilidad">
+                <a href="#experiencias" class="boton-disponibilidad">
                   VER DISPONIBILIDAD
                 </a>
               </div>
@@ -252,15 +252,15 @@ const enviarFormulario = async () => {
 
   try {
     await emailjs.send(
-      "service_e75bx9d",    
-      "template_6satnkh",    
+      "service_0dcwgmn",    
+      "template_zc2k7i6",    
       {
         nombre: formData.value.nombre,
         email: formData.value.email,
         telefono: formData.value.telefono,
         mensaje: formData.value.mensaje
       },
-      "OvSpobO-T9HnvdvTU"     
+      "M62LwVhdn9y-FGHrt"     
     );
 
     enviado.value = true
