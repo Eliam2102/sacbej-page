@@ -11,6 +11,12 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('vue') || id.includes('@vueuse')) {
+              return 'vue-vendor';
+            }
+            if (id.includes('fontawesome') || id.includes('@iconify')) {
+              return 'icons-vendor';
+            }
             return 'vendor';
           }
         }
