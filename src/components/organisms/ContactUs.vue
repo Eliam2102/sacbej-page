@@ -203,7 +203,7 @@
           <Icon icon="mdi:instagram" width="22" />
         </a>
 
-        <a href="https://www.tripadvisor.com/" 
+        <a href="https://www.tripadvisor.com.mx/Attraction_Review-g664925-d34046025-Reviews-SacBej_Celestun-Celestun_Yucatan_Peninsula.html" 
           class="icono-red tripadvisor" 
           aria-label="Tripadvisor" 
           target="_blank">
