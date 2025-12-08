@@ -101,16 +101,17 @@ const experiences: Experience[] = [
     id: 4,
     title: "Birdwatching – Observación de Aves",
     pricePerPerson: 1450,
-    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/birdwatching2.jpg",
     category: "Naturaleza",
     shortDescription:
       "Más de 200 especies en la Ría Celestún con guía experto. Inicia 6:00 a.m.",
     fullDescription:
       "Vive una experiencia inolvidable observando aves endémicas como el colibrí tijereta mexicano en un recorrido exclusivo. Sumérgete en la tranquilidad de la naturaleza, captura momentos únicos con tu cámara y disfruta de un entorno perfecto para los amantes de la fotografía. (Inicia 6:00 a.m.).",
     images: [
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/birdwatching2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
-      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves2.jpg",
-      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves3.JPG",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/birdwatchin3.jpg",
+      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/birdWatching1.jpg"
     ],
     duration: "4 horas",
     included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico","Tour narrado"],
