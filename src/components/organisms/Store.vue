@@ -3,18 +3,27 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { shopify } from '../../services/shopify'
 
 // -----------------------------
-// Reviews (estáticos)
-// -----------------------------
-// -----------------------------
-// Reviews (Datos crudos)
-// -----------------------------
-// -----------------------------
 // Reviews (Datos Estáticos)
 // -----------------------------
-// -----------------------------
-// Reviews (Datos Estáticos - Mobile)
-// -----------------------------
-const MOBILE_REVIEWS = [
+const REVIEWS = [
+  { 
+    author: "Geraline Amisadai Blanco Lopez", 
+    date: "Hace 3 meses",
+    text: "Eternamente agradecidos con el Sr. Enrique Can, por habernos llevado a conocer lugares mágicos en Celestún, por compartir con nosotros su AMPLIO CONOCIMIENTO. El tour fue nuestra mejor elección, la experiencia es frente a frente, poder palpar y experimentar en carne propia no tiene precio. Si hay alguien que sabe de Celestún y su cultura es don Enrique. 🌟",
+    href: "https://www.google.com/maps/contrib/114966847833682973121/reviews"
+  },
+  { 
+    author: "Deicy Antolinez", 
+    date: "Hace 3 meses",
+    text: "Más que un recorrido, es una oportunidad para mirar el lugar desde una perspectiva ecológica, sensible y consciente. Se siente el amor que Eduardo tiene por su tierra y su dedicación a preservarla. Al participar, también estás apoyando la economía local y a las personas que cuidan este ecosistema con respeto y compromiso. 💚 Si llegas hasta aquí, regálate esta experiencia.",
+    href: "https://www.google.com/maps/contrib/112675971553818610740/reviews"
+  },
+  { 
+    author: "Ariana NAVA GARDUÑO", 
+    date: "Hace 11 meses",
+    text: "Tours guiados por la reserva de la biosfera ría celestún, flamencos, manglares, aguas rosas, bosque petrificado, ex hacienda. Paseos en lanchas, mototaxis, canoas, senderismo en bicicleta y más. Excelente servicio.",
+    href: "https://www.google.com/maps/contrib/108396347320297964175/reviews"
+  },
   { 
     author: "Laura Camara", 
     date: "Hace 2 meses",
@@ -27,105 +36,7 @@ const MOBILE_REVIEWS = [
     text: "Excelente servicio. Nos explicaron todo sobre la flora y fauna del lugar. Se nota el amor que tienen por su tierra. Sin duda volveremos.",
     href: "https://www.facebook.com/juan.sarmientosantiago"
   },
-  { 
-    author: "Diana Tamayo", 
-    date: "Hace 3 semanas",
-    text: "El mejor tour en Celestún. Las lanchas están en muy buen estado y el paseo es muy relajante. ¡Gracias SacBej por este día tan especial!",
-    href: "https://www.facebook.com/diana.tamayo.964404"
-  },
-  { 
-    author: "Ramiro Parada", 
-    date: "Hace 4 meses",
-    text: "Increíble contacto con la naturaleza. Vimos cocodrilos, muchas aves y el ojo de agua es precioso. Vale totalmente la pena.",
-    href: "https://www.facebook.com/ramiro.paradagranados"
-  },
-  { 
-    author: "Cecy Ochoa", 
-    date: "Hace 5 meses",
-    text: "Atención de primera. Desde que llegamos nos trataron muy bien. El recorrido es muy completo y seguro. ¡Felicidades al equipo!",
-    href: "https://www.facebook.com/cecy.ochoa.54"
-  },
-  { 
-    author: "Lula Rubalcava", 
-    date: "Hace 6 meses",
-    text: "Maravilloso lugar y maravillosa gente. Si vienen a Celestún tienen que hacer este tour con ellos. No se arrepentirán.",
-    href: "https://www.facebook.com/lula.rubalcava.2025"
-  },
 ]
-
-// -----------------------------
-// Reviews (Facebook Iframes - Desktop)
-// -----------------------------
-const FB_REVIEWS = Object.freeze([
-  { href: "https://www.facebook.com/lccamara.celis/posts/pfbid0d5gPfWrkN87s4yY5AH7aaBA63Wfnx1C3xVXrZNrHPoP4HoVvpu3GaWYwpXwhExrLl", height: "551" },
-  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid034gd9rkyaQEw85XSa6Py3naZ4BhTVBwKTZrqV6UyCreRa7SsKkLiLQDfMr5K8vvmVl&id=100063497890923", height: "546" },
-  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid02t6D2CYqXPfmDAVE8KQkEibHvCYzSkK4ryodj9WYcEdkAswnwV7pCGz3X2B4acjqul&id=100063497890923", height: "560" },
-  { href: "https://www.facebook.com/permalink.php?story_fbid=pfbid0Yaa9JncbhcEiCQXkeFj79CAzDPm5uf6RmXFcHeXecj9JqrMFPQTqMGAuUinbfd4Kl&id=100063497890923", height: "549" },
-  { href: "https://www.facebook.com/anaid.lopez.737/posts/pfbid02ShPJ2abWyNLy5xxK8nfDpGsNFKPgrahAPEjPuFZCTk4Vj3aAWJHMEGBbipfoRzpwl", height: "706" },
-  { href: "https://www.facebook.com/juan.sarmientosantiago/posts/pfbid028qrYGtCWB16qEB42z8pr3esfqRSzCMgi1F4jJfbLViipB4XmLZ2ZL3nWAXRjZkg4l", height: "402" },
-  { href: "https://www.facebook.com/diana.tamayo.964404/posts/pfbid0fjZG35HCSQv2RMkYz4gJmktRruNRepfqxMnhHvqSUYK8bkmkefoTXi1Gf7SRj3pcl", height: "745" },
-  { href: "https://www.facebook.com/ramiro.paradagranados/posts/pfbid02fdzA3WtXfA67morRJmoYkQt4e8WaTTTQgZKk5GFCHqgyuwjd7iZuuC2ikPoSpH73l", height: "611" },
-  { href: "https://www.facebook.com/megd478/posts/pfbid0UdevTP16cFg7Y9xG4uCUot57F88M7By4TG7z4ZQWe8sJjCP2zcui6hpELcjjxaiXl", height: "585" },
-  { href: "https://www.facebook.com/cecy.ochoa.54/posts/pfbid02Ar47aXEhxbgNyFr911Jm7EU5HLXSN1YVjZocExW9eLuZhLi38xgtgm2sWDt5Qr1Nl", height: "611" },
-  { href: "https://www.facebook.com/lula.rubalcava.2025/posts/pfbid02h1i7VTr1NKMQQM9B47ZBN8KFSuAKnKo7JyH4R17zChzkHz8nqE89YGcP27pcY4bvl", height: "546" },
-])
-
-// Lógica de detección de móvil
-const isMobile = ref(false)
-const containerWidth = ref(350)
-
-const checkMobile = () => {
-  isMobile.value = window.innerWidth < 768
-  // En móvil restamos padding (aprox 32px), en desktop fijo a 350px
-  if (isMobile.value) {
-    containerWidth.value = Math.min(window.innerWidth - 48, 500)
-  } else {
-    containerWidth.value = 350
-  }
-}
-
-// Reviews procesadas con URL dinámica para Desktop
-const processedFbReviews = computed(() => {
-  return FB_REVIEWS.map(review => ({
-    ...review,
-    src: `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(review.href)}&width=${containerWidth.value}&show_text=true&height=${review.height}&appId`
-  }))
-})
-
-const showAll = ref(false)
-
-// Computed que decide qué mostrar basado en el dispositivo
-const displayedReviews = computed<any[]>(() => {
-  const source = isMobile.value ? MOBILE_REVIEWS : processedFbReviews.value
-  return showAll.value ? source : source.slice(0, 3)
-})
-
-const toggleReviews = () => { showAll.value = !showAll.value }
-
-// Lazy load de iframes (solo para desktop)
-const loaded = ref<{ [key: number]: boolean }>({})
-
-const loadIframe = (index: number) => {
-  if (!loaded.value[index]) {
-    loaded.value[index] = true
-  }
-}
-
-// Directiva de IntersectionObserver
-const vIntersection = {
-  mounted(el: Element, binding: any) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          binding.value()
-          observer.disconnect()
-        }
-      },
-      { root: null, threshold: 0.2 }
-    )
-    observer.observe(el)
-  },
-}
 
 // -----------------------------
 // Shopify
@@ -188,8 +99,6 @@ const normalizeProducts = (fetched: any[]) => {
 }
 
 onMounted(async () => {
-  checkMobile()
-  window.addEventListener('resize', checkMobile)
   try {
     loading.value = true
     error.value = null
@@ -201,10 +110,6 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', checkMobile)
 })
 
 // -----------------------------
@@ -225,10 +130,10 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
           <div class="header-badge">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path
-                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
               />
             </svg>
-            <span>Reseñas verificadas</span>
+            <span>Opiniones Reales</span>
           </div>
           <h2 class="section-title">Lo que dicen nuestros visitantes</h2>
           <p class="section-description">
@@ -236,16 +141,13 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
           </p>
         </div>
 
-        <div class="reviews-grid" :class="{ masonry: showAll }">
+        <div class="reviews-grid">
           <div
-            v-for="(review, index) in displayedReviews"
+            v-for="(review, index) in REVIEWS"
             :key="index"
             class="review-card"
-            :class="{ 'is-mobile-card': isMobile }"
-            v-intersection="() => !isMobile && loadIframe(index)"
           >
-            <!-- VISTA MÓVIL: Tarjeta Personalizada -->
-            <div v-if="isMobile" class="review-content">
+            <div class="review-content">
               <div class="review-header">
                 <div class="reviewer-avatar">
                   <span>{{ review.author.charAt(0) }}</span>
@@ -253,11 +155,6 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
                 <div class="reviewer-info">
                   <h3 class="reviewer-name">{{ review.author }}</h3>
                   <span class="review-date">{{ review.date }}</span>
-                </div>
-                <div class="review-platform">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
                 </div>
               </div>
               
@@ -269,68 +166,34 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 
               <p class="review-text">"{{ review.text }}"</p>
             </div>
-
-            <!-- VISTA DESKTOP: Iframe de Facebook -->
-            <template v-else>
-              <div v-if="!loaded[index]" class="review-skeleton">
-                <div class="skeleton-box"></div>
-              </div>
-              <iframe
-                v-else
-                :src="review.src"
-                :width="containerWidth"
-                :height="review.height"
-                class="fb-iframe"
-                style="border:none;overflow:hidden;"
-                scrolling="no"
-                frameborder="0"
-                allowfullscreen="true"
-                allowtransparency="true"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              ></iframe>
-            </template>
           </div>
         </div>
 
         <div class="action-buttons">
-          <button @click="toggleReviews" class="btn-toggle">
-            {{ showAll ? 'Ver menos' : 'Ver todas las reseñas' }}
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              :class="{ rotated: showAll }"
-            >
-              <path d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
+           <!-- BOTÓN GOOGLE -->
           <a
-            href="https://www.facebook.com/profile.php?id=61557688476803"
+            href="https://www.google.com/search?sca_esv=433c76685208b106&sxsrf=AE3TifOI0zTwOJiovfeeYYzslQFPJV8VXA:1765164886812&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E-B8csZhWD2nWgw_IyZ23ehsl8yCPa_HjMed0OJy8PDJ8TvntAAAFMiPMBkwLv7HzV0TizrCY42wuVbh9Tnkz-sQms2-lezRNfh7LggMTv2OvsNRRA%3D%3D&q=Eco+Turismo+Sac+Bej+Celest%C3%BAn+Opiniones&sa=X&ved=2ahUKEwjeqLHQh62RAxVeH0QIHfDDC9QQ0bkNegQIUBAE&biw=1680&bih=898&dpr=2"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-facebook"
+            class="btn-social btn-google"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                d="M24 12.073c0-6.627-5.373-12-12-12s-12 
-                5.373-12 12c0 5.99 4.388 10.954 10.125 
-                11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 
-                1.792-4.669 4.533-4.669 1.312 0 2.686.235 
-                2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 
-                1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 
-                23.027 24 18.062 24 12.073z"
-              />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+               <path d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z" />
             </svg>
-            Ver en Facebook
+            Ver reseñas en Google
+          </a>
+
+          <!-- BOTÓN FACEBOOK -->
+          <a
+            href="https://www.facebook.com/profile.php?id=100063497890923&sk=reviews"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-social btn-facebook"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Ver reseñas en Facebook
           </a>
         </div>
       </div>
@@ -484,44 +347,23 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 
 /* RESEÑAS */
 .reviews-section {
-  background-image: url('/src/assets/manglares.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Overlay suave para no distraer */
-  position: relative;
+  background: #fff; /* Fondo blanco limpio */
   padding-bottom: clamp(4rem, 8vw, 6rem);
-}
-
-.reviews-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.56); /* aclarado suave */
-  backdrop-filter: blur(2px);
-  z-index: 0;
-}
-
-.reviews-section > * {
   position: relative;
-  z-index: 2; /* El contenido no queda atrás del overlay */
 }
-
 
 .reviews-grid {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-  transition: all 0.5s ease;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  width: 100%;
 }
 
 .reviews-grid.masonry {
-  display: block;
-  column-count: 3;
-  column-gap: clamp(1.5rem, 3vw, 2rem);
+  /* En modo "ver todas", mantenemos el grid para uniformidad */
+  display: grid; 
+  column-count: auto;
 }
 
 .review-card {
@@ -552,53 +394,77 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 }
 
 /* Estilos de Tarjeta de Reseña */
-/* Estilos de Tarjeta de Reseña */
+/* Estilos de Tarjeta de Reseña (Premium / Glassmorphism) */
 .review-card {
-  width: 350px;
-  max-width: 100%;
-  height: fit-content;
-  flex-shrink: 0;
-  /* Reset default styles for desktop iframes */
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
+  width: 100%; /* Ocupa celda del grid */
+  height: 100%; /* Estira al alto de la fila */
+  display: flex; /* Para alinear contenido si fuera necesario */
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-/* Apply card styling ONLY for mobile custom cards */
-.review-card.is-mobile-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f1f5f9;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.review-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
 }
 
 .review-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  padding: 2.2rem;
+  position: relative;
+  z-index: 2;
+  flex: 1; /* Empuja el contenido para llenar */
+  height: 100%;
+}
+
+/* Watermark de comillas */
+.review-content::before {
+  content: "“";
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-family: 'Lora', serif;
+  font-size: 8rem;
+  line-height: 1;
+  color: #A68A6D;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .review-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .reviewer-avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fff;
 }
 
 .reviewer-info {
@@ -607,33 +473,34 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
 
 .reviewer-name {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   color: #0f172a;
   line-height: 1.2;
+  margin-bottom: 0.15rem;
 }
 
 .review-date {
   font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
-  color: #64748b;
-}
-
-.review-platform {
-  color: #1877f2;
+  color: #94a3b8;
+  font-weight: 500;
+  display: block;
 }
 
 .review-rating {
   display: flex;
-  gap: 2px;
+  gap: 3px;
+  margin-bottom: 1.25rem;
 }
 
 .review-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
+  font-family: 'Lora', serif;
+  font-size: 1.05rem;
   color: #334155;
-  line-height: 1.6;
+  line-height: 1.7;
   font-style: italic;
+  position: relative;
 }
 
 /* ACCIONES */
@@ -641,53 +508,48 @@ const formatPrice = (value: number | string | null, currency = 'MXN') => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
+  margin-top: 3rem;
 }
 
-.btn-toggle,
-.btn-facebook {
+.btn-social {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.75rem;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.875rem 1.75rem;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
+  border: 1px solid transparent;
 }
 
-.btn-toggle {
-  background: #0f172a;
-  color: #fff;
-  border: none;
+.btn-google {
+  background: #fff;
+  color: #3c4043;
+  border-color: #dadce0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-.btn-toggle:hover {
-  background: #1e293b;
+.btn-google:hover {
+  background: #f8f9fa;
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
-}
-
-.btn-toggle svg {
-  transition: transform 0.3s ease;
-}
-
-.btn-toggle svg.rotated {
-  transform: rotate(180deg);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-color: #d2e3fc;
 }
 
 .btn-facebook {
   background: #1877f2;
   color: #fff;
-  border: none;
+  box-shadow: 0 4px 10px rgba(24, 119, 242, 0.2);
 }
 
 .btn-facebook:hover {
-  background: #0c63d4;
+  background: #166fe5;
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(24, 119, 242, 0.3);
 }

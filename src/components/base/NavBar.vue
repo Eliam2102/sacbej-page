@@ -105,6 +105,10 @@ import { ContactInfo, MenuLinks } from "../../constants/content";
 
 library.add(faMapMarkerAlt, faClock, faPhone, faEnvelope);
 
+const props = defineProps<{
+  isPolicies?: boolean
+}>();
+
 const showTopInfo = ref(true);
 const showBottomNav = ref(true);
 const isOpen = ref(false);
@@ -149,6 +153,13 @@ const handleResize = () => {
 };
 
 const handleNavigation = async (e: Event, href: string) => {
+  // Si estamos en la vista de políticas, dejamos que el navegador maneje el cambio de hash
+  // para que App.vue detecte el cambio y renderice la vista principal.
+  if (props.isPolicies) {
+    closeMenu();
+    return;
+  }
+
   e.preventDefault();
   closeMenu();
   

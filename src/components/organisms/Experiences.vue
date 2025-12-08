@@ -14,6 +14,10 @@ interface Experience {
   duration: string;
   included: string[];
   category?: string;
+  priceType?: 'person' | 'unit';
+  priceLabel?: string;
+  maxPax?: number; // Capacidad máxima por unidad (si es type 'unit')
+  minPax?: number; // Mínimo de personas requeridas
 }
 
 /* ================== DATOS ================== */
@@ -26,21 +30,24 @@ const experiences: Experience[] = [
     badge: "popular",
     category: "Aventura Terrestre",
     shortDescription:
-      "Recorre la zona sur de la Reserva Ría Celestún: salinas rosas, bosque petrificado y flamencos.",
+      "Avistamiento de flamencos vía terrestre en su zona de alimentación y lagunas rosas.",
     fullDescription:
-      "Emprende un viaje fascinante a bordo de un tuc tuc por los senderos ocultos del sur de la Reserva. Maravíllate con el contraste de las charcas salineras y sus tonos rosados, camina entre la historia en el bosque petrificado y descubre las huellas del pasado en las ex haciendas. Una travesía que combina naturaleza virgen y cultura viva.",
+      "Emprende un viaje fascinante a bordo de un tuc tuc por los senderos ocultos del sur de la Reserva. Esta experiencia única te lleva directamente a la zona de alimentación de los flamencos y a las impresionantes lagunas rosas. Maravíllate con el paisaje, camina entre la historia en el bosque petrificado y descubre las huellas del pasado en las ex haciendas.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej-1.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej2.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej3.jpg",
     ],
-    duration: "1.5 a 2 horas",
+    duration: "1 a 1.30 horas",
     included: [
       "Transporte en tuc tuc",
       "Guía certificado bilingüe",
       "Servicio de pick-up",
     ],
+    priceType: 'unit',
+    priceLabel: 'por unidad (1-4 pax)',
+    maxPax: 4
   },
   {
     id: 2,
@@ -57,13 +64,16 @@ const experiences: Experience[] = [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast1.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast2.jpeg",
     ],
-    duration: "5 horas",
+    duration: "1 a 1.30 horas",
     included: ["Embarcación privada", "Guía y equipo de pesca", "Ceviche fresco"],
+    priceType: 'unit',
+    priceLabel: 'por unidad (1-5 pax)',
+    maxPax: 5
   },
   {
     id: 3,
     title: "Kayak en el Corazón del Manglar",
-    pricePerPerson: 1550,
+    pricePerPerson: 1900,
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak-manglar1.png",
     badge: "popular",
     category: "Aventura Acuática",
@@ -76,13 +86,16 @@ const experiences: Experience[] = [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak3.png",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/manglares4.jpg",
     ],
-    duration: "2 horas",
+    duration: "1 a 1.30 horas",
     included: [
       "Kayak doble",
       "Guía bilingüe",
       "Lámparas nocturnas",
       "Transporte tuc tuc",
     ],
+    priceType: 'unit',
+    priceLabel: 'por kayak doble (2 pax)',
+    maxPax: 2
   },
   {
     id: 4,
@@ -91,16 +104,19 @@ const experiences: Experience[] = [
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
     category: "Naturaleza",
     shortDescription:
-      "Más de 200 especies en la Ría Celestún con guía experto y equipo óptico.",
+      "Más de 200 especies en la Ría Celestún con guía experto. Inicia 6:00 a.m.",
     fullDescription:
-      "Vive una experiencia inolvidable observando aves endémicas como el colibrí tijereta mexicano en un recorrido exclusivo para 1 a 4 personas. Sumérgete en la tranquilidad de la naturaleza, captura momentos únicos con tu cámara y disfruta de un entorno perfecto para los amantes de la fotografía, la fauna y la aventura.",
+      "Vive una experiencia inolvidable observando aves endémicas como el colibrí tijereta mexicano en un recorrido exclusivo. Sumérgete en la tranquilidad de la naturaleza, captura momentos únicos con tu cámara y disfruta de un entorno perfecto para los amantes de la fotografía. (Inicia 6:00 a.m.).",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves1.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/aves3.JPG",
     ],
-    duration: "4.5 horas",
+    duration: "4 horas",
     included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico","Tour narrado"],
+    priceType: 'unit',
+    priceLabel: 'por grupo (1-4 pax)',
+    maxPax: 4
   },
   {
     id: 5,
@@ -110,18 +126,22 @@ const experiences: Experience[] = [
     badge: "oferta",
     category: "Tour Acuático",
     shortDescription:
-      "Tour en lancha: flamencos, túnel de manglar, isla de aves y ojo de agua.",
+      "Tour en lancha colectivo: flamencos, manglar, isla de aves. Salidas 10am y 12pm.",
     fullDescription:
       `
-      Navega hacia el encuentro con el ícono de Celestún: el flamenco rosa. En este recorrido en lancha, atravesarás el espectacular Túnel de Manglar, visitarás la Isla de Aves y te refrescarás en un ojo de agua cristalina. Una inmersión total en la biodiversidad de la Ría. (Tour colectivo, requiere reserva previa).
+      Navega hacia el encuentro con el ícono de Celestún: el flamenco rosa. Recorrido en lancha por el Túnel de Manglar, Isla de Aves y ojo de agua. 
+      Horarios colectivo: 10:00 a.m. y 12:00 p.m.
+      (Pregunta por opciones para grupos privados).
       `,
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest3.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/flamingo-celest.jpg",
     ],
-    duration: "1 hora 20 min",
-    included: ["Guía bilingüe - Certificado", "Lancha privada con sombra", "Acceso al parador turístico"],
+    duration: "1 a 1.30 horas",
+    included: ["Guía bilingüe", "Lancha con sombra", "Acceso parador", "Colectivo"],
+    priceType: 'person',
+    priceLabel: 'por persona'
   },
   {
     id: 6,
@@ -132,14 +152,17 @@ const experiences: Experience[] = [
     shortDescription:
       "Avistamiento de cocodrilos y luciérnagas bajo la luz de la luna.",
     fullDescription:
-      "Cuando el sol se oculta, la ría despierta. Adéntrate en la oscuridad de la noche en una lancha privada y agudiza tus sentidos. Observa cocodrilos en su hábitat natural, aves descansando y, con suerte, el fascinante espectáculo de bioluminiscencia o luciérnagas. Una aventura segura y exclusiva para los amantes de la naturaleza nocturna.",
+      "Cuando el sol se oculta, la ría despierta. Adéntrate en la oscuridad de la noche en una lancha privada y agudiza tus sentidos. Observa cocodrilos en su hábitat natural, aves descansando y, con suerte, el fascinante espectáculo de bioluminiscencia o luciérnagas. Una aventura segura y exclusiva.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/moonlight.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/Ceremonia%20y%20Tour%20Nocturno-11.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/moonlight2.jpg",
     ],
-    duration: "2 horas",
+    duration: "1 a 1.30 horas",
     included: ["Guía certificado", "Equipo de iluminación", "Lancha privada"],
+    priceType: 'unit',
+    priceLabel: 'por lancha (max 6 pax)',
+    maxPax: 6
   },
   {
     id: 7,
@@ -150,33 +173,37 @@ const experiences: Experience[] = [
     shortDescription:
       "Ceremonia maya guiada frente al mar para agradecer y renovar tu energía.",
     fullDescription:
-      "Renueva tu energía frente al mar con una ceremonia ancestral maya. Guiado por el aroma del copal, el fuego sagrado y la sabiduría tradicional, vivirás una limpieza energética y entregarás ofrendas al mar. Un momento íntimo de conexión y gratitud para armonizar cuerpo, mente y espíritu.",
+      "Renueva tu energía frente al mar con una ceremonia ancestral maya. Guiado por el aroma del copal, el fuego sagrado y la sabiduría tradicional, vivirás una limpieza energética y entregarás ofrendas al mar. Un momento íntimo de conexión y gratitud.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/xukulem1.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia2.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/ceremonia2.jpg",
     ],
-    duration: "40 minutos",
+    duration: "1 a 1.30 horas",
     included: ["Ceremonia frente al mar", "Ofrendas", "Guía espiritual"],
+    priceType: 'unit',
+    priceLabel: 'por grupo (max 12 pax)',
+    maxPax: 12
   },
   {
     id: 8,
     title: "Biking Tour – Pueblo Fantasma",
-    pricePerPerson: 350,
-    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/biking-tour1.jpg",
+    pricePerPerson: 450,
+    img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/nocturno-1.jpeg",
     category: "Aventura Nocturna",
     shortDescription:
-      "Aventura nocturna en bicicleta: explora la selva, ruinas de una hacienda y leyendas bajo las estrellas.",
+      "Aventura nocturna en bicicleta: explora la selva y leyendas bajo las estrellas. 7:00 y 9:30 p.m.",
     fullDescription:
-      "Adéntrate en la selva maya bajo el manto estelar con nuestro Biking Tour Nocturno. Guiado por expertos, recorrerás senderos rodeados de naturaleza hasta llegar al enigmático Pueblo Fantasma de Real de Salinas. Escucha las leyendas que habitan entre las ruinas de la antigua hacienda salinera, siente la brisa nocturna y descubre la biodiversidad que despierta cuando se oculta el sol. Una aventura que combina deporte, historia y misterio en un entorno seguro y fascinante.",
+      "Adéntrate en la selva maya bajo el manto estelar con nuestro Biking Tour Nocturno. Guiado por expertos, recorrerás senderos rodeados de naturaleza hasta llegar al enigmático Pueblo Fantasma de Real de Salinas. Horarios: 7:00 p.m. y 9:30 p.m. (Requiere reserva previa, mín. 2 personas).",
     images: [
-      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour2.jpg",
-      "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/bikingtour3.jpg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/nocturno-1.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/nocturno%202.jpeg",
     ],
-    duration: "2 a 2.5 horas",
+    duration: "1 a 1.30 horas",
     included: ["Guía federal", "Bicicleta", "Equipo nocturno"],
+    priceType: 'person',
+    priceLabel: 'por persona (mín 2)',
+    minPax: 2
   },
 ];
 
@@ -306,11 +333,23 @@ const reservaNota = ref("");
 
 const WHATSAPP_NUMBER = "5219998270891";
 
-const totalReserva = computed(() =>
-  selectedExperience.value
-    ? selectedExperience.value.pricePerPerson * reservaPersonas.value
-    : 0
-);
+const calculatedUnits = computed(() => {
+  if (!selectedExperience.value || selectedExperience.value.priceType !== 'unit') return 1;
+  const max = selectedExperience.value.maxPax || 999;
+  return Math.ceil(reservaPersonas.value / max);
+});
+
+const totalReserva = computed(() => {
+  if (!selectedExperience.value) return 0;
+  
+  // Lógica para precios por unidad (vehículo/lancha/grupo)
+  if (selectedExperience.value.priceType === 'unit') {
+    return selectedExperience.value.pricePerPerson * calculatedUnits.value;
+  }
+  
+  // Lógica predeterminada por persona
+  return selectedExperience.value.pricePerPerson * reservaPersonas.value;
+});
 
 const formErrors = ref<{ [k: string]: string }>({});
 
@@ -327,7 +366,13 @@ function resetReserva() {
 function validateStep1() {
   const errs: { [k: string]: string } = {};
   if (!reservaFecha.value) errs.fecha = "Selecciona una fecha.";
-  if (reservaPersonas.value < 1) errs.personas = "Mínimo 1 persona.";
+  
+  // Validación de mínimo
+  const min = selectedExperience.value?.minPax || 1;
+  if (reservaPersonas.value < min) {
+    errs.personas = `Mínimo ${min} personas para esta experiencia.`;
+  }
+  
   formErrors.value = errs;
   return Object.keys(errs).length === 0;
 }
@@ -351,6 +396,8 @@ function prevStep() {
 }
 
 function startReservation() {
+  // Inicializar con el mínimo requerido
+  reservaPersonas.value = selectedExperience.value?.minPax || 1;
   reservationStep.value = 1;
   formErrors.value = {};
 }
@@ -360,6 +407,12 @@ function enviarReservaWhatsApp() {
   if (!validateStep2()) return;
 
   const exp = selectedExperience.value;
+  
+  // Detalles extra para el mensaje
+  let details = "";
+  if (exp.priceType === 'unit') {
+    details = `(${calculatedUnits.value} unidades/vehículos requeridos para ${reservaPersonas.value} pax)`;
+  }
 
   const msg = `
 ¡Hola! Me gustaría reservar una experiencia 🌿
@@ -367,7 +420,8 @@ function enviarReservaWhatsApp() {
 *Experiencia:* ${exp.title}
 *Fecha:* ${reservaFecha.value}
 *Personas:* ${reservaPersonas.value}
-*Precio por persona:* ${formatMXN(exp.pricePerPerson)}
+${details ? `*Detalle:* ${details}` : ""}
+*Precio:* ${formatMXN(exp.pricePerPerson)} (${exp.priceLabel || 'por persona'})
 *Total estimado:* ${formatMXN(totalReserva.value)}
 
 *Mi información:*
@@ -388,6 +442,7 @@ function onCardThumbLoad(e: Event) {
   if (img) img.classList.add("is-loaded");
 }
 </script>
+
 
 <template>
   <section class="catalog">
@@ -455,7 +510,9 @@ function onCardThumbLoad(e: Event) {
                 <span class="price-amount">
                   {{ exp.pricePerPerson > 0 ? formatMXN(exp.pricePerPerson) : "Personalizado" }}
                 </span>
-                <span class="price-label" v-if="exp.pricePerPerson > 0">por persona</span>
+                <span class="price-label" v-if="exp.pricePerPerson > 0">
+                  {{ exp.priceLabel || 'por persona' }}
+                </span>
               </div>
 
               <div class="cta-link">
@@ -622,7 +679,9 @@ function onCardThumbLoad(e: Event) {
                 <div class="price-section">
                   <div class="price-card">
                     <div class="price-header">
-                      <span class="price-label">Precio por persona</span>
+                      <span class="price-label">
+                        {{ selectedExperience.priceLabel || 'Precio por persona' }}
+                      </span>
                       <div class="price-main">
                         {{
                           selectedExperience.pricePerPerson > 0
