@@ -13,12 +13,12 @@ export const SocialLinks = {
 }
 
 export const SiteContent = {
-  brandName: 'SacBej',
+  brandName: 'Sac-Bej',
   brandDesc: 'Experiencias inolvidables.',
   hero: {
     tagline: 'DESCUBRE EL ENCANTO SALVAJE DE CELESTÚN',
     title: 'DISEÑAMOS EL ESCAPE PERFECTO.\nLA NATURALEZA PONE LA MAGIA',
-    subtitle: 'Bienvenido a <strong>SacBej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.',
+    subtitle: 'Bienvenido a <strong>Sac-Bej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.',
     cta: 'DESCÚBRELO AHORA',
   },
   galardonUrl: 'https://galardonjaguardelturismo.com/',
@@ -35,7 +35,7 @@ export const MenuLinks = [
 export const TeamContent = {
   subtitle: 'VIVE LA AVENTURA, RESERVA CON NOSOTROS',
   title: 'Nuestro equipo',
-  description: 'Nos enorgullece contar con un equipo apasionado y dedicado que hace posible que tus sueños de viaje se conviertan en experiencias inolvidables. Nos destacamos por la atención al detalle, la amabilidad genuina y el compromiso con la sostenibilidad. Cada integrante contribuye de manera única para crear el ambiente acogedor y profesional que nos distingue.',
+  description: 'Somos un equipo orgullosamente nativo de la comunidad de Celestún, apasionados por nuestra tierra y dedicados a compartir su magia contigo. Más que guías, somos guardianes de nuestro entorno: trabajamos activamente en la conservación de especies, el saneamiento de manglares y la protección de nuestro ecosistema. Nos distinguimos por nuestra autenticidad, atención al detalle y un compromiso genuino con la sostenibilidad, asegurando que tu visita no solo sea inolvidable, sino que también contribuya al bienestar de nuestra naturaleza.',
   welcome: 'Bienvenido a tu próxima aventura',
   cta: 'CONTÁCTANOS YA',
   images: {
@@ -61,8 +61,8 @@ export const AwardsData = [
     shortDescription: 'Reconocimiento por experiencias turísticas excepcionales y servicio de alta calidad.',
     fullDescription: 'Este prestigioso galardón reconoce nuestro compromiso excepcional con la calidad del servicio turístico, la innovación en experiencias eco-turísticas y la calidez humana que caracteriza cada interacción con nuestros visitantes. Representa el más alto honor otorgado por la Secretaría de Turismo del Estado de Yucatán.',
     image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/jaguar-dorado.png',
-    category: 'Excelencia en Turismo',
-    issuer: 'Secretaría de Turismo del Estado',
+    category: 'DESTINO SOSTENIBLE DEL AÑO',
+    issuer: 'La cámara de turismo empresarial privada',
     year: '2025',
     highlights: [
       'Calidad excepcional en el servicio al cliente',
@@ -78,7 +78,7 @@ export const AwardsData = [
     fullDescription: 'Es el reconocimiento integral que otorga la Secretaría de Turismo Federal a los prestadores de servicios turísticos y destinos turísticos con altos estándares de calidad, que cumplen con el marco legal y normativo aplicable, estableciendo procesos de mejora continua.',
     image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/DISTINTIVOYUC-LOGO_COLOR-SINFONDO.png',
     category: 'Calidad y Sostenibilidad',
-    issuer: 'Gobierno del Estado de Yucatán',
+    issuer: 'La secretaria de fomento turístico a nivel estatal',
     year: '2025',
     highlights: [
       'Cumplimiento de estándares de calidad certificados',

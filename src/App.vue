@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent, computed } from 'vue'
 import { useHead } from '@vueuse/head'
 import { SiteContent } from './constants/content'
 
@@ -7,22 +7,36 @@ import { SiteContent } from './constants/content'
 import NavBar from './components/base/NavBar.vue'
 import Hero from './components/organisms/Hero.vue'
 
-// Lazy Loaded Components (Below the Fold)
-const About = defineAsyncComponent(() => import('./components/organisms/About.vue'))
-const Experiences = defineAsyncComponent(() => import('./components/organisms/Experiences.vue'))
-const OurTeam = defineAsyncComponent(() => import('./components/organisms/OurTeam.vue'))
-const ContactUs = defineAsyncComponent(() => import('./components/organisms/ContactUs.vue'))
-const Store = defineAsyncComponent(() => import('./components/organisms/Store.vue'))
-const Footer = defineAsyncComponent(() => import('./components/base/Footer.vue'))
+// Core Components (Eager Load for Smooth Scroll)
+import About from './components/organisms/About.vue'
+import Experiences from './components/organisms/Experiences.vue'
+import OurTeam from './components/organisms/OurTeam.vue'
+import ContactUs from './components/organisms/ContactUs.vue'
+import Store from './components/organisms/Store.vue'
+import Footer from './components/base/Footer.vue'
+
+// Lazy Load only separate views
+const Policies = defineAsyncComponent(() => import('./components/organisms/Policies.vue'))
 
 /* ======================
-3LOADER GLOBAL (solo por tiempo)
+   ROUTING LOGIC (HASH)
 ====================== */
+const isPoliciesView = ref(false)
+
+const checkHash = () => {
+  const hash = window.location.hash
+  if (['#privacy', '#cancelacion', '#politicas', '#terms', '#condiciones'].includes(hash)) {
+    isPoliciesView.value = true
+  } else {
+    isPoliciesView.value = false
+  }
+}
+
 /* ======================
    SEO & META TAGS
 ====================== */
 useHead({
-  title: SiteContent.brandName,
+  title: computed(() => isPoliciesView.value ? 'Políticas y Condiciones' : SiteContent.brandName),
   titleTemplate: '%s | Experiencias Inolvidables',
   meta: [
     { name: 'description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
@@ -33,15 +47,32 @@ useHead({
 })
 
 /* ======================
-3LOADER GLOBAL (solo por tiempo)
+   LOADER GLOBAL
 ====================== */
 const loading = ref(true)
 
 onMounted(() => {
-  // Fallback seguro: siempre quitar el loader después de 1.6s
+  checkHash()
+  window.addEventListener('hashchange', checkHash)
+
+  // 1. Check if already loaded
+  if (document.readyState === 'complete') {
+    loading.value = false;
+  } else {
+    // 2. Wait for full load (images, scripts, styles)
+    window.addEventListener('load', () => {
+      loading.value = false;
+    });
+  }
+
+  // 3. Safety Fallback: Force show after 10s if something hangs
   setTimeout(() => {
-    loading.value = false
-  }, 1600)
+    loading.value = false;
+  }, 10000);
+})
+
+onUnmounted(() => {
+  window.removeEventListener('hashchange', checkHash)
 })
 </script>
 
@@ -57,17 +88,25 @@ onMounted(() => {
 
     <!-- CONTENIDO REAL (v-else ADYACENTE → SIN ERROR) -->
     <div v-else>
-      <header>
+      <header v-if="!isPoliciesView">
         <NavBar />
       </header>
 
       <main>
-        <section id="inicio" class="section"><Hero /></section>
-        <section id="nosotros" class="section"><About /></section>
-        <section id="experiencias" class="section"><Experiences /></section>
-        <section id="equipo" class="section"><OurTeam /></section>
-        <section id="contacto" class="section"><ContactUs /></section>
-        <section id="opiniones" class="section"><Store /></section>
+        <!-- VISTA PRINCIPAL -->
+        <div v-show="!isPoliciesView">
+          <section id="inicio" class="section"><Hero /></section>
+          <section id="nosotros" class="section"><About /></section>
+          <section id="experiencias" class="section"><Experiences /></section>
+          <section id="equipo" class="section"><OurTeam /></section>
+          <section id="contacto" class="section"><ContactUs /></section>
+          <section id="opiniones" class="section"><Store /></section>
+        </div>
+
+        <!-- VISTA POLITICAS -->
+        <div v-if="isPoliciesView">
+           <Policies />
+        </div>
       </main>
 
       <footer>
