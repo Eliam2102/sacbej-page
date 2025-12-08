@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
-import { faAward } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { SiteContent, MenuLinks, SocialLinks } from "../../constants/content";
-
-library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn, faAward)
+import { Icon } from '@iconify/vue'
+import { SiteContent, MenuLinks } from "../../constants/content";
 </script>
 
 <template>
@@ -19,7 +14,7 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn, faAward)
           <p class="brand-desc">{{ SiteContent.brandDesc }}</p>
           
           <a :href="SiteContent.galardonUrl" target="_blank" rel="noopener noreferrer" class="galardon-btn">
-            <FontAwesomeIcon :icon="['fas', 'award']" />
+            <Icon icon="mdi:award" />
             <span>Ver Galardón Jaguar</span>
           </a>
         </div>
@@ -49,17 +44,36 @@ library.add(faFacebookF, faTwitter, faInstagram, faLinkedinIn, faAward)
       <div class="footer-section">
         <h3>Síguenos</h3>
         <div class="social-icons">
-          <a :href="SocialLinks.facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <FontAwesomeIcon :icon="['fab','facebook-f']" />
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/p/Ecoturismo-sac-bej-Celest%C3%BAn-100063497890923/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Facebook">
+            <Icon icon="mdi:facebook" />
           </a>
-          <a :href="SocialLinks.twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <FontAwesomeIcon :icon="['fab','twitter']" />
+          
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/sacbejcelestun/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Instagram">
+            <Icon icon="mdi:instagram" />
           </a>
-          <a :href="SocialLinks.instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FontAwesomeIcon :icon="['fab','instagram']" />
+
+          <!-- TripAdvisor -->
+          <a href="https://www.tripadvisor.com.mx/Attraction_Review-g664925-d34046025-Reviews-SacBej_Celestun-Celestun_Yucatan_Peninsula.html" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="Tripadvisor">
+            <Icon icon="simple-icons:tripadvisor" />
           </a>
-          <a :href="SocialLinks.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FontAwesomeIcon :icon="['fab','linkedin-in']" />
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/529998270891?text=Hola,%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20tours,%20por%20favor" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             aria-label="WhatsApp">
+            <Icon icon="mdi:whatsapp" />
           </a>
         </div>
       </div>
