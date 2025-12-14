@@ -54,7 +54,7 @@ import { SiteContent } from "../../constants/content";
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/src/assets/ría-celest.png'); /* <- pon tu imagen aquí */
+  background-image: url('/src/assets/ria-celest-opt.jpg'); /* <- pon tu imagen aquí */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

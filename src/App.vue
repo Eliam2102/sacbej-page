@@ -37,13 +37,67 @@ const checkHash = () => {
 ====================== */
 useHead({
   title: computed(() => isPoliciesView.value ? 'Políticas y Condiciones' : SiteContent.brandName),
-  titleTemplate: '%s | Experiencias Inolvidables',
+  titleTemplate: '%s | Ecoturismo en Celestún - Tours y Experiencias',
   meta: [
     { name: 'description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
-    { property: 'og:title', content: SiteContent.brandName },
-    { property: 'og:description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
+    { name: 'keywords', content: 'Celestún, Torus, Cooperativa Torus, Sacbej, Tours Celestún, Ecoturismo Yucatán, Flamencos Celestún, Paseo en lancha, Manglares, Turismo Responsable' },
+    { name: 'author', content: 'Cooperativa Sac-Bej Torus' },
+    { name: 'robots', content: 'index, follow' },
+    
+    // Open Graph / Facebook
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://sacbej-celestun.com/' },
+    { property: 'og:title', content: 'Sac-Bej | Tours y Ecoturismo en Celestún' },
+    { property: 'og:description', content: 'Descubre la magia de Celestún con la Cooperativa Torus. Tours en lancha, avistamiento de flamencos y experiencias inolvidables en la naturaleza.' },
     { property: 'og:image', content: '/src/assets/logo_sac_bej_celestun_transparente.png' },
+
+    // Twitter
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Sac-Bej | Tours en Celestún' },
+    { name: 'twitter:description', content: 'Vive la naturaleza de Celestún con los mejores guías locales.' },
+    { name: 'twitter:image', content: '/src/assets/logo_sac_bej_celestun_transparente.png' },
   ],
+  link: [
+    { rel: 'canonical', href: 'https://sacbej-celestun.com/' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Sac-Bej Ecoturismo (Cooperativa Torus)",
+        "image": "https://sacbej-celestun.com/src/assets/logo_sac_bej_celestun_transparente.png",
+        "@id": "https://sacbej-celestun.com",
+        "url": "https://sacbej-celestun.com",
+        "telephone": "+529998270891",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Celestún Centro",
+          "addressLocality": "Celestún",
+          "addressRegion": "Yucatán",
+          "postalCode": "97367",
+          "addressCountry": "MX"
+        },
+        "description": "Cooperativa turística en Celestún especializada en ecoturismo, paseos en lancha y avistamiento de flamencos. Experiencias auténticas y responsables.",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      })
+    }
+  ]
 })
 
 /* ======================

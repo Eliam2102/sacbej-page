@@ -57,7 +57,7 @@ export const AwardsContent = {
 export const AwardsData = [
   {
     id: 'galardon',
-    title: 'Galardón Estatal de Turismo',
+    title: 'Galardón jaguar del turismo',
     shortDescription: 'Reconocimiento por experiencias turísticas excepcionales y servicio de alta calidad.',
     fullDescription: 'Este prestigioso galardón reconoce nuestro compromiso excepcional con la calidad del servicio turístico, la innovación en experiencias eco-turísticas y la calidez humana que caracteriza cada interacción con nuestros visitantes. Representa el más alto honor otorgado por la Secretaría de Turismo del Estado de Yucatán.',
     image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/jaguar-dorado.png',
@@ -75,7 +75,7 @@ export const AwardsData = [
     id: 'distintivo',
     title: 'Distintivo Yucatán',
     shortDescription: 'Certificación oficial que avala nuestros estándares de calidad y hospitalidad.',
-    fullDescription: 'Es el reconocimiento integral que otorga la Secretaría de Turismo Federal a los prestadores de servicios turísticos y destinos turísticos con altos estándares de calidad, que cumplen con el marco legal y normativo aplicable, estableciendo procesos de mejora continua.',
+    fullDescription: 'Es el reconocimiento integral que otorga la Secretaría de Turismo Estatal a los prestadores de servicios turísticos y destinos turísticos con altos estándares de calidad, que cumplen con el marco legal y normativo aplicable, estableciendo procesos de mejora continua.',
     image: 'https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/DISTINTIVOYUC-LOGO_COLOR-SINFONDO.png',
     category: 'Calidad y Sostenibilidad',
     issuer: 'La secretaria de fomento turístico a nivel estatal',

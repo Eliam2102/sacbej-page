@@ -46,7 +46,7 @@ const experiences: Experience[] = [
       "Servicio de pick-up",
     ],
     priceType: 'unit',
-    priceLabel: 'por unidad (1-4 pax)',
+    priceLabel: 'por grupo (1-4 pax)',
     maxPax: 4
   },
   {
@@ -162,7 +162,7 @@ const experiences: Experience[] = [
     duration: "1 a 1.30 horas",
     included: ["Guía certificado", "Equipo de iluminación", "Lancha privada"],
     priceType: 'unit',
-    priceLabel: 'por lancha (max 6 pax)',
+    priceLabel: 'por grupo (max 6 pax)',
     maxPax: 6
   },
   {
