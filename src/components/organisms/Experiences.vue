@@ -46,7 +46,7 @@ const experiences: Experience[] = [
       "Servicio de pick-up",
     ],
     priceType: 'unit',
-    priceLabel: 'por unidad (1-4 pax)',
+    priceLabel: 'por grupo (1-4 personas)',
     maxPax: 4
   },
   {
@@ -67,7 +67,7 @@ const experiences: Experience[] = [
     duration: "1 a 1.30 horas",
     included: ["Embarcación privada", "Guía y equipo de pesca", "Ceviche fresco"],
     priceType: 'unit',
-    priceLabel: 'por unidad (1-5 pax)',
+    priceLabel: 'por unidad (1-5 personas)',
     maxPax: 5
   },
   {
@@ -94,7 +94,7 @@ const experiences: Experience[] = [
       "Transporte tuc tuc",
     ],
     priceType: 'unit',
-    priceLabel: 'por kayak doble (2 pax)',
+    priceLabel: 'por kayak doble (2 personas)',
     maxPax: 2
   },
   {
@@ -116,7 +116,7 @@ const experiences: Experience[] = [
     duration: "4 horas",
     included: ["Guía NOM 09-TUR-2002", "Tuc tuc", "Equipo óptico básico","Tour narrado"],
     priceType: 'unit',
-    priceLabel: 'por grupo (1-4 pax)',
+    priceLabel: 'por grupo (1-4 personas)',
     maxPax: 4
   },
   {
@@ -162,7 +162,7 @@ const experiences: Experience[] = [
     duration: "1 a 1.30 horas",
     included: ["Guía certificado", "Equipo de iluminación", "Lancha privada"],
     priceType: 'unit',
-    priceLabel: 'por lancha (max 6 pax)',
+    priceLabel: 'por grupo (máx 6 personas)',
     maxPax: 6
   },
   {
@@ -183,7 +183,7 @@ const experiences: Experience[] = [
     duration: "1 a 1.30 horas",
     included: ["Ceremonia frente al mar", "Ofrendas", "Guía espiritual"],
     priceType: 'unit',
-    priceLabel: 'por grupo (max 12 pax)',
+    priceLabel: 'por grupo (máx 12 personas)',
     maxPax: 12
   },
   {
@@ -412,7 +412,7 @@ function enviarReservaWhatsApp() {
   // Detalles extra para el mensaje
   let details = "";
   if (exp.priceType === 'unit') {
-    details = `(${calculatedUnits.value} unidades/vehículos requeridos para ${reservaPersonas.value} pax)`;
+    details = `(${calculatedUnits.value} unidades/vehículos requeridos para ${reservaPersonas.value} personas)`;
   }
 
   const msg = `

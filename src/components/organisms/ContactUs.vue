@@ -224,7 +224,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
-import emailjs from 'emailjs-com'
+import emailjs from '@emailjs/browser'
 
 // ==========================
 // DATOS DEL FORMULARIO
@@ -252,7 +252,7 @@ const enviarFormulario = async () => {
 
   try {
     await emailjs.send(
-      "service_0dcwgmn",    
+      "service_mzvn87r",    
       "template_zc2k7i6",    
       {
         nombre: formData.value.nombre,
@@ -260,7 +260,7 @@ const enviarFormulario = async () => {
         telefono: formData.value.telefono,
         mensaje: formData.value.mensaje
       },
-      "M62LwVhdn9y-FGHrt"     
+      "1bWimXJ-SUcsK-uNy"     
     );
 
     enviado.value = true
@@ -280,7 +280,7 @@ const enviarFormulario = async () => {
 
   } catch (error) {
     console.error("❌ Error al enviar", error)
-    alert("Hubo un error al enviar el mensaje. Intenta de nuevo.")
+    alert("Hubo un error al enviar el mensaje. Revisar configuración.")
   }
 
   cargando.value = false
