@@ -1949,6 +1949,7 @@ function onCardThumbLoad(e: Event) {
 .form-input,
 .form-textarea,
 .stepper-input {
+  width: 100%;
   padding: 0.875rem 1rem;
   border: 2px solid #e8e3d7;
   border-radius: 12px;
@@ -1985,6 +1986,7 @@ function onCardThumbLoad(e: Event) {
   grid-template-columns: 48px 1fr 48px;
   gap: 0.75rem;
   align-items: center;
+  width: 100%;
 }
 
 .stepper-btn {
