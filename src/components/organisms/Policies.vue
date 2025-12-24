@@ -87,6 +87,11 @@ const goHome = () => {
             <li>Recibir el reembolso íntegro (100%) del anticipo en un lapso de 5 a 10 días hábiles.</li>
           </ul>
         </div>
+        <div class="policy-block">
+          <h3>5. Precios y Facturación</h3>
+          <p>Los precios mostrados <strong>no incluyen IVA</strong>.</p>
+          <p>En caso de requerir factura, se aplicará un cargo adicional del <strong>16%</strong> sobre el valor total del costo del servicio.</p>
+        </div>
       </section>
 
       <div class="divider"></div>

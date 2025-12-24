@@ -943,6 +943,12 @@ function onCardThumbLoad(e: Event) {
                     </Transition>
                   </div>
                 </Transition>
+
+
+                <!-- LEGAL DISCLAIMER -->
+                <div class="legal-disclaimer">
+                  <p>Precios antes de impuestos. En caso de requerir factura, aplicará el 16% de IVA sobre el total.</p>
+                </div>
               </div>
 
               <!-- Mobile Sticky CTA -->
@@ -1389,6 +1395,26 @@ function onCardThumbLoad(e: Event) {
   display: flex;
   flex-direction: column;
   outline: none;
+}
+
+.legal-disclaimer {
+  text-align: center;
+  padding: 1rem 2rem 2rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.legal-disclaimer:hover {
+  opacity: 0.9;
+}
+
+.legal-disclaimer p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0.3px;
 }
 
 .modal-close {
