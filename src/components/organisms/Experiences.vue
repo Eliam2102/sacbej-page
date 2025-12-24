@@ -30,9 +30,9 @@ const experiences: Experience[] = [
     badge: "popular",
     category: "Aventura Terrestre",
     shortDescription:
-      "Avistamiento de flamencos vía terrestre en su zona de alimentación y lagunas rosas.",
+      "Avistamiento de flamencos rosados vía terrestre en la Reserva de la Biósfera y sus lagunas rosas.",
     fullDescription:
-      "Emprende un viaje fascinante a bordo de un tuc tuc por los senderos ocultos del sur de la Reserva. Esta experiencia única te lleva directamente a la zona de alimentación de los flamencos y a las impresionantes lagunas rosas. Maravíllate con el paisaje, camina entre la historia en el bosque petrificado y descubre las huellas del pasado en las ex haciendas.",
+      "Emprende un viaje fascinante a bordo de un tuc tuc por los senderos ocultos del sur de la Reserva de la Biósfera Ría Celestún. Esta experiencia única te lleva directamente a la zona de alimentación de los flamencos rosados y a las impresionantes lagunas rosas. Maravíllate con el paisaje, camina entre la historia en el exótico bosque petrificado y descubre las huellas del pasado en las ex haciendas.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej.JPG",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/sacbej-1.jpeg",
@@ -56,9 +56,9 @@ const experiences: Experience[] = [
     img: "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
     category: "Pesca Deportiva",
     shortDescription:
-      "Pesca deportiva en el Golfo: corvina, robalo, jurel, pargo y más.",
+      "Pesca deportiva en las costas de Celestún: corvina, robalo, jurel, pargo y más.",
     fullDescription:
-      "Siente la emoción de la pesca deportiva a orillas del Golfo de México. Con la brisa matutina y el sol naciente, lanzarás tu anzuelo en busca de especies locales. La experiencia culmina con el sabor inigualable de un ceviche fresco, preparado al momento con la pesca del día, al puro estilo ribereño.",
+      "Siente la emoción de la pesca deportiva a orillas del Golfo de México en Celestún. Con la brisa matutina y el sol naciente, lanzarás tu anzuelo en busca de especies locales. La experiencia culmina con el sabor inigualable de un ceviche fresco, preparado al momento con la pesca del día, al puro estilo ribereño.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast3.jpeg",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/surf-cast1.jpeg",
@@ -78,9 +78,9 @@ const experiences: Experience[] = [
     badge: "popular",
     category: "Aventura Acuática",
     shortDescription:
-      "Remo entre manglares al amanecer o anochecer, rodeado de aves y luciérnagas.",
+      "Remo entre los manglares de Celestún al amanecer o anochecer, rodeado de aves y luciérnagas.",
     fullDescription:
-      "Deslízate en silencio a través de los túneles de manglar y conecta profundamente con la naturaleza. Ya sea bajo la luz dorada del amanecer rodeado de aves, o bajo el manto estelar presenciando el mágico brillo de las luciérnagas, esta experiencia de remo te llevará al corazón palpitante del humedal.",
+      "Deslízate en silencio a través de los túneles de manglar de Celestún y conecta profundamente con la naturaleza. Ya sea bajo la luz dorada del amanecer rodeado de aves, o bajo el manto estelar presenciando el mágico brillo de las luciérnagas, esta experiencia de remo te llevará al corazón palpitante del humedal.",
     images: [
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak2.png",
       "https://uvjwsdeyhuaievbeddql.supabase.co/storage/v1/object/public/sacbej/experiencias/kayak3.png",
@@ -130,7 +130,7 @@ const experiences: Experience[] = [
       "Tour en lancha colectivo: flamencos, manglar, isla de aves. Salidas 10am y 12pm.",
     fullDescription:
       `
-      Navega hacia el encuentro con el ícono de Celestún: el flamenco rosa. Recorrido en lancha por el Túnel de Manglar, Isla de Aves y ojo de agua. 
+      Navega hacia el encuentro con el ícono de la Reserva: los flamencos rosados. Recorrido en lancha por el Túnel de Manglar, Isla de Aves y el impresionante ojo de agua. 
       Horarios colectivo: 10:00 a.m. y 12:00 p.m.
       (Pregunta por opciones para grupos privados).
       `,

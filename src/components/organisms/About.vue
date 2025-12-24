@@ -220,9 +220,11 @@
           <h2>Experiencias únicas con nosotros</h2>
           <hr class="hero-divider" />
           <p>
-            Nuestros recorridos están meticulosamente diseñados para ser mucho más que simples viajes; son
-            una inmersión completa en la esencia de cada destino. Combinamos estratégicamente cultura, aventura
-            y naturaleza para crear una narrativa de viaje única que te conectará profundamente con el lugar.
+            Nuestros recorridos en <strong>Celestún</strong> están meticulosamente diseñados para ser mucho más que simples viajes; son
+            una inmersión completa en la esencia de este paraíso costero de Yucatán. Como expertos locales, combinamos estratégicamente 
+            la rica cultura maya, la aventura en los manglares y la impresionante biodiversidad de la <strong>Reserva de la Biósfera Ría Celestún</strong>.
+            Nuestro objetivo es crear una narrativa de viaje única que te conectará profundamente con el lugar, permitiéndote descubrir 
+            los secretos mejor guardados de Celestún de la mano de guías certificados.
           </p>
           <a href="#contacto" class="hero-btn">Conoce más ahora!</a>
         </div>

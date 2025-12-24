@@ -17,18 +17,25 @@ import Footer from './components/base/Footer.vue'
 
 // Lazy Load only separate views
 const Policies = defineAsyncComponent(() => import('./components/organisms/Policies.vue'))
+const FAQ = defineAsyncComponent(() => import('./components/organisms/FAQ.vue'))
 
 /* ======================
    ROUTING LOGIC (HASH)
 ====================== */
 const isPoliciesView = ref(false)
+const isFaqView = ref(false)
 
 const checkHash = () => {
   const hash = window.location.hash
   if (['#privacy', '#cancelacion', '#politicas', '#terms', '#condiciones'].includes(hash)) {
     isPoliciesView.value = true
+    isFaqView.value = false
+  } else if (hash === '#faq') {
+    isFaqView.value = true
+    isPoliciesView.value = false
   } else {
     isPoliciesView.value = false
+    isFaqView.value = false
   }
 }
 
@@ -36,7 +43,11 @@ const checkHash = () => {
    SEO & META TAGS
 ====================== */
 useHead({
-  title: computed(() => isPoliciesView.value ? 'Políticas y Condiciones' : SiteContent.brandName),
+  title: computed(() => {
+    if (isPoliciesView.value) return 'Políticas y Condiciones'
+    if (isFaqView.value) return 'Preguntas Frecuentes'
+    return SiteContent.brandName
+  }),
   titleTemplate: '%s | Ecoturismo en Celestún - Tours y Experiencias',
   meta: [
     { name: 'description', content: SiteContent.hero.subtitle.replace(/<[^>]*>?/gm, '') },
@@ -142,13 +153,13 @@ onUnmounted(() => {
 
     <!-- CONTENIDO REAL (v-else ADYACENTE → SIN ERROR) -->
     <div v-else>
-      <header v-if="!isPoliciesView">
+      <header v-if="!isPoliciesView && !isFaqView">
         <NavBar />
       </header>
 
       <main>
         <!-- VISTA PRINCIPAL -->
-        <div v-show="!isPoliciesView">
+        <div v-show="!isPoliciesView && !isFaqView">
           <section id="inicio" class="section"><Hero /></section>
           <section id="nosotros" class="section"><About /></section>
           <section id="experiencias" class="section"><Experiences /></section>
@@ -160,6 +171,11 @@ onUnmounted(() => {
         <!-- VISTA POLITICAS -->
         <div v-if="isPoliciesView">
            <Policies />
+        </div>
+
+        <!-- VISTA FAQ -->
+        <div v-if="isFaqView">
+           <FAQ />
         </div>
       </main>
 

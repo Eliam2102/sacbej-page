@@ -17,8 +17,8 @@ export const SiteContent = {
   brandDesc: 'Experiencias inolvidables.',
   hero: {
     tagline: 'DESCUBRE EL ENCANTO SALVAJE DE CELESTÚN',
-    title: 'DISEÑAMOS EL ESCAPE PERFECTO.\nLA NATURALEZA PONE LA MAGIA',
-    subtitle: 'Bienvenido a <strong>Sac-Bej</strong>, tu guía personal hacia las maravillas inolvidables de <strong>Celestún</strong>.',
+    title: 'CELESTÚN: TU ESCAPE PERFECTO.\nDONDE LA NATURALEZA ES MAGIA',
+    subtitle: 'Bienvenido a <strong>Sac-Bej</strong>, tu guía personal hacia las maravillas inolvidables de la <strong>Reserva de la Biósfera Ría Celestún</strong>.',
     cta: 'DESCÚBRELO AHORA',
   },
   galardonUrl: 'https://galardonjaguardelturismo.com/',
